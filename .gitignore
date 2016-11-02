@@ -25,3 +25,4 @@ app/src/main/obj
 /gradle
 ehthumbs.db
 Thumbs.db
+/include/jnipp/core/configuration.h
