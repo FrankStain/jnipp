@@ -44,4 +44,16 @@ namespace utils
 	*/
 	template< typename... TStrings >
 	using CombinedStaticString = typename utils::StringCombiner<TStrings...>::String;
+
+	/// @brief	Helper for producing valid name of Java class.
+	template< char... CHARS >
+	using ClassName = CombinedStaticString< StaticString<'L'>, StaticString<CHARS...>, StaticString<';'> >;
+
+	/// @brief	Helper for producing valid name of Java array.
+	template< typename TElementNameString >
+	using ArrayName = CombinedStaticString< StaticString<'['>, TElementNameString >;
+
+	/// @brief	Helper for producing valid name of Java function.
+	template< typename TReturnTypeName, typename... TArgumentTypeNames >
+	using FunctionSignature = CombinedStaticString< StaticString<'('>, TArgumentTypeNames..., StaticString<')'>, TReturnTypeName >;
 };

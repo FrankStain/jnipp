@@ -5,7 +5,6 @@
 
 namespace jnipp
 {
-/// @brief	Logging support for Jni++. Only android log-cat used here by default.
 namespace logging
 {
 	constexpr static const char TAG[] = "Jni++";
