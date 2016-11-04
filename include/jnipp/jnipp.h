@@ -29,7 +29,6 @@ namespace jnipp
 // Jni++ core stuff.
 #include <jnipp/core/logging.h>
 #include <jnipp/core/macros.h>
-#include <jnipp/core/types.h>
 
 // Jni++ utils.
 #include <jnipp/utils/StaticString.h>
