@@ -1,0 +1,33 @@
+// Copyright since 2016 : Evgenii Shatunov (github.com/FrankStain/jnipp)
+// Apache 2.0 License
+#pragma once
+
+
+// Force JNI to use standard plain types.
+#define HAVE_INTTYPES_H 1
+
+// Debug build detection.
+#if( !defined( JNIPP_DEBUG_BUILD ) )
+	#if( !defined( NDEBUG ) )
+		#define JNIPP_DEBUG_BUILD 1
+	#else
+		#define JNIPP_DEBUG_BUILD 0
+	#endif
+#endif
+
+// Logging switches.
+
+// Overall logging switch.
+#if( !defined( JNIPP_LOGS_ENABLED ) )
+	#define JNIPP_LOGS_ENABLED		1
+#endif
+
+// Overall handles logging switch.
+#if( !defined( JNIPP_LOG_HANDLES ) )
+	#define JNIPP_LOG_HANDLES		1
+#endif
+
+// Overall marshaling logging switch.
+#if( !defined( JNIPP_LOG_MARSHALING ) )
+	#define JNIPP_LOG_MARSHALING	1
+#endif
