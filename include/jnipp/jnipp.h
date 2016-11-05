@@ -55,6 +55,10 @@ namespace marshaling {};
 #include <jnipp/handles/FieldHandle.h>
 #include <jnipp/handles/StaticFieldHandle.h>
 
+// Jni++ wrap for Java functions.
+#include <jnipp/handles/FunctionHandle.h>
+#include <jnipp/handles/StaticFunctionHandle.h>
+
 // Jni++ major utility - virtual machine wrap.
 #include <jnipp/core/types.h>
 #include <jnipp/utils/VirtualMachine.h>
