@@ -49,6 +49,9 @@ namespace marshaling
 		static constexpr auto NONVIRTUAL_FUNCTION_HANDLER	= &JNIEnv::CallNonvirtualObjectMethod;
 	};
 
+	template< typename TNatveType >
+	using TypeSignature = typename JniEnvFacade<TNatveType>::Signature;
+
 	template<>
 	struct JniEnvFacade<void> final
 	{
