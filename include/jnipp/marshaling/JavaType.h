@@ -18,6 +18,7 @@ namespace marshaling
 	template< typename TNativeType >
 	using JavaType = typename JavaTypeInfo<TNativeType>::Type;
 
+
 	/// @brief	Translation of `void` type.
 	template<>
 	struct JavaTypeInfo<void> final
@@ -34,7 +35,7 @@ namespace marshaling
 		using Type		= jboolean;
 	};
 
-	/// @brief	Translation of `string` type.
+	/// @brief	Translation of plain utf8 string type.
 	template<>
 	struct JavaTypeInfo<const char*> final
 	{
@@ -42,9 +43,25 @@ namespace marshaling
 		using Type		= jstring;
 	};
 
-	/// @brief	Translation of `string` type.
+	/// @brief	Translation of plain utf16 string type.
+	template<>
+	struct JavaTypeInfo<const char16_t*> final
+	{
+		/// @brief	Java `string` type.
+		using Type		= jstring;
+	};
+
+	/// @brief	Translation of `std::string` type with utf8 content.
 	template<>
 	struct JavaTypeInfo<std::string> final
+	{
+		/// @brief	Java `string` type.
+		using Type		= jstring;
+	};
+
+	/// @brief	Translation of `std::u16string` type with utf16 content.
+	template<>
+	struct JavaTypeInfo<std::u16string> final
 	{
 		/// @brief	Java `string` type.
 		using Type		= jstring;

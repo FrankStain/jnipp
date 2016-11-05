@@ -55,5 +55,5 @@ namespace marshaling {};
 #include <jnipp/handles/FieldHandle.h>
 #include <jnipp/handles/StaticFieldHandle.h>
 
-// Jni++ major util - virtual machine wrap.
+// Jni++ major utility - virtual machine wrap.
 #include <jnipp/utils/VirtualMachine.h>
