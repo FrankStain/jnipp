@@ -80,7 +80,7 @@
 	#define Expects( ... )										\
 	if( !( __VA_ARGS__ ) )										\
 	{															\
-		JNIPP_LOG_ERROR(										\
+		jnipp::logging::Assert(									\
 			"%s:%d - Unexpected result of `%s` expression.",		\
 			__FILE__, __LINE__, JNIPP_STRINGIFY( __VA_ARGS__ )	\
 		);														\
@@ -94,7 +94,7 @@
 	#define Ensures( ... )										\
 	if( !( __VA_ARGS__ ) )										\
 	{															\
-		JNIPP_LOG_ERROR(										\
+		jnipp::logging::Assert(									\
 			"%s:%d - Unexpected result of `%s` expression.",		\
 			__FILE__, __LINE__, JNIPP_STRINGIFY( __VA_ARGS__ )	\
 		);														\
