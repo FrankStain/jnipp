@@ -54,6 +54,3 @@ namespace marshaling
 	};
 };
 };
-
-#include "TypeConvert.FromJava.inl"
-#include "TypeConvert.ToJava.inl"

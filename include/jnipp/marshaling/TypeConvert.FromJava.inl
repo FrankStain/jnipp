@@ -16,13 +16,27 @@ namespace marshaling
 	template<>
 	inline void FromJava<std::string>( const JavaType<std::string>& source, std::string& destination )
 	{
-		// @TODO: Make convert using `JniEnvironment`.
+		auto local_env				= VirtualMachine::GetLocalEnvironment();
+		const jsize string_length	= local_env->GetStringUTFLength( source );
+
+		destination.clear();
+		CRET( string_length == 0 );
+
+		destination.resize( string_length, ' ' );
+		local_env->GetStringUTFRegion( source, 0, string_length, &destination.front() );
 	};
 
 	template<>
 	inline void FromJava<std::u16string>( const JavaType<std::u16string>& source, std::u16string& destination )
 	{
-		// @TODO: Make convert using `JniEnvironment`.
+		auto local_env				= VirtualMachine::GetLocalEnvironment();
+		const jsize string_length	= local_env->GetStringLength( source );
+
+		destination.clear();
+		CRET( string_length == 0 );
+
+		destination.resize( string_length, ' ' );
+		local_env->GetStringRegion( source, 0, string_length, reinterpret_cast<jchar*>( &destination.front() ) );
 	};
 
 	template<>

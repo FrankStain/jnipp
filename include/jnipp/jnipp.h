@@ -63,3 +63,7 @@ namespace marshaling {};
 #include <jnipp/core/types.h>
 #include <jnipp/utils/VirtualMachine.h>
 #include <jnipp/utils/JniEnv.h>
+
+// Implementations of converting functions may need functionality of `VirtualMachine`.
+#include <jnipp/marshaling/TypeConvert.FromJava.inl>
+#include <jnipp/marshaling/TypeConvert.ToJava.inl>
