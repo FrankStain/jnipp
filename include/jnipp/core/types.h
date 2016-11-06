@@ -11,15 +11,23 @@ namespace jnipp
 	*/
 	struct NativeFunction final
 	{
-		void*		address;
-		std::string	signature;
+		void*		address;	// Address of function.
+		std::string	signature;	// Function signature.
+		std::string	name;		// Function name.
 
 		template< typename TReturnType, typename... TArgumentTypes >
-		NativeFunction( TReturnType (*func_address)( TArgumentTypes... ) )
+		NativeFunction( const char* func_name, TReturnType (*func_address)( TArgumentTypes... ) )
 			: address( reinterpret_cast<void*>( func_address ) )
 			, signature( FunctionSignature< TypeSignature<TReturnType>, TypeSignature<TArgumentTypes>... >::GetString() )
+			, name( func_name )
 		{
 
+		};
+
+		/// @brief	Get JNI-consumable form of native function.
+		inline JNINativeMethod GetJniNativeMethod() const
+		{
+			return { name.c_str(), signature.c_str(), address };
 		};
 	};
 
@@ -29,7 +37,7 @@ namespace jnipp
 	*/
 	struct NativeBindingTable final
 	{
-		std::string								class_name;
-		std::initializer_list<NativeFunction>	natives;
+		std::string								class_name;	// Name of Java class.
+		std::initializer_list<NativeFunction>	natives;	// List of native handlers.
 	};
 };
