@@ -162,7 +162,7 @@ namespace jnipp
 	std::shared_ptr<_jclass> VirtualMachine::GetClass( jobject object )
 	{
 		LOG_ENTER();
-		CRET_W( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		CRET_D( object == nullptr, {}, "Attempt to get Java class via null object." );
 
 		auto local_env		= GetLocalEnvironment();
@@ -181,7 +181,7 @@ namespace jnipp
 	std::shared_ptr<_jclass> VirtualMachine::GetClass( const std::string& class_name )
 	{
 		LOG_ENTER();
-		CRET_W( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		CRET_W( class_name.empty(), {}, "Attempt to get Java class via empty string." );
 
 		utils::MutexLock lock{ m_mutex };
@@ -199,7 +199,7 @@ namespace jnipp
 	std::shared_ptr<_jclass> VirtualMachine::LookupClass( const std::string& class_name )
 	{
 		LOG_ENTER();
-		CRET_W( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		auto local_env		= GetLocalEnvironment();
 		auto local_class	= local_env->FindClass( class_name.c_str() );

@@ -20,7 +20,7 @@ namespace jnipp
 		/// @brief	Invalidate the handle.
 		void Invalidate();
 
-		/// brief	Check the class handle carries valid value.
+		/// @brief	Check the class handle carries valid value.
 		inline const bool IsValid() const	{ return m_class != nullptr; };
 
 
