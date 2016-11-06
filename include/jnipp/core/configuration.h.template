@@ -22,6 +22,11 @@
 	#define JNIPP_LOGS_ENABLED		1
 #endif
 
+// Trace logging switch.
+#if( !defined( JNIPP_TRACING_ENABLED ) )
+	#define JNIPP_TRACING_ENABLED	1
+#endif
+
 // Overall handles logging switch.
 #if( !defined( JNIPP_LOG_HANDLES ) )
 	#define JNIPP_LOG_HANDLES		1
@@ -31,3 +36,30 @@
 #if( !defined( JNIPP_LOG_MARSHALING ) )
 	#define JNIPP_LOG_MARSHALING	1
 #endif
+
+// `VirtualMachine` logging switch.
+#if( !defined( JNIPP_LOG_VM ) )
+	#define JNIPP_LOG_VM			1
+#endif
+
+// `JniEnv` logging switch.
+#if( !defined( JNIPP_LOG_ENV ) )
+	#define JNIPP_LOG_ENV			1
+#endif
+
+// `ClassHandle` logging switch.
+#if( !defined( JNIPP_LOG_CLASS_HANDLE ) )
+	#define JNIPP_LOG_CLASS_HANDLE	1
+#endif
+
+// Use STL synchronization by default.
+#include <mutex>
+
+namespace jnipp
+{
+namespace utils
+{
+	using Mutex		= std::recursive_mutex;
+	using MutexLock	= std::lock_guard<Mutex>;
+};
+};
