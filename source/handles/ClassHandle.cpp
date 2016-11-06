@@ -72,7 +72,7 @@ namespace jnipp
 		Expects( class_name != nullptr );
 		Expects( strlen( class_name ) > 0 );
 
-		m_class = VirtualMachine::GetClass( class_name );
+		m_class = VirtualMachine::GetInstance().GetClass( class_name );
 
 		Ensures( IsValid() );
 		LOG_EXIT();
@@ -84,7 +84,7 @@ namespace jnipp
 		Invalidate();
 		
 		CRET( java_object == nullptr );
-		m_class = VirtualMachine::GetClass( java_object );
+		m_class = VirtualMachine::GetInstance().GetClass( java_object );
 
 		Ensures( IsValid() );
 		LOG_EXIT();
