@@ -31,16 +31,17 @@ namespace jnipp
 
 		
 		/// @brief	Get the value of field from given handle to object.
-		inline const bool SetValue( const ObjectHandle& object_handle, TFieldType& value_storage ) const;
+		inline const bool SetValue( const ObjectHandle& object_handle, const TFieldType& value_storage ) const;
 		
 		/// @brief	Get the value of field from given object ref.
-		inline const bool SetValue( jobject object_ref, TFieldType& value_storage ) const;
+		inline const bool SetValue( jobject object_ref, const TFieldType& value_storage ) const;
 
 		
 		inline explicit operator const bool () const	{ return IsValid(); };
 
 	private:
-		using JavaType = typename marshaling::JniEnvFacade<TNativeType>::JavaType;
+		using JavaType	= typename marshaling::JniEnvFacade<TNativeType>::JavaType;
+		using Signature	= typename marshaling::JniEnvFacade<TNativeType>::Signature;
 
 		FieldHandle( jclass class_ref, const char* field_name );
 
@@ -53,14 +54,15 @@ namespace jnipp
 
 		
 		/// @brief	Get the value of field from given handle to object.
-		inline const bool SetValue( JNIEnv* local_env, const ObjectHandle& object_handle, TFieldType& value_storage ) const;
+		inline const bool SetValue( JNIEnv* local_env, const ObjectHandle& object_handle, const TFieldType& value_storage ) const;
 		
 		/// @brief	Get the value of field from given object ref.
-		inline const bool SetValue( JNIEnv* local_env, jobject object_ref, TFieldType& value_storage ) const;
+		inline const bool SetValue( JNIEnv* local_env, jobject object_ref, const TFieldType& value_storage ) const;
 
 	private:
-		static constexpr auto FIELD_READ_HANDLER	= marshaling::JniEnvFacade<TNativeType>::FIELD_READ_HANDLER;
-		static constexpr auto FIELD_WRITE_HANDLER	= marshaling::JniEnvFacade<TNativeType>::FIELD_WRITE_HANDLER;
+		constexpr static size_t LOCAL_FRAME_SIZE	= marshaling::JniEnvFacade<TNativeType>::LOCAL_FRAME_SIZE;
+		constexpr static auto FIELD_READ_HANDLER	= marshaling::JniEnvFacade<TNativeType>::FIELD_READ_HANDLER;
+		constexpr static auto FIELD_WRITE_HANDLER	= marshaling::JniEnvFacade<TNativeType>::FIELD_WRITE_HANDLER;
 
 		jfieldID	m_field_id	= 0;	// Field id for JNI.
 	};

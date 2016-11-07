@@ -67,3 +67,4 @@ namespace marshaling {};
 // Implementations of converting functions may need functionality of `VirtualMachine`.
 #include <jnipp/marshaling/TypeConvert.FromJava.inl>
 #include <jnipp/marshaling/TypeConvert.ToJava.inl>
+#include <jnipp/handles/FieldHandle.inl>
