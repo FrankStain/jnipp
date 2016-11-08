@@ -68,3 +68,4 @@ namespace marshaling {};
 #include <jnipp/marshaling/TypeConvert.FromJava.inl>
 #include <jnipp/marshaling/TypeConvert.ToJava.inl>
 #include <jnipp/handles/FieldHandle.inl>
+#include <jnipp/handles/StaticFieldHandle.inl>
