@@ -5,7 +5,7 @@
 
 namespace jnipp
 {
-	/// @brief	
+	/// @brief	Handle to field of Java object.
 	template< typename TNativeType >
 	class FieldHandle final
 	{
@@ -20,7 +20,7 @@ namespace jnipp
 		FieldHandle( const ClassHandle& class_handle, const char* field_name );
 
 		
-		/// @brief	Check the class handle carries valid value.
+		/// @brief	Check the field handle carries valid value.
 		inline const bool IsValid() const				{ return m_field_id != 0; };
 
 		/// @brief	Get the value of field from given handle to object.
@@ -30,10 +30,10 @@ namespace jnipp
 		inline const bool GetValue( jobject object_ref, TFieldType& value_storage ) const;
 
 		
-		/// @brief	Get the value of field from given handle to object.
+		/// @brief	Set the value of field to given object by its handle.
 		inline const bool SetValue( const ObjectHandle& object_handle, const TFieldType& value_storage ) const;
 		
-		/// @brief	Get the value of field from given object ref.
+		/// @brief	Set the value of field to given object by its ref.
 		inline const bool SetValue( jobject object_ref, const TFieldType& value_storage ) const;
 
 		
@@ -53,10 +53,10 @@ namespace jnipp
 		inline const bool GetValue( JNIEnv* local_env, jobject object_ref, TFieldType& value_storage ) const;
 
 		
-		/// @brief	Get the value of field from given handle to object.
+		/// @brief	Set the value of field to given object by its handle.
 		inline const bool SetValue( JNIEnv* local_env, const ObjectHandle& object_handle, const TFieldType& value_storage ) const;
 		
-		/// @brief	Get the value of field from given object ref.
+		/// @brief	Set the value of field to given object by its ref.
 		inline const bool SetValue( JNIEnv* local_env, jobject object_ref, const TFieldType& value_storage ) const;
 
 	private:
