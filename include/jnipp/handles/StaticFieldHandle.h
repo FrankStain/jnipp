@@ -21,7 +21,7 @@ namespace jnipp
 
 		
 		/// @brief	Check the field handle carries valid value.
-		inline const bool IsValid() const				{ return m_field_id != 0; };
+		inline const bool IsValid() const				{ return m_class_handle.IsValid() && ( m_field_id != 0 ); };
 
 		/// @brief	Get the value of field.
 		inline const bool GetValue( TFieldType& value_storage ) const;
