@@ -25,13 +25,13 @@ namespace jnipp
 		/// @brief	Register native handlers for list of Java classes via given list of binding tables.
 		static const bool RegisterClassNatives( std::initializer_list<NativeBindingTable> bindings );
 
-		/// @brief	
+		/// @brief	Get the `JniEnv` instance for current thread.
 		static JNIEnv* GetLocalEnvironment();
 
-		/// @brief	
+		/// @brief	Get the global `JavaVM` instance.
 		static JavaVM* GetJvm();
 
-		/// @brief	
+		/// @brief	Check the `VirtualMachine` is properly initialized.
 		static const bool IsValid();
 
 	private:
