@@ -64,6 +64,22 @@ namespace jnipp
 		LOG_EXIT();
 	};
 
+	const std::string ClassHandle::GetName() const
+	{
+		LOG_ENTER();
+		// @TODO: Use `VirtualMachine` instance to access the functionality.
+		LOG_EXIT();
+		return {};
+	};
+
+	ClassHandle ClassHandle::GetParentHandle() const
+	{
+		LOG_ENTER();
+		// @TODO: Use `VirtualMachine` instance to access the functionality.
+		LOG_EXIT();
+		return {};
+	};
+
 	void ClassHandle::AcquireHandle( const char* class_name )
 	{
 		LOG_ENTER();
