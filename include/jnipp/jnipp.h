@@ -73,3 +73,5 @@ namespace marshaling {};
 #include <jnipp/utils/StaticFunctionCall.inl>
 #include <jnipp/handles/FieldHandle.inl>
 #include <jnipp/handles/StaticFieldHandle.inl>
+#include <jnipp/handles/FunctionHandle.inl>
+#include <jnipp/handles/StaticFunctionHandle.inl>
