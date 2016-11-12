@@ -26,7 +26,7 @@ namespace utils
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline FunctionCall<TNativeReturnType, TNativeArguments>::FunctionCall( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
+	inline FunctionCall<TNativeReturnType, TNativeArguments...>::FunctionCall( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
 		: m_local_env( local_env )
 		, m_object_ref( object_ref )
 		, m_function_id( function_id )
@@ -36,7 +36,7 @@ namespace utils
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline TNativeReturnType FunctionCall<TNativeReturnType, TNativeArguments>::Call( TNativeArguments... arguments ) const
+	inline TNativeReturnType FunctionCall<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeReturnType, TNativeArguments...>::RESULT;
 		
@@ -44,7 +44,7 @@ namespace utils
 		CRET_E( LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), false, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
 		auto function_result = reinterpret_cast<JavaType>(
-			(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( std::forward<TNativeArguments>( arguments ) )... );
+			(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
 		);
 
 		TNativeReturnType native_result;
@@ -56,7 +56,7 @@ namespace utils
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline TNativeReturnType FunctionCall<TNativeReturnType, TNativeArguments>::CallNonVirtual( TNativeArguments... arguments ) const
+	inline TNativeReturnType FunctionCall<TNativeReturnType, TNativeArguments...>::CallNonVirtual( const TNativeArguments&... arguments ) const
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeReturnType, TNativeArguments...>::RESULT;
 		
@@ -64,7 +64,7 @@ namespace utils
 		CRET_E( LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), false, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
 		auto function_result = reinterpret_cast<JavaType>(
-			(m_local_env->*NONVIRTUAL_FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( std::forward<TNativeArguments>( arguments ) )... );
+			(m_local_env->*NONVIRTUAL_FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
 		);
 
 		TNativeReturnType native_result;
@@ -76,7 +76,7 @@ namespace utils
 	};
 
 	template< typename... TNativeArguments >
-	inline FunctionCall<void, TNativeArguments>::FunctionCall( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
+	inline FunctionCall<void, TNativeArguments...>::FunctionCall( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
 		: m_local_env( local_env )
 		, m_object_ref( object_ref )
 		, m_function_id( function_id )
@@ -86,28 +86,28 @@ namespace utils
 	};
 
 	template< typename... TNativeArguments >
-	inline void FunctionCall<void, TNativeArguments>::Call( TNativeArguments... arguments ) const
+	inline void FunctionCall<void, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeArguments...>::RESULT;
 		
 		CRET_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
 		CRET_E( LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), false, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
-		(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( std::forward<TNativeArguments>( arguments ) )... );
+		(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
 
 		CRET( LOCAL_FRAME_SIZE == 0, native_result );
 		local_env->PopLocalFrame( nullptr );
 	};
 
 	template< typename... TNativeArguments >
-	inline void FunctionCall<void, TNativeArguments>::CallNonVirtual( TNativeArguments... arguments ) const
+	inline void FunctionCall<void, TNativeArguments...>::CallNonVirtual( const TNativeArguments&... arguments ) const
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeArguments...>::RESULT;
 		
 		CRET_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
 		CRET_E( LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), false, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
-		(m_local_env->*NONVIRTUAL_FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( std::forward<TNativeArguments>( arguments ) )... );
+		(m_local_env->*NONVIRTUAL_FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
 
 		CRET( LOCAL_FRAME_SIZE == 0, native_result );
 		local_env->PopLocalFrame( nullptr );

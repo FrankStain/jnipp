@@ -13,7 +13,7 @@ namespace utils
 	public:
 		inline StaticFunctionCall( JNIEnv* local_env, jclass class_ref, jmethodID function_id );
 
-		inline TNativeReturnType Call( TNativeArguments... arguments ) const;
+		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;
 
 	private:
 		using JavaType	= typename jnipp::marshaling::JniEnvFacade<TNativeReturnType>::JavaType;
@@ -32,7 +32,7 @@ namespace utils
 	public:
 		inline StaticFunctionCall( JNIEnv* local_env, jclass class_ref, jmethodID function_id );
 
-		inline TNativeReturnType Call( TNativeArguments... arguments ) const;
+		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;
 
 	private:
 		constexpr static auto FUNCTION_HANDLER	= marshaling::JniEnvFacade<void>::STATIC_FUNCTION_HANDLER;
