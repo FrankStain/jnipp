@@ -20,7 +20,7 @@ namespace marshaling {};
 // Jni++ configuration.
 #include <jnipp/core/configuration.h>
 
-// Most major includes.
+// Most major system includes.
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -47,6 +47,9 @@ namespace marshaling {};
 #include <jnipp/marshaling/TypeConvert.h>
 #include <jnipp/marshaling/JniEnvFacade.h>
 
+// Jni++ forward declarations.
+#include <jnipp/utils/forwards.h>
+
 // Jni++ wrap for Java classes.
 #include <jnipp/handles/ClassHandle.h>
 #include <jnipp/handles/ObjectHandle.h>
@@ -61,8 +64,10 @@ namespace marshaling {};
 #include <jnipp/handles/FunctionHandle.h>
 #include <jnipp/handles/StaticFunctionHandle.h>
 
+// Some crucial Jni++ types.
+#include <jnipp/utils/types.h>
+
 // Jni++ major utility - virtual machine wrap.
-#include <jnipp/core/types.h>
 #include <jnipp/utils/VirtualMachine.h>
 #include <jnipp/utils/JniEnv.h>
 
