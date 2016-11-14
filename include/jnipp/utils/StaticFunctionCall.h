@@ -7,15 +7,18 @@ namespace jnipp
 {
 namespace utils
 {
+	/// @brief	Java static method decorator. Used by `StaticFunctionHandle` to directly call the Java method.
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	class StaticFunctionCall
 	{
 	public:
 		inline StaticFunctionCall( JNIEnv* local_env, jclass class_ref, jmethodID function_id );
 
+		/// @brief	Call the Java method on given Java class with given function arguments.
 		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;
 
 	private:
+		/// @brief	Java type of function call result.
 		using JavaType	= typename jnipp::marshaling::JniEnvFacade<TNativeReturnType>::JavaType;
 
 	private:
@@ -26,12 +29,14 @@ namespace utils
 		jmethodID	m_function_id	= 0;		// Id of function.
 	};
 
+	/// @brief	Private specialization of Java static method decorator for case of `void` call result.
 	template< typename... TNativeArguments >
 	class StaticFunctionCall<void, TNativeArguments...>
 	{
 	public:
 		inline StaticFunctionCall( JNIEnv* local_env, jclass class_ref, jmethodID function_id );
 
+		/// @brief	Call the Java method on given Java class with given function arguments.
 		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;
 
 	private:
