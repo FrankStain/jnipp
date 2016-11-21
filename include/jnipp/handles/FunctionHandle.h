@@ -5,6 +5,7 @@
 
 namespace jnipp
 {
+	/// @brief	Handle to member-function (method) of Java object.
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	class FunctionHandle final
 	{
