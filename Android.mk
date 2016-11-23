@@ -2,11 +2,6 @@
 # Apache 2.0 License
 
 
-# Define library paths for BitLight platform.
-$(call import-add-path, $(BL_ENGINE_HOME)/projects/build.android)
-$(call import-add-path, $(BL_ENGINE_HOME)/third-party/projects/build.android)
-
-
 # Looks for a files in requested tree of folders.
 define lookup-files
     $(wildcard $(1)) $(foreach e, $(wildcard $(1)/*), $(call lookup-files, $(e)))
