@@ -60,28 +60,28 @@ namespace jnipp
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( const ObjectHandle& object_handle, TFieldType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::GetValue( const ObjectHandle& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( *object_handle, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( jobject object_ref, TFieldType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::GetValue( jobject object_ref, TNativeType& value_storage ) const
 	{
-		CRET_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		CRET_E( !VirtualMachine::IsValid(), false, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return GetValue( local_env, object_ref, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( JNIEnv* local_env, const ObjectHandle& object_handle, TFieldType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::GetValue( JNIEnv* local_env, const ObjectHandle& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( local_env, *object_handle, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( JNIEnv* local_env, jobject object_ref, TFieldType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::GetValue( JNIEnv* local_env, jobject object_ref, TNativeType& value_storage ) const
 	{
 		CRET_E( !IsValid(), false, "Field handle was not initialized properly." );
 		CRET_E( object_ref == nullptr, false, "Attempt to get the value of field from null object." );
@@ -98,28 +98,28 @@ namespace jnipp
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( const ObjectHandle& object_handle, const TFieldType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::SetValue( const ObjectHandle& object_handle, const TNativeType& value_storage ) const
 	{
 		return SetValue( *object_handle, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( jobject object_ref, const TFieldType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::SetValue( jobject object_ref, const TNativeType& value_storage ) const
 	{
-		CRET_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		CRET_E( !VirtualMachine::IsValid(), false, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return SetValue( local_env, object_ref, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( JNIEnv* local_env, const ObjectHandle& object_handle, const TFieldType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::SetValue( JNIEnv* local_env, const ObjectHandle& object_handle, const TNativeType& value_storage ) const
 	{
 		return SetValue( local_env, *object_handle, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( JNIEnv* local_env, jobject object_ref, const TFieldType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::SetValue( JNIEnv* local_env, jobject object_ref, const TNativeType& value_storage ) const
 	{
 		CRET_E( !IsValid(), false, "Field handle was not initialized properly." );
 		CRET_E( object_ref == nullptr, false, "Attempt to set the value of field to null object." );

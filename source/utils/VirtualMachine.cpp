@@ -58,6 +58,7 @@ namespace jnipp
 		Ensures( vm.m_jvm != nullptr );
 		Ensures( vm.m_main_env != nullptr );
 		LOG_EXIT();
+		return true;
 	};
 
 	void VirtualMachine::Finalize()

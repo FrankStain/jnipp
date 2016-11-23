@@ -24,10 +24,10 @@ namespace jnipp
 		inline const bool IsValid() const				{ return m_class_handle.IsValid() && ( m_field_id != 0 ); };
 
 		/// @brief	Get the value of field.
-		inline const bool GetValue( TFieldType& value_storage ) const;
+		inline const bool GetValue( TNativeType& value_storage ) const;
 
 		/// @brief	Set the value of field.
-		inline const bool SetValue( const TFieldType& value_storage ) const;
+		inline const bool SetValue( const TNativeType& value_storage ) const;
 
 
 		inline explicit operator const bool () const	{ return IsValid(); };
@@ -37,10 +37,10 @@ namespace jnipp
 		using Signature	= typename marshaling::JniEnvFacade<TNativeType>::Signature;
 
 		/// @brief	Get the value of field.
-		inline const bool GetValue( JNIEnv* local_env, TFieldType& value_storage ) const;
+		inline const bool GetValue( JNIEnv* local_env, TNativeType& value_storage ) const;
 
 		/// @brief	Set the value of field.
-		inline const bool SetValue( JNIEnv* local_env, const TFieldType& value_storage ) const;
+		inline const bool SetValue( JNIEnv* local_env, const TNativeType& value_storage ) const;
 
 	private:
 		constexpr static size_t LOCAL_FRAME_SIZE	= marshaling::JniEnvFacade<TNativeType>::LOCAL_FRAME_SIZE;

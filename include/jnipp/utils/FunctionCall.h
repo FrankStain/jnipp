@@ -25,8 +25,8 @@ namespace utils
 		using JavaType	= typename jnipp::marshaling::JniEnvFacade<TNativeReturnType>::JavaType;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER				= marshaling::JniEnvFacade<TNativeType>::FUNCTION_HANDLER;
-		constexpr static auto NONVIRTUAL_FUNCTION_HANDLER	= marshaling::JniEnvFacade<TNativeType>::NONVIRTUAL_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER				= marshaling::JniEnvFacade<TNativeReturnType>::FUNCTION_HANDLER;
+		constexpr static auto NONVIRTUAL_FUNCTION_HANDLER	= marshaling::JniEnvFacade<TNativeReturnType>::NONVIRTUAL_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jobject		m_object_ref	= nullptr;	// Reference to Java object.

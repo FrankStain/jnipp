@@ -78,6 +78,7 @@ namespace jnipp
 		LOG_ENTER();
 		AcquireObjectRef( object_ref );
 		LOG_EXIT();
+		return *this;
 	};
 
 	const ObjectHandle& ObjectHandle::operator=( const ClassHandle& class_handle )
@@ -86,6 +87,7 @@ namespace jnipp
 		m_object	= class_handle.m_class;
 		m_class_handle.Invalidate();
 		LOG_EXIT();
+		return *this;
 	};
 
 	const ObjectHandle& ObjectHandle::operator=( ClassHandle&& class_handle )
@@ -94,6 +96,7 @@ namespace jnipp
 		m_object	= std::move( class_handle.m_class );
 		m_class_handle.Invalidate();
 		LOG_EXIT();
+		return *this;
 	};
 
 	const ObjectHandle& ObjectHandle::operator=( const ObjectHandle& other )
@@ -102,6 +105,7 @@ namespace jnipp
 		m_object	= other.m_object;
 		m_class_handle.Invalidate();
 		LOG_EXIT();
+		return *this;
 	};
 
 	const ObjectHandle& ObjectHandle::operator=( ObjectHandle&& other )
@@ -110,6 +114,7 @@ namespace jnipp
 		m_object	= std::move( other.m_object );
 		m_class_handle.Invalidate();
 		LOG_EXIT();
+		return *this;
 	};
 
 	void ObjectHandle::DeleteObjectRef( jobject object_ref )

@@ -18,7 +18,7 @@ namespace jnipp
 		template< typename TReturnType, typename... TArgumentTypes >
 		NativeFunction( const char* func_name, TReturnType (*func_address)( TArgumentTypes... ) )
 			: address( reinterpret_cast<void*>( func_address ) )
-			, signature( FunctionSignature< TypeSignature<TReturnType>, TypeSignature<TArgumentTypes>... >::GetString() )
+			, signature( FunctionSignature< marshaling::TypeSignature<TReturnType>, marshaling::TypeSignature<TArgumentTypes>... >::GetString() )
 			, name( func_name )
 		{
 

@@ -50,7 +50,7 @@ namespace jnipp
 		CRET_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
-		m_function_id	= local_env->GetStaticMethodID( *m_class_handle, field_name, Signature::GetString() );
+		m_function_id	= local_env->GetStaticMethodID( *m_class_handle, function_name, Signature::GetString() );
 
 		Ensures( m_function_id != 0 );
 	};
