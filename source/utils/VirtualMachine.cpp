@@ -119,7 +119,6 @@ namespace jnipp
 
 		JNIEnv* local_env = nullptr;
 		CRET_D( vm.m_jvm->GetEnv( reinterpret_cast<void**>( &local_env ), VirtualMachine::JNI_VERSION ) == JNI_OK, local_env, "Accessing already atached JniEnv." );
-		Ensures( local_env != nullptr );
 
 		// Try to attach JVM to this thread.
 		CRET_E( vm.m_jvm->AttachCurrentThread( &local_env, nullptr ) != JNI_OK, nullptr, "Failed to attach Java VM to current thread." );
