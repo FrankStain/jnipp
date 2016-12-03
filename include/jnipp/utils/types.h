@@ -15,13 +15,24 @@ namespace jnipp
 		std::string	signature;	// Function signature.
 		std::string	name;		// Function name.
 
-		template< typename TReturnType, typename... TArgumentTypes >
-		NativeFunction( const char* func_name, TReturnType (*func_address)( TArgumentTypes... ) )
+		/**
+			@brief	Generic constructor to automatically determinate the signature of given function.
+			@tparam	TReturnType		Type of value returned by function. Only JNI interpretations accepted.
+			@tparam	TSenderType		Type of JNI interpretation of Java object, which invokes the function. Only `jobject` and `jclass` may be accepted.
+			@tparam	TArgumentTypes	Pack of function arguments. Only JNI interpretations accepted.
+			@param	func_name		The name of given function for Java.
+			@param	func_address	Actual address of function.
+		*/
+		template< typename TReturnType, typename TSenderType, typename... TArgumentTypes >
+		NativeFunction( const char* func_name, TReturnType (*func_address)( JNIEnv*, TSenderType, TArgumentTypes... ) )
 			: address( reinterpret_cast<void*>( func_address ) )
 			, signature( FunctionSignature< marshaling::TypeSignature<TReturnType>, marshaling::TypeSignature<TArgumentTypes>... >::GetString() )
 			, name( func_name )
 		{
-
+			static_assert(
+				std::is_same<jobject, TSenderType>::value || std::is_same<jclass, TSenderType>::value,
+				"The function handler must be `jobject` or `jclass`."
+			);
 		};
 
 		/// @brief	Get JNI-consumable form of native function.
