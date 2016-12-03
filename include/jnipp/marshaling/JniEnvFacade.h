@@ -52,6 +52,9 @@ namespace marshaling
 	template< typename TNatveType >
 	using TypeSignature = typename JniEnvFacade<TNatveType>::Signature;
 
+	template< typename TJavaType >
+	using JavaTypeSignature = typename JniEnvFacade< NativeType<TJavaType> >::Signature; 
+
 	template<>
 	struct JniEnvFacade<void> final
 	{

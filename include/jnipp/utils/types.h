@@ -26,7 +26,7 @@ namespace jnipp
 		template< typename TReturnType, typename TSenderType, typename... TArgumentTypes >
 		NativeFunction( const char* func_name, TReturnType (*func_address)( JNIEnv*, TSenderType, TArgumentTypes... ) )
 			: address( reinterpret_cast<void*>( func_address ) )
-			, signature( FunctionSignature< marshaling::TypeSignature<TReturnType>, marshaling::TypeSignature<TArgumentTypes>... >::GetString() )
+			, signature( FunctionSignature< marshaling::JavaTypeSignature<TReturnType>, marshaling::JavaTypeSignature<TArgumentTypes>... >::GetString() )
 			, name( func_name )
 		{
 			static_assert(
