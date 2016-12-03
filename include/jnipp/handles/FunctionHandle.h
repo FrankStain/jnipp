@@ -39,7 +39,7 @@ namespace jnipp
 		inline explicit operator const bool () const	{ return IsValid(); };
 
 	private:
-		using Signature		= FunctionSignature<TNativeReturnType, TNativeArguments...>;
+		using Signature		= FunctionSignature< marshaling::TypeSignature<TNativeReturnType>, marshaling::TypeSignature<TNativeArguments>... >;
 		using CallDecorator	= utils::FunctionCall<TNativeReturnType, TNativeArguments...>;
 
 		FunctionHandle( jclass class_ref, const char* function_name );

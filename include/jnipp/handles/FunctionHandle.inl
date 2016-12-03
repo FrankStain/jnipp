@@ -68,7 +68,7 @@ namespace jnipp
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType FunctionHandle<TNativeReturnType, TNativeArguments...>::Call( jobject object_ref, const TNativeArguments&... arguments ) const
 	{
-		CRET_E( !VirtualMachine::IsValid(), TNativeReturnType{}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		CRET_E( !VirtualMachine::IsValid(), TNativeReturnType(), "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return Call( local_env, object_ref, arguments... );
@@ -83,8 +83,8 @@ namespace jnipp
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType FunctionHandle<TNativeReturnType, TNativeArguments...>::Call( JNIEnv* local_env, jobject object_ref, const TNativeArguments&... arguments ) const
 	{
-		CRET_E( !IsValid(), TNativeReturnType{}, "Function handle was not initialized properly." );
-		CRET_E( object_ref == nullptr, TNativeReturnType{}, "Attempt to call member function of null object." );
+		CRET_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
+		CRET_E( object_ref == nullptr, TNativeReturnType(), "Attempt to call member function of null object." );
 
 		return CallDecorator{ local_env, object_ref, m_function_id }.Call( arguments... );
 	};
@@ -98,7 +98,7 @@ namespace jnipp
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType FunctionHandle<TNativeReturnType, TNativeArguments...>::CallNonVirtual( jobject object_ref, const TNativeArguments&... arguments ) const
 	{
-		CRET_E( !VirtualMachine::IsValid(), TNativeReturnType{}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		CRET_E( !VirtualMachine::IsValid(), TNativeReturnType(), "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return CallNonVirtual( local_env, object_ref, arguments... );
@@ -113,8 +113,8 @@ namespace jnipp
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType FunctionHandle<TNativeReturnType, TNativeArguments...>::CallNonVirtual( JNIEnv* local_env, jobject object_ref, const TNativeArguments&... arguments ) const
 	{
-		CRET_E( !IsValid(), TNativeReturnType{}, "Function handle was not initialized properly." );
-		CRET_E( object_ref == nullptr, TNativeReturnType{}, "Attempt to call member function of null object." );
+		CRET_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
+		CRET_E( object_ref == nullptr, TNativeReturnType(), "Attempt to call member function of null object." );
 
 		return CallDecorator{ local_env, object_ref, m_function_id }.CallNonVirtual( arguments... );
 	};
