@@ -21,10 +21,13 @@ namespace jnipp
 		void Invalidate();
 
 		/// @brief	Check the object handle carries valid value.
-		inline const bool IsValid() const					{ return m_object != nullptr; };
+		inline const bool IsValid() const					{ return m_object_ref != nullptr; };
 
 		/// @brief	Get the handle to class of stored object.
 		inline const ClassHandle& GetClassHandle() const	{ InitClassHandle(); return m_class_handle; };
+
+		/// @brief	Get the JNI representation of Java object reference.
+		inline jobject GetJniReference() const				{ return m_object_ref.get(); };
 
 
 		const ObjectHandle& operator = ( jobject object_ref );
@@ -35,7 +38,7 @@ namespace jnipp
 
 
 		inline explicit operator const bool () const		{ return IsValid(); };
-		inline jobject operator * () const					{ return m_object.get(); };
+		inline jobject operator * () const					{ return GetJniReference(); };
 
 	private:
 		/// @brief	Delete global ref to object.
@@ -49,7 +52,7 @@ namespace jnipp
 		void AcquireObjectRef( jobject object_ref );
 
 	private:
-		std::shared_ptr<_jobject>	m_object;		// Global ref to stored object.
+		std::shared_ptr<_jobject>	m_object_ref;	// Shared JNI representation of Java object global reference.
 		mutable ClassHandle			m_class_handle;	// Handle to class of stored object.
 	};
 };

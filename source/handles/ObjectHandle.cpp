@@ -40,26 +40,26 @@ namespace jnipp
 	};
 
 	ObjectHandle::ObjectHandle( const ClassHandle& class_handle )
-		: m_object( class_handle.m_class_ref )
+		: m_object_ref( class_handle.m_class_ref )
 	{
 		LOG_PASS();
 	};
 
 	ObjectHandle::ObjectHandle( ClassHandle&& class_handle )
-		: m_object( std::move( class_handle.m_class_ref ) )
+		: m_object_ref( std::move( class_handle.m_class_ref ) )
 	{
 		LOG_PASS();
 	};
 
 	ObjectHandle::ObjectHandle( const ObjectHandle& other )
-		: m_object( other.m_object )
+		: m_object_ref( other.m_object_ref )
 		, m_class_handle( other.m_class_handle )
 	{
 		LOG_PASS();
 	};
 
 	ObjectHandle::ObjectHandle( ObjectHandle&& other )
-		: m_object( std::move( other.m_object ) )
+		: m_object_ref( std::move( other.m_object_ref ) )
 		, m_class_handle( std::move( other.m_class_handle ) )
 	{
 		LOG_PASS();
@@ -68,7 +68,7 @@ namespace jnipp
 	void ObjectHandle::Invalidate()
 	{
 		LOG_ENTER();
-		m_object.reset();
+		m_object_ref.reset();
 		m_class_handle.Invalidate();
 		LOG_EXIT();
 	};
@@ -84,7 +84,7 @@ namespace jnipp
 	const ObjectHandle& ObjectHandle::operator=( const ClassHandle& class_handle )
 	{
 		LOG_ENTER();
-		m_object	= class_handle.m_class_ref;
+		m_object_ref	= class_handle.m_class_ref;
 		m_class_handle.Invalidate();
 		LOG_EXIT();
 		return *this;
@@ -93,7 +93,7 @@ namespace jnipp
 	const ObjectHandle& ObjectHandle::operator=( ClassHandle&& class_handle )
 	{
 		LOG_ENTER();
-		m_object	= std::move( class_handle.m_class_ref );
+		m_object_ref	= std::move( class_handle.m_class_ref );
 		m_class_handle.Invalidate();
 		LOG_EXIT();
 		return *this;
@@ -102,7 +102,7 @@ namespace jnipp
 	const ObjectHandle& ObjectHandle::operator=( const ObjectHandle& other )
 	{
 		LOG_ENTER();
-		m_object	= other.m_object;
+		m_object_ref	= other.m_object_ref;
 		m_class_handle.Invalidate();
 		LOG_EXIT();
 		return *this;
@@ -111,7 +111,7 @@ namespace jnipp
 	const ObjectHandle& ObjectHandle::operator=( ObjectHandle&& other )
 	{
 		LOG_ENTER();
-		m_object	= std::move( other.m_object );
+		m_object_ref	= std::move( other.m_object_ref );
 		m_class_handle.Invalidate();
 		LOG_EXIT();
 		return *this;
@@ -128,8 +128,8 @@ namespace jnipp
 	void ObjectHandle::InitClassHandle() const
 	{
 		LOG_ENTER();
-		CRET( !m_object || m_class_handle.IsValid() );
-		m_class_handle.AcquireHandle( m_object.get() );
+		CRET( !m_object_ref || m_class_handle.IsValid() );
+		m_class_handle.AcquireHandle( m_object_ref.get() );
 		LOG_EXIT();
 	};
 
@@ -139,7 +139,7 @@ namespace jnipp
 		CRET_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		CRET_W( object_ref == nullptr, , "Attempt to get global ref of null object." );
 
-		m_object = { VirtualMachine::GetLocalEnvironment()->NewGlobalRef( object_ref ), ObjectHandle::DeleteObjectRef };
+		m_object_ref = { VirtualMachine::GetLocalEnvironment()->NewGlobalRef( object_ref ), ObjectHandle::DeleteObjectRef };
 		m_class_handle.Invalidate();
 		LOG_EXIT();
 	};

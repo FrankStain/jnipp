@@ -50,6 +50,6 @@ namespace jnipp
 		void AcquireHandle( jobject object_ref );
 
 	private:
-		std::shared_ptr<_jclass>	m_class_ref;	// Shared JNI representation of Java class reference.
+		std::shared_ptr<_jclass>	m_class_ref;	// Shared JNI representation of Java class global reference.
 	};
 };
