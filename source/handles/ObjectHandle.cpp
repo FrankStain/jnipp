@@ -40,13 +40,13 @@ namespace jnipp
 	};
 
 	ObjectHandle::ObjectHandle( const ClassHandle& class_handle )
-		: m_object( class_handle.m_class )
+		: m_object( class_handle.m_class_ref )
 	{
 		LOG_PASS();
 	};
 
 	ObjectHandle::ObjectHandle( ClassHandle&& class_handle )
-		: m_object( std::move( class_handle.m_class ) )
+		: m_object( std::move( class_handle.m_class_ref ) )
 	{
 		LOG_PASS();
 	};
@@ -84,7 +84,7 @@ namespace jnipp
 	const ObjectHandle& ObjectHandle::operator=( const ClassHandle& class_handle )
 	{
 		LOG_ENTER();
-		m_object	= class_handle.m_class;
+		m_object	= class_handle.m_class_ref;
 		m_class_handle.Invalidate();
 		LOG_EXIT();
 		return *this;
@@ -93,7 +93,7 @@ namespace jnipp
 	const ObjectHandle& ObjectHandle::operator=( ClassHandle&& class_handle )
 	{
 		LOG_ENTER();
-		m_object	= std::move( class_handle.m_class );
+		m_object	= std::move( class_handle.m_class_ref );
 		m_class_handle.Invalidate();
 		LOG_EXIT();
 		return *this;

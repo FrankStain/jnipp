@@ -33,13 +33,13 @@
 namespace jnipp
 {
 	ClassHandle::ClassHandle( const ClassHandle& other )
-		: m_class( other.m_class )
+		: m_class_ref( other.m_class_ref )
 	{
 		LOG_PASS();
 	};
 
 	ClassHandle::ClassHandle( ClassHandle&& other )
-		: m_class( std::move( other.m_class ) )
+		: m_class_ref( std::move( other.m_class_ref ) )
 	{
 		LOG_PASS();
 	};
@@ -60,7 +60,7 @@ namespace jnipp
 	void ClassHandle::Invalidate()
 	{
 		LOG_ENTER();
-		m_class.reset();
+		m_class_ref.reset();
 		LOG_EXIT();
 	};
 
@@ -88,19 +88,19 @@ namespace jnipp
 		Expects( class_name != nullptr );
 		Expects( strlen( class_name ) > 0 );
 
-		m_class = VirtualMachine::GetInstance().GetClass( class_name );
+		m_class_ref = VirtualMachine::GetInstance().GetClass( class_name );
 
 		Ensures( IsValid() );
 		LOG_EXIT();
 	};
 
-	void ClassHandle::AcquireHandle( jobject java_object )
+	void ClassHandle::AcquireHandle( jobject object_ref )
 	{
 		LOG_ENTER();
 		Invalidate();
 		
-		CRET( java_object == nullptr );
-		m_class = VirtualMachine::GetInstance().GetClass( java_object );
+		CRET( object_ref == nullptr );
+		m_class_ref = VirtualMachine::GetInstance().GetClass( object_ref );
 
 		Ensures( IsValid() );
 		LOG_EXIT();
@@ -109,7 +109,7 @@ namespace jnipp
 	const ClassHandle& ClassHandle::operator=( const ClassHandle& other )
 	{
 		LOG_ENTER();
-		m_class = other.m_class;
+		m_class_ref = other.m_class_ref;
 		LOG_EXIT();
 		return *this;
 	};
@@ -117,7 +117,7 @@ namespace jnipp
 	const ClassHandle& ClassHandle::operator=( ClassHandle&& other )
 	{
 		LOG_ENTER();
-		m_class = std::move( other.m_class );
+		m_class_ref = std::move( other.m_class_ref );
 		LOG_EXIT();
 		return *this;
 	};

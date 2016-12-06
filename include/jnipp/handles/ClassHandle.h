@@ -27,7 +27,10 @@ namespace jnipp
 		ClassHandle GetParentHandle() const;
 
 		/// @brief	Check the class handle carries valid value.
-		inline const bool IsValid() const	{ return m_class != nullptr; };
+		inline const bool IsValid() const		{ return m_class_ref != nullptr; };
+
+		/// @brief	Get the JNI representation of Java class reference.
+		inline jclass GetJniReference() const	{ return m_class_ref.get(); };
 
 
 		const ClassHandle& operator = ( const ClassHandle& other );
@@ -37,16 +40,16 @@ namespace jnipp
 
 		
 		inline explicit operator const bool () const	{ return IsValid(); };
-		inline jclass operator * () const				{ return m_class.get(); };
+		inline jclass operator * () const				{ return GetJniReference(); };
 
 	private:
 		/// @brief	Acquire the handle of class via it's name.
 		void AcquireHandle( const char* class_name );
 
 		/// @brief	Acquire the handle of class via handle of object.
-		void AcquireHandle( jobject java_object );
+		void AcquireHandle( jobject object_ref );
 
 	private:
-		std::shared_ptr<_jclass>	m_class;	// Shared JNI handle to Java class.
+		std::shared_ptr<_jclass>	m_class_ref;	// Shared JNI representation of Java class reference.
 	};
 };
