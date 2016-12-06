@@ -9,6 +9,10 @@ namespace jnipp
 	class ObjectHandle final
 	{
 	public:
+		/// @brief	Constructs new object of given class and using given construction arguments.
+		template< typename... TNativeArguments >
+		static ObjectHandle NewObject( const ClassHandle& class_handle, const TNativeArguments&... arguments );
+
 		ObjectHandle() = default;
 		ObjectHandle( jobject object_ref );
 		ObjectHandle( const ClassHandle& class_handle );

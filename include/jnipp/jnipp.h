@@ -76,6 +76,7 @@ namespace marshaling {};
 #include <jnipp/marshaling/TypeConvert.ToJava.inl>
 #include <jnipp/utils/FunctionCall.inl>
 #include <jnipp/utils/StaticFunctionCall.inl>
+#include <jnipp/handles/ObjectHandle.inl>
 #include <jnipp/handles/FieldHandle.inl>
 #include <jnipp/handles/StaticFieldHandle.inl>
 #include <jnipp/handles/FunctionHandle.inl>

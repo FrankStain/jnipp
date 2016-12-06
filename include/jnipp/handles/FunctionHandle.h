@@ -35,8 +35,15 @@ namespace jnipp
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType CallNonVirtual( jobject object_ref, const TNativeArguments&... arguments ) const;
 
+		/// @brief	Get the function signature string.
+		inline const char* GetSignature() const			{ return Signature::GetString(); };
+
+		/// @brief	Get the id of Java object method.
+		inline jmethodID GetFunctionId() const			{ return m_function_id; };
+
 
 		inline explicit operator const bool () const	{ return IsValid(); };
+		inline jmethodID operator * () const			{ return GetFunctionId(); };
 
 	private:
 		using Signature		= FunctionSignature< marshaling::TypeSignature<TNativeReturnType>, marshaling::TypeSignature<TNativeArguments>... >;
