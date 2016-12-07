@@ -85,7 +85,7 @@
 			__FILE__, __LINE__, JNIPP_STRINGIFY( __VA_ARGS__ )	\
 		);														\
 		std::terminate();										\
-	};
+	}
 #endif
 
 
@@ -99,5 +99,5 @@
 			__FILE__, __LINE__, JNIPP_STRINGIFY( __VA_ARGS__ )	\
 		);														\
 		std::terminate();										\
-	};
+	}
 #endif
