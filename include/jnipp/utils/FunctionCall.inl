@@ -7,8 +7,11 @@ namespace jnipp
 {
 namespace utils
 {
+	template< size_t... NUMBERS >
+	struct NumberSumm;
+
 	template< size_t NUMBER, size_t... REST_NUMBERS >
-	struct NumberSumm
+	struct NumberSumm<NUMBER, REST_NUMBERS...>
 	{
 		constexpr static const size_t RESULT = NUMBER + NumberSumm<REST_NUMBERS...>::RESULT;
 	};
@@ -17,6 +20,12 @@ namespace utils
 	struct NumberSumm<NUMBER>
 	{
 		constexpr static const size_t RESULT = NUMBER;
+	};
+
+	template<>
+	struct NumberSumm<>
+	{
+		constexpr static const size_t RESULT = 0;
 	};
 
 	template< typename... TNativeTypes >
@@ -32,7 +41,7 @@ namespace utils
 		, m_function_id( function_id )
 	{
 		Expects( m_object_ref != nullptr );
-		Expects( m_function_id != 0 )
+		Expects( m_function_id != 0 );
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
