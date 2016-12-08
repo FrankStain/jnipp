@@ -23,6 +23,9 @@ namespace jnipp
 		/// @brief	Check the field handle carries valid value.
 		inline const bool IsValid() const				{ return m_field_id != 0; };
 
+		/// @brief	Get the JNI id of Java member field.
+		inline jfieldID GetFieldId() const				{ return m_field_id; };
+
 		/// @brief	Get the value of field from given handle to object.
 		inline const bool GetValue( const ObjectHandle& object_handle, TNativeType& value_storage ) const;
 		
@@ -38,6 +41,7 @@ namespace jnipp
 
 		
 		inline explicit operator const bool () const	{ return IsValid(); };
+		inline jfieldID operator * () const				{ return GetFieldId(); };
 
 	private:
 		using JavaType	= typename marshaling::JniEnvFacade<TNativeType>::JavaType;

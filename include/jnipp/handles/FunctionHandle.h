@@ -23,6 +23,9 @@ namespace jnipp
 		/// @brief	Check the field handle carries valid value.
 		inline const bool IsValid() const				{ return m_function_id != 0; };
 
+		/// @brief	Get the JNI id of Java object method.
+		inline jmethodID GetFunctionId() const			{ return m_function_id; };
+
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType Call( const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
 
@@ -37,9 +40,6 @@ namespace jnipp
 
 		/// @brief	Get the function signature string.
 		inline const char* GetSignature() const			{ return Signature::GetString(); };
-
-		/// @brief	Get the id of Java object method.
-		inline jmethodID GetFunctionId() const			{ return m_function_id; };
 
 
 		inline explicit operator const bool () const	{ return IsValid(); };

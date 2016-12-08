@@ -22,11 +22,15 @@ namespace jnipp
 		/// @brief	Check the field handle carries valid value.
 		inline const bool IsValid() const				{ return m_class_handle.IsValid() && ( m_function_id != 0 ); };
 
+		/// @brief	Get the JNI id of Java static method.
+		inline jmethodID GetFunctionId() const			{ return m_function_id; };
+
 		/// @brief	Call the function with given arguments.
 		inline TNativeReturnType Call( const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
 
 
 		inline explicit operator const bool () const	{ return IsValid(); };
+		inline jmethodID operator * () const			{ return GetFunctionId(); };
 
 	private:
 		using Signature		= FunctionSignature< marshaling::TypeSignature<TNativeReturnType>, marshaling::TypeSignature<TNativeArguments>... >;
