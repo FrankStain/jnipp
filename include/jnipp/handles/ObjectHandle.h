@@ -6,7 +6,7 @@
 namespace jnipp
 {
 	/// @brief	Java object handle through JNI interface.
-	class ObjectHandle final
+	class ObjectHandle
 	{
 	public:
 		/// @brief	Constructs new object of given class and using given construction arguments.
