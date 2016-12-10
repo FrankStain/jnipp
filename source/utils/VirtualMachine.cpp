@@ -81,7 +81,7 @@ namespace jnipp
 
 		auto local_env	= GetLocalEnvironment();
 		auto java_class	= GetInstance().GetClass( bindings.class_name );
-		CRET_E( !java_class, false, "Class `%s` was not found.", bindings.class_name.c_str() );
+		CRET_E( !java_class, false, "Class `%s` was not found.", bindings.class_name );
 
 		std::vector<JNINativeMethod> jni_natives;
 		jni_natives.reserve( bindings.natives.size() );
@@ -96,7 +96,7 @@ namespace jnipp
 		CRET_E(
 			local_env->RegisterNatives( java_class.get(), jni_natives.data(), static_cast<int32_t>( jni_natives.size() ) ) != JNI_OK,
 			false,
-			"Failed to register natives for class `%s`.", bindings.class_name.c_str()
+			"Failed to register natives for class `%s`.", bindings.class_name
 		);
 		LOG_EXIT();
 		return true;
@@ -159,30 +159,43 @@ namespace jnipp
 		LOG_EXIT();
 	};
 
-	std::shared_ptr<_jclass> VirtualMachine::GetClass( jobject object )
+	std::shared_ptr<_jclass> VirtualMachine::GetClass( jobject local_object_ref )
 	{
-		LOG_ENTER();
 		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
-		CRET_D( object == nullptr, {}, "Attempt to get Java class via null object." );
+		CRET_D( local_object_ref == nullptr, {}, "Attempt to get Java class via null object." );
 
 		auto local_env		= GetLocalEnvironment();
-		auto local_class	= local_env->GetObjectClass( object );
+		auto local_class	= local_env->GetObjectClass( local_object_ref );
 		CRET_W( local_class == nullptr, {}, "Unable to get Java class for object." );
 
 		// @TODO: Get class name using Java functions.
 		//const std::string class_name{ m_get_class_name( local_class ) };
 		//auto shared_class = GetClass( class_name );
 
-		LOG_EXIT();
 		// The value returned is `std::shared_ptr` with custom deleter.
 		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class ) ), VirtualMachine::DeleteSharedClass };
 	};
 
-	std::shared_ptr<_jclass> VirtualMachine::GetClass( const std::string& class_name )
+	std::shared_ptr<_jclass> VirtualMachine::GetClass( jclass local_class_ref )
+	{
+		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		CRET_D( local_class_ref == nullptr, {}, "Attempt to get Java class via null object." );
+
+		auto local_env		= GetLocalEnvironment();
+
+		// @TODO: Get class name using Java functions.
+		//const std::string class_name{ m_get_class_name( local_class ) };
+		//auto shared_class = GetClass( class_name );
+
+		// The value returned is `std::shared_ptr` with custom deleter.
+		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class_ref ) ), VirtualMachine::DeleteSharedClass };
+	};
+
+	std::shared_ptr<_jclass> VirtualMachine::GetClass( const char* class_name )
 	{
 		LOG_ENTER();
 		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
-		CRET_W( class_name.empty(), {}, "Attempt to get Java class via empty string." );
+		CRET_W( ( class_name == nullptr ) || !strlen( class_name ), {}, "Attempt to get Java class via empty class name." );
 
 		utils::MutexLock lock{ m_mutex };
 		auto& weak_class = m_shared_classes[ class_name ];
@@ -196,25 +209,25 @@ namespace jnipp
 		return shared_class;
 	};
 
-	std::shared_ptr<_jclass> VirtualMachine::LookupClass( const std::string& class_name )
+	std::shared_ptr<_jclass> VirtualMachine::LookupClass( const char* class_name )
 	{
 		LOG_ENTER();
 		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
-		auto local_env		= GetLocalEnvironment();
-		auto local_class	= local_env->FindClass( class_name.c_str() );
+		auto local_env			= GetLocalEnvironment();
+		auto local_class_ref	= local_env->FindClass( class_name );
 
 		if( local_env->ExceptionCheck() == JNI_TRUE )
 		{
 			local_env->ExceptionDescribe();
 			local_env->ExceptionClear();
-			local_class = nullptr;
+			local_class_ref = nullptr;
 		};
 
-		CRET_W( local_class == nullptr, {}, "No class was found with name `%s`.", class_name.c_str() );
+		CRET_W( local_class_ref == nullptr, {}, "No class was found with name `%s`.", class_name );
 
 		LOG_EXIT();
 		// The value returned is `std::shared_ptr` with custom deleter.
-		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class ) ), VirtualMachine::DeleteSharedClass };
+		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class_ref ) ), VirtualMachine::DeleteSharedClass };
 	};
 };

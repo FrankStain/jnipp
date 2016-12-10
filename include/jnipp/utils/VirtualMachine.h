@@ -47,9 +47,10 @@ namespace jnipp
 	private:
 		VirtualMachine() = default;
 
-		std::shared_ptr<_jclass> GetClass( jobject object );
-		std::shared_ptr<_jclass> GetClass( const std::string& class_name );
-		std::shared_ptr<_jclass> LookupClass( const std::string& class_name );
+		std::shared_ptr<_jclass> GetClass( jobject local_object_ref );
+		std::shared_ptr<_jclass> GetClass( jclass local_class_ref );
+		std::shared_ptr<_jclass> GetClass( const char* class_name );
+		std::shared_ptr<_jclass> LookupClass( const char* class_name );
 
 	private:
 		// ['Java class name'] -> weak `jclass` pointer. Used for shared owning of `jclass` instances.
@@ -62,5 +63,11 @@ namespace jnipp
 		int64_t				m_detach_key		= 0;		// 
 
 		WeakClassStorage	m_shared_classes;				// Storage for found Java class descriptors.
+
+	private:
+		ObjectHandle	m_class_loader;
+
+		//FunctionHandle<ClassHandle, std::string>	m_load_class_func;
+		//FunctionHandle<std::string>					m_get_class_name_func;
 	};
 };
