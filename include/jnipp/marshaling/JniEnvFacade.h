@@ -22,7 +22,7 @@ namespace marshaling
 		using NativeType	= TNativeType;
 
 		/// @brief	JNI representation of Java `object` type.
-		using JavaType		= marshaling::JavaType<TNativeType>;
+		using JavaType		= JavaType<TNativeType>;
 
 		/// @brief	Signature of `object` type.
 		using Signature		= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'O', 'b', 'j', 'e', 'c', 't'>;
@@ -65,7 +65,7 @@ namespace marshaling
 		using NativeType	= void;
 
 		/// @brief	JNI representation of Java `void` type.
-		using JavaType		= marshaling::JavaType<void>;
+		using JavaType		= JavaType<void>;
 
 		/// @brief	Signature of `void` type.
 		using Signature		= StaticString<'V'>;
@@ -90,7 +90,7 @@ namespace marshaling
 		using NativeType	= bool;
 
 		/// @brief	JNI representation of Java `boolean` type.
-		using JavaType		= marshaling::JavaType<bool>;
+		using JavaType		= JavaType<bool>;
 
 		/// @brief	Signature of `boolean` type.
 		using Signature		= StaticString<'Z'>;
@@ -127,7 +127,7 @@ namespace marshaling
 		using NativeType	= float;
 
 		/// @brief	JNI representation of Java `float` type.
-		using JavaType		= marshaling::JavaType<float>;
+		using JavaType		= JavaType<float>;
 
 		/// @brief	Signature of `float` type.
 		using Signature		= StaticString<'F'>;
@@ -164,7 +164,7 @@ namespace marshaling
 		using NativeType	= double;
 
 		/// @brief	JNI representation of Java `double` type.
-		using JavaType		= marshaling::JavaType<double>;
+		using JavaType		= JavaType<double>;
 
 		/// @brief	Signature of `double` type.
 		using Signature		= StaticString<'D'>;
@@ -201,7 +201,7 @@ namespace marshaling
 		using NativeType	= const char*;
 
 		/// @brief	JNI representation of Java `string` type.
-		using JavaType		= marshaling::JavaType<const char*>;
+		using JavaType		= JavaType<const char*>;
 
 		/// @brief	Signature of `string` type.
 		using Signature		= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'S', 't', 'r', 'i', 'n', 'g'>;
@@ -238,7 +238,7 @@ namespace marshaling
 		using NativeType	= const char16_t*;
 
 		/// @brief	JNI representation of Java `string` type.
-		using JavaType		= marshaling::JavaType<const char16_t*>;
+		using JavaType		= JavaType<const char16_t*>;
 
 		/// @brief	Signature of `string` type.
 		using Signature		= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'S', 't', 'r', 'i', 'n', 'g'>;
@@ -275,7 +275,7 @@ namespace marshaling
 		using NativeType	= std::string;
 
 		/// @brief	JNI representation of Java `string` type.
-		using JavaType		= marshaling::JavaType<std::string>;
+		using JavaType		= JavaType<std::string>;
 
 		/// @brief	Signature of `string` type.
 		using Signature		= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'S', 't', 'r', 'i', 'n', 'g'>;
@@ -312,7 +312,7 @@ namespace marshaling
 		using NativeType	= std::u16string;
 
 		/// @brief	JNI representation of Java `string` type.
-		using JavaType		= marshaling::JavaType<std::u16string>;
+		using JavaType		= JavaType<std::u16string>;
 
 		/// @brief	Signature of `string` type.
 		using Signature		= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'S', 't', 'r', 'i', 'n', 'g'>;
@@ -349,7 +349,7 @@ namespace marshaling
 		using NativeType	= int8_t;
 
 		/// @brief	JNI representation of Java `byte` type.
-		using JavaType		= marshaling::JavaType<int8_t>;
+		using JavaType		= JavaType<int8_t>;
 
 		/// @brief	Signature of `byte` type.
 		using Signature		= StaticString<'B'>;
@@ -386,7 +386,7 @@ namespace marshaling
 		using NativeType	= char16_t;
 
 		/// @brief	JNI representation of Java `char` type.
-		using JavaType		= marshaling::JavaType<char16_t>;
+		using JavaType		= JavaType<char16_t>;
 
 		/// @brief	Signature of `char` type.
 		using Signature		= StaticString<'C'>;
@@ -423,7 +423,7 @@ namespace marshaling
 		using NativeType	= int16_t;
 
 		/// @brief	JNI representation of Java `short` type.
-		using JavaType		= marshaling::JavaType<int16_t>;
+		using JavaType		= JavaType<int16_t>;
 
 		/// @brief	Signature of `short` type.
 		using Signature		= StaticString<'S'>;
@@ -460,7 +460,7 @@ namespace marshaling
 		using NativeType	= int32_t;
 
 		/// @brief	JNI representation of Java `int` type.
-		using JavaType		= marshaling::JavaType<int32_t>;
+		using JavaType		= JavaType<int32_t>;
 
 		/// @brief	Signature of `int` type.
 		using Signature		= StaticString<'I'>;
@@ -497,7 +497,7 @@ namespace marshaling
 		using NativeType	= int64_t;
 
 		/// @brief	JNI representation of Java `long` type.
-		using JavaType		= marshaling::JavaType<int64_t>;
+		using JavaType		= JavaType<int64_t>;
 
 		/// @brief	Signature of `long` type.
 		using Signature		= StaticString<'J'>;
@@ -534,7 +534,7 @@ namespace marshaling
 		using NativeType	= uint8_t;
 
 		/// @brief	JNI representation of Java `short` type.
-		using JavaType		= marshaling::JavaType<uint8_t>;
+		using JavaType		= JavaType<uint8_t>;
 
 		/// @brief	Signature of `short` type.
 		using Signature		= StaticString<'S'>;
@@ -571,7 +571,7 @@ namespace marshaling
 		using NativeType	= uint16_t;
 
 		/// @brief	JNI representation of Java `int` type.
-		using JavaType		= marshaling::JavaType<uint16_t>;
+		using JavaType		= JavaType<uint16_t>;
 
 		/// @brief	Signature of `int` type.
 		using Signature		= StaticString<'I'>;
@@ -608,7 +608,7 @@ namespace marshaling
 		using NativeType	= uint32_t;
 
 		/// @brief	JNI representation of Java `long` type.
-		using JavaType		= marshaling::JavaType<uint32_t>;
+		using JavaType		= JavaType<uint32_t>;
 
 		/// @brief	Signature of `long` type.
 		using Signature		= StaticString<'J'>;
@@ -645,7 +645,7 @@ namespace marshaling
 		using NativeType	= uint64_t;
 
 		/// @brief	JNI representation of Java `long` type.
-		using JavaType		= marshaling::JavaType<uint64_t>;
+		using JavaType		= JavaType<uint64_t>;
 
 		/// @brief	Signature of `long` type.
 		using Signature		= StaticString<'J'>;
