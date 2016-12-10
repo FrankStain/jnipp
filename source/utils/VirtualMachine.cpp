@@ -203,6 +203,14 @@ namespace jnipp
 
 		auto local_env		= GetLocalEnvironment();
 		auto local_class	= local_env->FindClass( class_name.c_str() );
+
+		if( local_env->ExceptionCheck() == JNI_TRUE )
+		{
+			local_env->ExceptionDescribe();
+			local_env->ExceptionClear();
+			local_class = nullptr;
+		};
+
 		CRET_W( local_class == nullptr, {}, "No class was found with name `%s`.", class_name.c_str() );
 
 		LOG_EXIT();
