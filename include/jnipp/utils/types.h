@@ -12,8 +12,8 @@ namespace jnipp
 	struct NativeFunction final
 	{
 		void*		address;	// Address of function.
-		std::string	signature;	// Function signature.
-		std::string	name;		// Function name.
+		const char*	signature;	// Function signature.
+		const char*	name;		// Function name.
 
 		/**
 			@brief	Generic constructor to automatically determinate the signature of given function.
@@ -38,7 +38,7 @@ namespace jnipp
 		/// @brief	Get JNI-consumable form of native function.
 		inline JNINativeMethod GetJniNativeMethod() const
 		{
-			return { name.c_str(), signature.c_str(), address };
+			return { name, signature, address };
 		};
 	};
 
@@ -48,7 +48,7 @@ namespace jnipp
 	*/
 	struct NativeBindingTable final
 	{
-		std::string								class_name;	// Name of Java class.
+		const char*								class_name;	// Name of Java class.
 		std::initializer_list<NativeFunction>	natives;	// List of native handlers.
 	};
 };
