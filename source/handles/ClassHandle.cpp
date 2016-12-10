@@ -106,6 +106,12 @@ namespace jnipp
 		LOG_EXIT();
 	};
 
+	const ClassHandle& ClassHandle::operator=( jclass class_ref )
+	{
+		m_class_ref = VirtualMachine::GetInstance().GetClass( class_ref );
+		return *this;
+	};
+
 	const ClassHandle& ClassHandle::operator=( const ClassHandle& other )
 	{
 		LOG_ENTER();

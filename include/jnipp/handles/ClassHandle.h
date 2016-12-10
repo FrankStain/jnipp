@@ -33,6 +33,7 @@ namespace jnipp
 		inline jclass GetJniReference() const	{ return m_class_ref.get(); };
 
 
+		const ClassHandle& operator = ( jclass class_ref );
 		const ClassHandle& operator = ( const ClassHandle& other );
 		const ClassHandle& operator = ( ClassHandle&& other );
 		const ClassHandle& operator = ( const std::string& class_name );
