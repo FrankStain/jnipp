@@ -168,10 +168,6 @@ namespace jnipp
 		auto local_class	= local_env->GetObjectClass( local_object_ref );
 		CRET_W( local_class == nullptr, {}, "Unable to get Java class for object." );
 
-		// @TODO: Get class name using Java functions.
-		//const std::string class_name{ m_get_class_name( local_class ) };
-		//auto shared_class = GetClass( class_name );
-
 		// The value returned is `std::shared_ptr` with custom deleter.
 		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class ) ), VirtualMachine::DeleteSharedClass };
 	};
@@ -181,11 +177,7 @@ namespace jnipp
 		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		CRET_D( local_class_ref == nullptr, {}, "Attempt to get Java class via null object." );
 
-		auto local_env		= GetLocalEnvironment();
-
-		// @TODO: Get class name using Java functions.
-		//const std::string class_name{ m_get_class_name( local_class ) };
-		//auto shared_class = GetClass( class_name );
+		auto local_env = GetLocalEnvironment();
 
 		// The value returned is `std::shared_ptr` with custom deleter.
 		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class_ref ) ), VirtualMachine::DeleteSharedClass };
