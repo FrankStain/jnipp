@@ -11,7 +11,7 @@ namespace jnipp
 	{
 		friend class JniEnv;
 	public:
-		FieldHandle() = delete;
+		FieldHandle() = default;
 		FieldHandle( const FieldHandle& other );
 		FieldHandle( FieldHandle&& other );
 		FieldHandle( const std::string& class_name, const std::string& field_name );
@@ -19,12 +19,6 @@ namespace jnipp
 		FieldHandle( const char* class_name, const char* field_name );
 		FieldHandle( const ClassHandle& class_handle, const char* field_name );
 
-		
-		/// @brief	Check the field handle carries valid value.
-		inline const bool IsValid() const				{ return m_field_id != 0; };
-
-		/// @brief	Get the JNI id of Java member field.
-		inline jfieldID GetFieldId() const				{ return m_field_id; };
 
 		/// @brief	Get the value of field from given handle to object.
 		inline const bool GetValue( const ObjectHandle& object_handle, TNativeType& value_storage ) const;
@@ -39,9 +33,20 @@ namespace jnipp
 		/// @brief	Set the value of field to given object by its ref.
 		inline const bool SetValue( jobject object_ref, const TNativeType& value_storage ) const;
 
+
+		/// @brief	Check the field handle carries valid value.
+		inline const bool IsValid() const									{ return m_field_id != 0; };
+
+		/// @brief	Get the JNI id of Java member field.
+		inline jfieldID GetFieldId() const									{ return m_field_id; };
+
+
+		inline const FieldHandle& operator = ( const FieldHandle& other )	{ m_field_id = other.m_field_id; return *this; };
+		inline const FieldHandle& operator = ( FieldHandle&& other )		{ m_field_id = std::move( other.m_field_id ); return *this; };
+
 		
-		inline explicit operator const bool () const	{ return IsValid(); };
-		inline jfieldID operator * () const				{ return GetFieldId(); };
+		inline explicit operator const bool () const						{ return IsValid(); };
+		inline jfieldID operator * () const									{ return GetFieldId(); };
 
 	private:
 		using JavaType	= typename marshaling::JniEnvFacade<TNativeType>::JavaType;
