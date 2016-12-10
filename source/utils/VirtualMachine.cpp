@@ -1,6 +1,8 @@
 // Copyright since 2016 : Evgenii Shatunov (github.com/FrankStain/jnipp)
 // Apache 2.0 License
 #include <jnipp/jnipp.h>
+#include <jnipp/utils/ThreadHandle.h>
+#include <jnipp/utils/ClassLoaderHandle.h>
 #include <pthread.h>
 
 #if( JNIPP_LOG_VM )
@@ -57,6 +59,8 @@ namespace jnipp
 		Ensures( pthread_key_create( &reinterpret_cast<pthread_key_t&>( vm.m_detach_key ), VirtualMachine::DetachLocalEnv ) == 0 )
 		Ensures( vm.m_jvm != nullptr );
 		Ensures( vm.m_main_env != nullptr );
+
+		CRET_E( !vm.CaptureClassLoader(), false, "Failed to capture the class loader." );
 		LOG_EXIT();
 		return true;
 	};
@@ -72,6 +76,32 @@ namespace jnipp
 		vm.m_main_env		= nullptr;
 		vm.m_main_thread_id	= 0;
 		LOG_EXIT();
+	};
+
+	const bool VirtualMachine::CaptureClassLoader()
+	{
+		ClassHandle loader_class{ "java/lang/ClassLoader" };
+		CRET_E( !loader_class, false, "Failed to locate `java.lang.ClassLoader` class." );
+
+		m_load_class_func = { loader_class, "loadClass" };
+		CRET_E( !m_load_class_func, false, "Failed to locate `Class ClassLoader::findClass( String )` function." );
+
+		ClassHandle thread_class{ "java/lang/Thread" };
+		CRET_E( !thread_class, false, "Failed to locate `java.lang.Thread` class." );
+
+		StaticFunctionHandle<ThreadHandle> current_thread_func{ thread_class, "currentThread" };
+		CRET_E( !current_thread_func, false, "Failed to locate `Thread Thread::currentThread()` function." );
+
+		ThreadHandle current_thread{ current_thread_func.Call() };
+		CRET_E( !current_thread, false, "Failed to get object of current thread." );
+
+		FunctionHandle<ClassLoaderHandle> get_class_loader_func{ thread_class, "getContextClassLoader" };
+		CRET_E( !get_class_loader_func, false, "Failed to locate `ClassLoader Thread::getContextClassLoader()` function." );
+
+		m_class_loader = get_class_loader_func.Call( current_thread );
+		CRET_E( !m_class_loader, false, "Failed to get class loader object." );
+
+		return true;
 	};
 
 	const bool VirtualMachine::RegisterClassNatives( const NativeBindingTable& bindings )
@@ -146,7 +176,10 @@ namespace jnipp
 		LOG_ENTER();
 		CRET_E( !IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
-		GetLocalEnvironment()->DeleteGlobalRef( value );
+		if( value != nullptr )
+		{
+			GetLocalEnvironment()->DeleteGlobalRef( value );
+		};
 
 		LOG_EXIT();
 	};
@@ -175,7 +208,7 @@ namespace jnipp
 	std::shared_ptr<_jclass> VirtualMachine::GetClass( jclass local_class_ref )
 	{
 		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
-		CRET_D( local_class_ref == nullptr, {}, "Attempt to get Java class via null object." );
+		CRET_D( local_class_ref == nullptr, {}, "Attempt to get Java class via null class." );
 
 		auto local_env = GetLocalEnvironment();
 
@@ -207,7 +240,27 @@ namespace jnipp
 		CRET_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		auto local_env			= GetLocalEnvironment();
-		auto local_class_ref	= local_env->FindClass( class_name );
+		jclass local_class_ref	= nullptr;
+
+		if( pthread_self() == m_main_thread_id )
+		{
+			// For main thread we may use `FindClass` function of `JNIEnv` object.
+			local_class_ref	= local_env->FindClass( class_name );
+		}
+		else
+		{
+			// For any other thread only captured `ClassLoader` instance may be used.
+			std::string modified_class_name{ class_name };
+			for( auto& stored_char : modified_class_name )
+			{
+				if( stored_char == '/' )
+				{
+					stored_char = '.';
+				};
+			};
+
+			local_class_ref = reinterpret_cast<jclass>( local_env->CallObjectMethod( *m_class_loader, *m_load_class_func, marshaling::ToJava( modified_class_name ) ) );
+		};
 
 		if( local_env->ExceptionCheck() == JNI_TRUE )
 		{
