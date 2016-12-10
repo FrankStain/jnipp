@@ -11,13 +11,20 @@ namespace jnipp
 	{
 		friend class JniEnv;
 	public:
-		StaticFieldHandle() = delete;
+		StaticFieldHandle() = default;
 		StaticFieldHandle( const StaticFieldHandle& other );
 		StaticFieldHandle( StaticFieldHandle&& other );
 		StaticFieldHandle( const std::string& class_name, const std::string& field_name );
 		StaticFieldHandle( const ClassHandle& class_handle, const std::string& field_name );
 		StaticFieldHandle( const char* class_name, const char* field_name );
 		StaticFieldHandle( const ClassHandle& class_handle, const char* field_name );
+
+
+		/// @brief	Get the value of field.
+		inline const bool GetValue( TNativeType& value_storage ) const;
+
+		/// @brief	Set the value of field.
+		inline const bool SetValue( const TNativeType& value_storage ) const;
 
 		
 		/// @brief	Check the field handle carries valid value.
@@ -26,11 +33,9 @@ namespace jnipp
 		/// @brief	Get the JNI id of Java static field.
 		inline jfieldID GetFieldId() const				{ return m_field_id; };
 
-		/// @brief	Get the value of field.
-		inline const bool GetValue( TNativeType& value_storage ) const;
 
-		/// @brief	Set the value of field.
-		inline const bool SetValue( const TNativeType& value_storage ) const;
+		inline const StaticFieldHandle& operator = ( const StaticFieldHandle& other );
+		inline const StaticFieldHandle& operator = ( StaticFieldHandle&& other );
 
 
 		inline explicit operator const bool () const	{ return IsValid(); };

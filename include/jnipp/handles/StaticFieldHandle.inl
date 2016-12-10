@@ -103,4 +103,20 @@ namespace jnipp
 		local_env->PopLocalFrame( nullptr );
 		return true;
 	};
+
+	template< typename TNativeType >
+	inline const StaticFieldHandle<TNativeType>& StaticFieldHandle<TNativeType>::operator=( const StaticFieldHandle& other )
+	{
+		m_class_handle	= other.m_class_handle;
+		m_field_id		= other.m_field_id;
+		return *this;
+	};
+
+	template< typename TNativeType >
+	inline const StaticFieldHandle<TNativeType>& StaticFieldHandle<TNativeType>::operator=( StaticFieldHandle&& other )
+	{
+		m_class_handle	= std::move( other.m_class_handle );
+		m_field_id		= std::move( other.m_field_id );
+		return *this;
+	};
 };
