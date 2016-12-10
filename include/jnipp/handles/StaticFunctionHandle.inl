@@ -56,7 +56,7 @@ namespace jnipp
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline TNativeReturnType StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::Call( const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const
+	inline TNativeReturnType StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
 		CRET_E( !VirtualMachine::IsValid(), TNativeReturnType(), "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
@@ -70,5 +70,23 @@ namespace jnipp
 		CRET_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
 
 		return CallDecorator{ local_env, *m_class_handle, m_function_id }.Call( arguments... );
+	};
+
+	template< typename TNativeReturnType, typename... TNativeArguments >
+	inline const StaticFunctionHandle<TNativeReturnType, TNativeArguments...>&
+	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::operator=( const StaticFunctionHandle& other )
+	{
+		m_class_handle	= other.m_class_handle;
+		m_function_id	= other.m_function_id;
+		return *this;
+	};
+	
+	template< typename TNativeReturnType, typename... TNativeArguments >
+	inline const StaticFunctionHandle<TNativeReturnType, TNativeArguments...>&
+	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::operator=( StaticFunctionHandle&& other )
+	{
+		m_class_handle	= std::move( other.m_class_handle );
+		m_function_id	= std::move( other.m_function_id );
+		return *this;
 	};
 };

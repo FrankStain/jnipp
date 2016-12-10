@@ -10,7 +10,7 @@ namespace jnipp
 	{
 		friend class JniEnv;
 	public:
-		StaticFunctionHandle() = delete;
+		StaticFunctionHandle() = default;
 		StaticFunctionHandle( const StaticFunctionHandle& other );
 		StaticFunctionHandle( StaticFunctionHandle&& other );
 		StaticFunctionHandle( const std::string& class_name, const std::string& function_name );
@@ -19,14 +19,19 @@ namespace jnipp
 		StaticFunctionHandle( const ClassHandle& class_handle, const char* function_name );
 
 
+		/// @brief	Call the function with given arguments.
+		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;
+
+
 		/// @brief	Check the field handle carries valid value.
 		inline const bool IsValid() const				{ return m_class_handle.IsValid() && ( m_function_id != 0 ); };
 
 		/// @brief	Get the JNI id of Java static method.
 		inline jmethodID GetFunctionId() const			{ return m_function_id; };
 
-		/// @brief	Call the function with given arguments.
-		inline TNativeReturnType Call( const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
+
+		inline const StaticFunctionHandle& operator = ( const StaticFunctionHandle& other );
+		inline const StaticFunctionHandle& operator = ( StaticFunctionHandle&& other );
 
 
 		inline explicit operator const bool () const	{ return IsValid(); };
