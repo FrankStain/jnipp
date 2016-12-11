@@ -35,7 +35,7 @@ namespace logging
 	template< typename... TArgumentTypes >
 	inline void Verbose( const char* format, TArgumentTypes... arguments )
 	{
-		#if( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD )
+		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_VERBOSE_ENABLED )
 		__android_log_print( ANDROID_LOG_VERBOSE, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
 	};
@@ -50,7 +50,7 @@ namespace logging
 	template< typename... TArgumentTypes >
 	inline void Debug( const char* format, TArgumentTypes... arguments )
 	{
-		#if( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD )
+		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_DEBUG_ENABLED )
 		__android_log_print( ANDROID_LOG_DEBUG, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
 	};
@@ -65,7 +65,7 @@ namespace logging
 	template< typename... TArgumentTypes >
 	inline void Info( const char* format, TArgumentTypes... arguments )
 	{
-		#if( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD )
+		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_INFO_ENABLED )
 		__android_log_print( ANDROID_LOG_INFO, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
 	};
@@ -80,7 +80,7 @@ namespace logging
 	template< typename... TArgumentTypes >
 	inline void Warning( const char* format, TArgumentTypes... arguments )
 	{
-		#if( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD )
+		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_WARNING_ENABLED )
 		__android_log_print( ANDROID_LOG_WARN, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
 	};
@@ -95,7 +95,7 @@ namespace logging
 	template< typename... TArgumentTypes >
 	inline void Error( const char* format, TArgumentTypes... arguments )
 	{
-		#if( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD )
+		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_EROR_ENABLED )
 		__android_log_print( ANDROID_LOG_ERROR, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
 	};
@@ -110,7 +110,7 @@ namespace logging
 	template< typename... TArgumentTypes >
 	inline void Assert( const char* format, TArgumentTypes... arguments )
 	{
-		#if( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD )
+		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_ASSERT_ENABLED )
 		__android_log_print( ANDROID_LOG_FATAL, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
 	};
