@@ -48,6 +48,7 @@ namespace jnipp
 		VirtualMachine() = default;
 
 		const bool CaptureClassLoader();
+		const bool AcquireClassInterface();
 
 		std::shared_ptr<_jclass> GetClass( jobject local_object_ref );
 		std::shared_ptr<_jclass> GetClass( jclass local_class_ref );
@@ -69,6 +70,11 @@ namespace jnipp
 	private:
 		ObjectHandle	m_class_loader;
 
-		FunctionHandle<ClassHandle, std::string>	m_load_class_func;
+		FunctionHandle<ClassHandle, std::string>	m_load_class_func;		// `java.lang.Class java.lang.ClassLoader::loadClass( java.lang.String )`
+
+		FunctionHandle<ClassHandle>					m_get_super_class_func;	// `java.lang.Class java.lang.Class::getSuperClass()`
+		FunctionHandle<std::string>					m_get_canonical_name;	// `java.lang.String java.lang.Class::getCanonicalName()`
+		FunctionHandle<std::string>					m_get_name;				// `java.lang.String java.lang.Class::getName()`
+		FunctionHandle<std::string>					m_get_simple_name;		// `java.lang.String java.lang.Class::getSimpleName()`
 	};
 };

@@ -61,6 +61,7 @@ namespace jnipp
 		Ensures( vm.m_main_env != nullptr );
 
 		CRET_E( !vm.CaptureClassLoader(), false, "Failed to capture the class loader." );
+		CRET_E( !vm.AcquireClassInterface(), false, "Failed to acquire the interface of `java.lang.Class` class." );
 		LOG_EXIT();
 		return true;
 	};
@@ -100,6 +101,26 @@ namespace jnipp
 
 		m_class_loader = get_class_loader_func.Call( current_thread );
 		CRET_E( !m_class_loader, false, "Failed to get class loader object." );
+
+		return true;
+	};
+
+	const bool VirtualMachine::AcquireClassInterface()
+	{
+		const ClassHandle class_handle{ "java/lang/Class" };
+		CRET_E( !class_handle, false, "Failed to locate `java.lang.Class` class." );
+
+		m_get_super_class_func = { class_handle, "getSuperclass" };
+		CRET_E( !m_get_super_class_func, false, "Failed to locate `Class Class::getSuperclass()` function." );
+
+		m_get_canonical_name = { class_handle, "getCanonicalName" };
+		CRET_E( !m_get_canonical_name, false, "Failed to locate `String Class::getCanonicalName()` function." );
+
+		m_get_name = { class_handle, "getName" };
+		CRET_E( !m_get_name, false, "Failed to locate `String Class::getName()` function." );
+
+		m_get_simple_name = { class_handle, "getSimpleName" };
+		CRET_E( !m_get_simple_name, false, "Failed to locate `String Class::getSimpleName()` function." );
 
 		return true;
 	};
@@ -251,7 +272,7 @@ namespace jnipp
 		{
 			// The name of class must be converted into Java-style package name.
 			std::string modified_class_name{ class_name };
-			for( auto& stored_char : modified_class_name )
+			for( char& stored_char : modified_class_name )
 			{
 				if( stored_char == '/' )
 				{
