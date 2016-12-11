@@ -249,7 +249,7 @@ namespace jnipp
 		}
 		else
 		{
-			// For any other thread only captured `ClassLoader` instance may be used.
+			// The name of class must be converted into Java-style package name.
 			std::string modified_class_name{ class_name };
 			for( auto& stored_char : modified_class_name )
 			{
@@ -259,7 +259,10 @@ namespace jnipp
 				};
 			};
 
-			local_class_ref = reinterpret_cast<jclass>( local_env->CallObjectMethod( *m_class_loader, *m_load_class_func, marshaling::ToJava( modified_class_name ) ) );
+			// For any other thread only captured `ClassLoader` instance may be used.
+			local_class_ref = reinterpret_cast<jclass>(
+				local_env->CallObjectMethod( *m_class_loader, *m_load_class_func, marshaling::ToJava( modified_class_name ) )
+			);
 		};
 
 		if( local_env->ExceptionCheck() == JNI_TRUE )
