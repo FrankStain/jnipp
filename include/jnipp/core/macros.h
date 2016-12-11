@@ -8,6 +8,10 @@
 	#define CRET( CONDITION, ... )				if( CONDITION ) { return __VA_ARGS__; }
 #endif
 
+#if( !defined( CRET_V ) )
+	#define CRET_V( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); return RESULT; }
+#endif
+
 #if( !defined( CRET_D ) )
 	#define CRET_D( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Debug( __VA_ARGS__ ); return RESULT; }
 #endif
@@ -30,6 +34,10 @@
 	#define CCON( CONDITION )					if( CONDITION ) { continue; }
 #endif
 
+#if( !defined( CCON_V ) )
+	#define CCON_V( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); continue; }
+#endif
+
 #if( !defined( CCON_D ) )
 	#define CCON_D( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Debug( __VA_ARGS__ ); continue; }
 #endif
@@ -50,6 +58,10 @@
 /// @brief	Conditional break (c-brk) for shorter the service code.
 #if( !defined( CBRK ) )
 	#define CBRK( CONDITION )					if( CONDITION ) { break; }
+#endif
+
+#if( !defined( CBRK_V ) )
+	#define CBRK_V( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); break; }
 #endif
 
 #if( !defined( CBRK_D ) )
