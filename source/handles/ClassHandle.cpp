@@ -64,20 +64,42 @@ namespace jnipp
 		LOG_EXIT();
 	};
 
-	const std::string ClassHandle::GetName() const
+	const std::string ClassHandle::GetCanonicalName() const
 	{
-		LOG_ENTER();
-		// @TODO: Use `VirtualMachine` instance to access the functionality.
-		LOG_EXIT();
-		return {};
+		CRET( !IsValid(), {} );
+		Expects( VirtualMachine::IsValid() );
+		return VirtualMachine::GetInstance().m_get_canonical_name.Call( GetJniReference() );
 	};
 
-	ClassHandle ClassHandle::GetParentHandle() const
+	const std::string ClassHandle::GetName() const
 	{
-		LOG_ENTER();
-		// @TODO: Use `VirtualMachine` instance to access the functionality.
-		LOG_EXIT();
-		return {};
+		CRET( !IsValid(), {} );
+		Expects( VirtualMachine::IsValid() );
+		std::string class_name{ VirtualMachine::GetInstance().m_get_name.Call( GetJniReference() ) };
+
+		for( char& stored_char : class_name )
+		{
+			if( stored_char == '.' )
+			{
+				stored_char = '/';
+			};
+		};
+
+		return class_name;
+	};
+
+	const std::string ClassHandle::GetSimpleName() const
+	{
+		CRET( !IsValid(), {} );
+		Expects( VirtualMachine::IsValid() );
+		return VirtualMachine::GetInstance().m_get_simple_name.Call( GetJniReference() );
+	};
+
+	ClassHandle ClassHandle::GetParentClassHandle() const
+	{
+		CRET( !IsValid(), {} );
+		Expects( VirtualMachine::IsValid() );
+		return VirtualMachine::GetInstance().m_get_super_class_func.Call( GetJniReference() );
 	};
 
 	void ClassHandle::AcquireHandle( const char* class_name )

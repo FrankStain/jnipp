@@ -20,11 +20,17 @@ namespace jnipp
 		/// @brief	Invalidate the handle.
 		void Invalidate();
 
+		/// @brief	Returns the canonical name of this class or empty string for invalid class.
+		const std::string GetCanonicalName() const;
+
 		/// @brief	Get the name of this class or empty string for invalid class.
 		const std::string GetName() const;
 
+		/// @brief	Returns the simple name of this class or empty string for invalid class.
+		const std::string GetSimpleName() const;
+
 		/// @brief	Get the handle to parent class, if available.
-		ClassHandle GetParentHandle() const;
+		ClassHandle GetParentClassHandle() const;
 
 		/// @brief	Check the class handle carries valid value.
 		inline const bool IsValid() const		{ return m_class_ref != nullptr; };
