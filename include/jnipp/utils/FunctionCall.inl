@@ -52,10 +52,7 @@ namespace utils
 		CRET_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
 		CRET_E( LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), {}, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
-		auto function_result = reinterpret_cast<JavaType>(
-			(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... )
-		);
-
+		auto function_result = (JavaType)(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
 		TNativeReturnType native_result;
 		jnipp::marshaling::FromJava( function_result, native_result );
 
@@ -72,10 +69,7 @@ namespace utils
 		CRET_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
 		CRET_E( LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), {}, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
-		auto function_result = reinterpret_cast<JavaType>(
-			(m_local_env->*NONVIRTUAL_FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... )
-		);
-
+		auto function_result = (JavaType)(m_local_env->*NONVIRTUAL_FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
 		TNativeReturnType native_result;
 		jnipp::marshaling::FromJava( function_result, native_result );
 

@@ -87,9 +87,7 @@ namespace jnipp
 		CRET_E( object_ref == nullptr, false, "Attempt to get the value of field from null object." );
 		CRET_E( LOCAL_FRAME_SIZE && ( local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), false, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
-		auto value_source = reinterpret_cast<JavaType>(
-			(local_env->*FIELD_READ_HANDLER)( object_ref, m_field_id )
-		);
+		auto value_source = (JavaType)(local_env->*FIELD_READ_HANDLER)( object_ref, m_field_id );
 		marshaling::FromJava( value_source, value_storage );
 
 		CRET( LOCAL_FRAME_SIZE == 0, true );
