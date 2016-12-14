@@ -147,16 +147,6 @@ namespace jnipp
 		return local_env;
 	};
 
-	JavaVM* VirtualMachine::GetJvm()
-	{
-		return GetInstance().m_jvm;
-	};
-
-	const bool VirtualMachine::IsValid()
-	{
-		return GetInstance().m_jvm != nullptr;
-	};
-
 	void VirtualMachine::DeleteSharedClass( jclass value )
 	{
 		CRET_E( !IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );

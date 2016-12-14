@@ -29,10 +29,10 @@ namespace jnipp
 		static JNIEnv* GetLocalEnvironment();
 
 		/// @brief	Get the global `JavaVM` instance.
-		static JavaVM* GetJvm();
+		static inline JavaVM* GetJvm()			{ return GetInstance().m_jvm; };
 
 		/// @brief	Check the `VirtualMachine` is properly initialized.
-		static const bool IsValid();
+		static inline const bool IsValid()		{ return GetInstance().m_jvm != nullptr; };
 
 	private:
 		/// @brief	Access to single instance (using Meyers's implementation).
