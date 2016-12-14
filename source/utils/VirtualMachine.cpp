@@ -1,8 +1,8 @@
 // Copyright since 2016 : Evgenii Shatunov (github.com/FrankStain/jnipp)
 // Apache 2.0 License
 #include <jnipp/jnipp.h>
-#include <jnipp/utils/ThreadHandle.h>
-#include <jnipp/utils/ClassLoaderHandle.h>
+#include <jnipp/android/ThreadHandle.h>
+#include <jnipp/android/ClassLoaderHandle.h>
 #include <pthread.h>
 
 
