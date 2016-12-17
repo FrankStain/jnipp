@@ -93,7 +93,7 @@
 	if( !( __VA_ARGS__ ) )										\
 	{															\
 		jnipp::logging::Assert(									\
-			"%s:%d - Unexpected result of `%s` expression.",		\
+			"%s:%d - Unexpected result of `%s` expression.",	\
 			__FILE__, __LINE__, JNIPP_STRINGIFY( __VA_ARGS__ )	\
 		);														\
 		std::terminate();										\
@@ -107,7 +107,7 @@
 	if( !( __VA_ARGS__ ) )										\
 	{															\
 		jnipp::logging::Assert(									\
-			"%s:%d - Unexpected result of `%s` expression.",		\
+			"%s:%d - Unexpected result of `%s` expression.",	\
 			__FILE__, __LINE__, JNIPP_STRINGIFY( __VA_ARGS__ )	\
 		);														\
 		std::terminate();										\
