@@ -217,6 +217,10 @@ namespace jnipp
 		}
 		else
 		{
+			// Since JNI can't return class reference from native threads,
+			// according to next article the best way is using the cached `ClassLoader` instance.
+			// https://developer.android.com/training/articles/perf-jni.html#faq_FindClass
+
 			// The name of class must be converted into Java-style package name.
 			std::string modified_class_name{ class_name };
 			for( char& stored_char : modified_class_name )
