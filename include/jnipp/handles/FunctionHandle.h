@@ -27,18 +27,10 @@ namespace jnipp
 		inline TNativeReturnType Call( jobject object_ref, const TNativeArguments&... arguments ) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType CallNonVirtual(
-			const ObjectHandle& object_handle,
-			const ClassHandle& class_handle,
-			const TNativeArguments&... arguments
-		) const;
+		inline TNativeReturnType CallNonVirtual( const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType CallNonVirtual(
-			jobject object_ref,
-			jclass class_ref,
-			const TNativeArguments&... arguments
-		) const;
+		inline TNativeReturnType CallNonVirtual( jobject object_ref, const TNativeArguments&... arguments ) const;
 
 
 		/// @brief	Check the field handle carries valid value.
@@ -62,8 +54,6 @@ namespace jnipp
 		using Signature		= FunctionSignature< marshaling::TypeSignature<TNativeReturnType>, marshaling::TypeSignature<TNativeArguments>... >;
 		using CallDecorator	= utils::FunctionCall<TNativeReturnType, TNativeArguments...>;
 
-		FunctionHandle( jclass class_ref, const char* function_name );
-
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType Call( JNIEnv* local_env, const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
 
@@ -74,7 +64,6 @@ namespace jnipp
 		inline TNativeReturnType CallNonVirtual(
 			JNIEnv* local_env,
 			const ObjectHandle& object_handle,
-			const ClassHandle& class_handle,
 			const TNativeArguments&... arguments
 		) const;
 
@@ -82,11 +71,11 @@ namespace jnipp
 		inline TNativeReturnType CallNonVirtual(
 			JNIEnv* local_env,
 			jobject object_ref,
-			jclass class_ref,
 			const TNativeArguments&... arguments
 		) const;
 
 	private:
-		jmethodID	m_function_id	= 0; // Id of Java object method.
+		ClassHandle	m_class_handle;				// Handle to class owning the static method.
+		jmethodID	m_function_id	= nullptr;	// Id of Java object method.
 	};
 };
