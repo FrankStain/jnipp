@@ -27,10 +27,18 @@ namespace jnipp
 		inline TNativeReturnType Call( jobject object_ref, const TNativeArguments&... arguments ) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType CallNonVirtual( const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
+		inline TNativeReturnType CallNonVirtual(
+			const ObjectHandle& object_handle,
+			const ClassHandle& class_handle,
+			const TNativeArguments&... arguments
+		) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType CallNonVirtual( jobject object_ref, const TNativeArguments&... arguments ) const;
+		inline TNativeReturnType CallNonVirtual(
+			jobject object_ref,
+			jclass class_ref,
+			const TNativeArguments&... arguments
+		) const;
 
 
 		/// @brief	Check the field handle carries valid value.
@@ -63,10 +71,20 @@ namespace jnipp
 		inline TNativeReturnType Call( JNIEnv* local_env, jobject object_ref, const TNativeArguments&... arguments ) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType CallNonVirtual( JNIEnv* local_env, const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
+		inline TNativeReturnType CallNonVirtual(
+			JNIEnv* local_env,
+			const ObjectHandle& object_handle,
+			const ClassHandle& class_handle,
+			const TNativeArguments&... arguments
+		) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType CallNonVirtual( JNIEnv* local_env, jobject object_ref, const TNativeArguments&... arguments ) const;
+		inline TNativeReturnType CallNonVirtual(
+			JNIEnv* local_env,
+			jobject object_ref,
+			jclass class_ref,
+			const TNativeArguments&... arguments
+		) const;
 
 	private:
 		jmethodID	m_function_id	= 0; // Id of Java object method.
