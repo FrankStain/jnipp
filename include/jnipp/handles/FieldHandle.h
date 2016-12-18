@@ -73,6 +73,6 @@ namespace jnipp
 		constexpr static auto FIELD_READ_HANDLER	= marshaling::JniEnvFacade<TNativeType>::FIELD_READ_HANDLER;
 		constexpr static auto FIELD_WRITE_HANDLER	= marshaling::JniEnvFacade<TNativeType>::FIELD_WRITE_HANDLER;
 
-		jfieldID	m_field_id	= 0;	// Field id for JNI.
+		jfieldID	m_field_id	= nullptr;	// Field id for JNI.
 	};
 };
