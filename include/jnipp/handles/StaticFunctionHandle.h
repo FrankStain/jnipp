@@ -45,7 +45,7 @@ namespace jnipp
 		inline TNativeReturnType Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const;
 
 	private:
-		ClassHandle	m_class_handle;			// Handle to class owning the static method.
-		jmethodID	m_function_id	= 0;	// Id of Java static method.
+		ClassHandle	m_class_handle;				// Handle to class owning the static method.
+		jmethodID	m_function_id	= nullptr;	// Id of Java static method.
 	};
 };

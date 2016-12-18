@@ -46,7 +46,7 @@ namespace jnipp
 	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::StaticFunctionHandle( const ClassHandle& class_handle, const char* function_name )
 		: m_class_handle( class_handle )
 	{
-		Expects( m_class_handle.IsValid() );
+		Expects( m_class_handle );
 		CRET_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
