@@ -15,6 +15,8 @@ namespace Jni
 	class JniEnv final
 	{
 	public:
+		JniEnv() = default;
+
 		/// @brief	Get the value of field belongs to object using the local JNI environment.
 		template< typename TNativeType >
 		inline const bool GetValue(
@@ -62,7 +64,10 @@ namespace Jni
 			const TNativeArguments&... arguments
 		);
 
-		inline JNIEnv* operator -> () const	{ return m_local_env; };
+		inline const bool IsValid() const				{ return m_local_env != nullptr; };
+
+		inline JNIEnv* operator -> () const				{ return m_local_env; };
+		inline explicit operator const bool () const	{ return IsValid(); };
 
 	private:
 		JniEnv( const JniEnv& )					= delete;
