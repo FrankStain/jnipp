@@ -6,7 +6,7 @@
 #include <pthread.h>
 
 
-namespace jnipp
+namespace Jni
 {
 	VirtualMachine& VirtualMachine::GetInstance()
 	{
@@ -192,7 +192,7 @@ namespace jnipp
 		JNI_RETURN_IF_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		JNI_RETURN_IF_W( ( class_name == nullptr ) || !strlen( class_name ), {}, "Attempt to get Java class via empty class name." );
 
-		utils::MutexLock lock{ m_mutex };
+		Utils::MutexLock lock{ m_mutex };
 		auto& weak_class = m_shared_classes[ class_name ];
 		JNI_RETURN_IF_V( !weak_class.expired(), weak_class.lock(), "Shared class found." );
 
@@ -233,7 +233,7 @@ namespace jnipp
 
 			// For any other thread only captured `ClassLoader` instance may be used.
 			local_class_ref = reinterpret_cast<jclass>(
-				local_env->CallObjectMethod( *m_class_loader, *m_load_class_func, marshaling::ToJava( modified_class_name ) )
+				local_env->CallObjectMethod( *m_class_loader, *m_load_class_func, Marshaling::ToJava( modified_class_name ) )
 			);
 		};
 

@@ -3,9 +3,9 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
-namespace marshaling
+namespace Marshaling
 {
 	template<>
 	inline void ToJava<bool>( const bool& source, JavaType<bool>& destination )

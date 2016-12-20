@@ -3,9 +3,9 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
-namespace utils
+namespace Utils
 {
 	/// @brief	Java object method decorator. Used by `FunctionHandle` to directly call the Java method.
 	template< typename TNativeReturnType, typename... TNativeArguments >
@@ -22,11 +22,11 @@ namespace utils
 
 	private:
 		/// @brief	Java type of function call result.
-		using JavaType	= typename jnipp::marshaling::JniEnvFacade<TNativeReturnType>::JavaType;
+		using JavaType	= typename Jni::Marshaling::JniEnvFacade<TNativeReturnType>::JavaType;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER				= marshaling::JniEnvFacade<TNativeReturnType>::FUNCTION_HANDLER;
-		constexpr static auto NONVIRTUAL_FUNCTION_HANDLER	= marshaling::JniEnvFacade<TNativeReturnType>::NONVIRTUAL_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER				= Marshaling::JniEnvFacade<TNativeReturnType>::FUNCTION_HANDLER;
+		constexpr static auto NONVIRTUAL_FUNCTION_HANDLER	= Marshaling::JniEnvFacade<TNativeReturnType>::NONVIRTUAL_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jmethodID	m_function_id	= nullptr;	// Id of function.
@@ -47,8 +47,8 @@ namespace utils
 		inline void CallNonVirtual( jclass class_ref, const TNativeArguments&... arguments ) const;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER				= marshaling::JniEnvFacade<void>::FUNCTION_HANDLER;
-		constexpr static auto NONVIRTUAL_FUNCTION_HANDLER	= marshaling::JniEnvFacade<void>::NONVIRTUAL_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER				= Marshaling::JniEnvFacade<void>::FUNCTION_HANDLER;
+		constexpr static auto NONVIRTUAL_FUNCTION_HANDLER	= Marshaling::JniEnvFacade<void>::NONVIRTUAL_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jmethodID	m_function_id	= nullptr;	// Id of function.

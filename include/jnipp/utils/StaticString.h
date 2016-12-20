@@ -3,7 +3,7 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
 	/**
 		@brief	Compile-time string. While runtime instances of one will be represented by plain strings.

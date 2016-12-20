@@ -3,7 +3,7 @@
 #include <jnipp/jnipp.h>
 
 
-namespace jnipp
+namespace Jni
 {
 	ObjectHandle::ObjectHandle( jobject object_ref )
 	{

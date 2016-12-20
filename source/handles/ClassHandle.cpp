@@ -3,7 +3,7 @@
 #include <jnipp/jnipp.h>
 
 
-namespace jnipp
+namespace Jni
 {
 	ClassHandle::ClassHandle( const ClassHandle& other )
 		: m_class_ref( other.m_class_ref )

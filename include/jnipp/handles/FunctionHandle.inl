@@ -3,7 +3,7 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	FunctionHandle<TNativeReturnType, TNativeArguments...>::FunctionHandle( const FunctionHandle& other )

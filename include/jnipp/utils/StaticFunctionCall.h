@@ -3,9 +3,9 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
-namespace utils
+namespace Utils
 {
 	/// @brief	Java static method decorator. Used by `StaticFunctionHandle` to directly call the Java method.
 	template< typename TNativeReturnType, typename... TNativeArguments >
@@ -19,10 +19,10 @@ namespace utils
 
 	private:
 		/// @brief	Java type of function call result.
-		using JavaType	= typename jnipp::marshaling::JniEnvFacade<TNativeReturnType>::JavaType;
+		using JavaType	= typename Jni::Marshaling::JniEnvFacade<TNativeReturnType>::JavaType;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER	= marshaling::JniEnvFacade<TNativeReturnType>::STATIC_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER	= Marshaling::JniEnvFacade<TNativeReturnType>::STATIC_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.
@@ -40,7 +40,7 @@ namespace utils
 		inline void Call( const TNativeArguments&... arguments ) const;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER	= marshaling::JniEnvFacade<void>::STATIC_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER	= Marshaling::JniEnvFacade<void>::STATIC_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.

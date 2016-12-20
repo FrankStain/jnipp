@@ -3,7 +3,7 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	class StaticFunctionHandle final
@@ -38,8 +38,8 @@ namespace jnipp
 		inline jmethodID operator * () const			{ return GetFunctionId(); };
 
 	private:
-		using Signature		= FunctionSignature< marshaling::TypeSignature<TNativeReturnType>, marshaling::TypeSignature<TNativeArguments>... >;
-		using CallDecorator	= utils::StaticFunctionCall<TNativeReturnType, TNativeArguments...>;
+		using Signature		= FunctionSignature< Marshaling::TypeSignature<TNativeReturnType>, Marshaling::TypeSignature<TNativeArguments>... >;
+		using CallDecorator	= Utils::StaticFunctionCall<TNativeReturnType, TNativeArguments...>;
 
 		/// @brief	Call the function with given arguments.
 		inline TNativeReturnType Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const;

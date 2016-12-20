@@ -3,7 +3,7 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
 	/// @brief	Handle to static field of Java class.
 	template< typename TNativeType >
@@ -42,8 +42,8 @@ namespace jnipp
 		inline jfieldID operator * () const				{ return GetFieldId(); };
 
 	private:
-		using JavaType	= typename marshaling::JniEnvFacade<TNativeType>::JavaType;
-		using Signature	= typename marshaling::JniEnvFacade<TNativeType>::Signature;
+		using JavaType	= typename Marshaling::JniEnvFacade<TNativeType>::JavaType;
+		using Signature	= typename Marshaling::JniEnvFacade<TNativeType>::Signature;
 
 		/// @brief	Get the value of field.
 		inline const bool GetValue( JNIEnv* local_env, TNativeType& value_storage ) const;
@@ -52,9 +52,9 @@ namespace jnipp
 		inline const bool SetValue( JNIEnv* local_env, const TNativeType& value_storage ) const;
 
 	private:
-		constexpr static size_t LOCAL_FRAME_SIZE	= marshaling::JniEnvFacade<TNativeType>::LOCAL_FRAME_SIZE;
-		constexpr static auto FIELD_READ_HANDLER	= marshaling::JniEnvFacade<TNativeType>::STATIC_FIELD_READ_HANDLER;
-		constexpr static auto FIELD_WRITE_HANDLER	= marshaling::JniEnvFacade<TNativeType>::STATIC_FIELD_WRITE_HANDLER;
+		constexpr static size_t LOCAL_FRAME_SIZE	= Marshaling::JniEnvFacade<TNativeType>::LOCAL_FRAME_SIZE;
+		constexpr static auto FIELD_READ_HANDLER	= Marshaling::JniEnvFacade<TNativeType>::STATIC_FIELD_READ_HANDLER;
+		constexpr static auto FIELD_WRITE_HANDLER	= Marshaling::JniEnvFacade<TNativeType>::STATIC_FIELD_WRITE_HANDLER;
 
 		ClassHandle	m_class_handle;				// Handle to class of field.
 		jfieldID	m_field_id		= nullptr;	// Field id for JNI.

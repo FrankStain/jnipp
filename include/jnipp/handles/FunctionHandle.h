@@ -3,7 +3,7 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
 	/// @brief	Handle to member-function (method) of Java object.
 	template< typename TNativeReturnType, typename... TNativeArguments >
@@ -51,8 +51,8 @@ namespace jnipp
 		inline jmethodID operator * () const									{ return GetFunctionId(); };
 
 	private:
-		using Signature		= FunctionSignature< marshaling::TypeSignature<TNativeReturnType>, marshaling::TypeSignature<TNativeArguments>... >;
-		using CallDecorator	= utils::FunctionCall<TNativeReturnType, TNativeArguments...>;
+		using Signature		= FunctionSignature< Marshaling::TypeSignature<TNativeReturnType>, Marshaling::TypeSignature<TNativeArguments>... >;
+		using CallDecorator	= Utils::FunctionCall<TNativeReturnType, TNativeArguments...>;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType Call( JNIEnv* local_env, const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;

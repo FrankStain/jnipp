@@ -4,16 +4,16 @@
 
 
 /// @brief	Jni++ main namespace.
-namespace jnipp
+namespace Jni
 {
 /// @brief	Logging support for Jni++. Only android log-cat used here by default.
-namespace logging {};
+namespace Logging {};
 
 /// @brief	Useful utils for Jni++.
-namespace utils {};
+namespace Utils {};
 
 /// @brief	Type marshaling for Jni++.
-namespace marshaling {};
+namespace Marshaling {};
 };
 
 

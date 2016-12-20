@@ -3,7 +3,7 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
 	/// @brief	Java class handle through JNI interface.
 	class ClassHandle final

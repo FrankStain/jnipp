@@ -3,9 +3,9 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
-namespace utils
+namespace Utils
 {
 	template< size_t... NUMBERS >
 	struct NumberSumm;
@@ -29,7 +29,7 @@ namespace utils
 	};
 
 	template< typename... TNativeTypes >
-	struct TotalLocalFrame : NumberSumm<jnipp::marshaling::JniEnvFacade<TNativeTypes>::LOCAL_FRAME_SIZE...>
+	struct TotalLocalFrame : NumberSumm<Jni::Marshaling::JniEnvFacade<TNativeTypes>::LOCAL_FRAME_SIZE...>
 	{
 	
 	};
@@ -57,9 +57,9 @@ namespace utils
 			LOCAL_FRAME_SIZE
 		);
 
-		auto function_result = (JavaType)(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
+		auto function_result = (JavaType)(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, Jni::Marshaling::ToJava( arguments )... );
 		TNativeReturnType native_result;
-		jnipp::marshaling::FromJava( function_result, native_result );
+		Jni::Marshaling::FromJava( function_result, native_result );
 
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, native_result );
 		m_local_env->PopLocalFrame( nullptr );
@@ -87,11 +87,11 @@ namespace utils
 			m_object_ref,
 			class_ref,
 			m_function_id,
-			jnipp::marshaling::ToJava( arguments )...
+			Jni::Marshaling::ToJava( arguments )...
 		);
 
 		TNativeReturnType native_result;
-		jnipp::marshaling::FromJava( function_result, native_result );
+		Jni::Marshaling::FromJava( function_result, native_result );
 
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, native_result );
 		m_local_env->PopLocalFrame( nullptr );
@@ -121,7 +121,7 @@ namespace utils
 			LOCAL_FRAME_SIZE
 		);
 
-		(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
+		(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, Jni::Marshaling::ToJava( arguments )... );
 
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0 );
 		m_local_env->PopLocalFrame( nullptr );
@@ -148,7 +148,7 @@ namespace utils
 			m_object_ref,
 			class_ref,
 			m_function_id,
-			jnipp::marshaling::ToJava( arguments )...
+			Jni::Marshaling::ToJava( arguments )...
 		);
 
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0 );

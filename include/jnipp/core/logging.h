@@ -3,9 +3,9 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
-namespace logging
+namespace Logging
 {
 	constexpr static const char TAG[] = "Jni++";
 	

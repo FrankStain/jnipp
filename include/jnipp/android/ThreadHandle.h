@@ -4,7 +4,7 @@
 
 
 /// @brief	Jni++ main namespace.
-namespace jnipp
+namespace Jni
 {
 	/// @brief	Handle to `java.lang.THread` object.
 	class ThreadHandle : public ObjectHandle
@@ -20,7 +20,7 @@ namespace jnipp
 		const ThreadHandle& operator = ( ThreadHandle&& other )			{ ObjectHandle::operator=( other ); return *this; };
 	};
 
-namespace marshaling
+namespace Marshaling
 {
 	/// @brief	Translation of `ThreadHandle` type.
 	template<>

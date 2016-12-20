@@ -3,7 +3,7 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
 	/// @brief	Java object handle through JNI interface.
 	class ObjectHandle

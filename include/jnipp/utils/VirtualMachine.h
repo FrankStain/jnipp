@@ -4,7 +4,7 @@
 
 
 /// @brief	Jni++ main namespace.
-namespace jnipp
+namespace Jni
 {
 	/// @brief	
 	class VirtualMachine final
@@ -59,7 +59,7 @@ namespace jnipp
 		// ['Java class name'] -> weak `jclass` pointer. Used for shared owning of `jclass` instances.
 		using WeakClassStorage = std::unordered_map< std::string, std::weak_ptr<_jclass> >;
 		
-		utils::Mutex		m_mutex;						// Synchronization mutex for safe multi-thread access.
+		Utils::Mutex		m_mutex;						// Synchronization mutex for safe multi-thread access.
 		JavaVM*				m_jvm				= nullptr;	// Instance of Java virtual machine.
 		JNIEnv*				m_main_env			= nullptr;	// Instance of JniEnv for the main thread.
 		int64_t				m_main_thread_id	= 0;		// TID of main thread, where the initialization was invoked from.

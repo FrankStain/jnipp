@@ -3,9 +3,9 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
-namespace marshaling
+namespace Marshaling
 {
 	/**
 		@brief	Information about transformation from Java type to C++ one.

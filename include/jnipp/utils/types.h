@@ -3,7 +3,7 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
 	/**
 		@brief	Facade for native binding.
@@ -26,7 +26,7 @@ namespace jnipp
 		template< typename TReturnType, typename TSenderType, typename... TArgumentTypes >
 		NativeFunction( const char* func_name, TReturnType (*func_address)( JNIEnv*, TSenderType, TArgumentTypes... ) )
 			: address( reinterpret_cast<void*>( func_address ) )
-			, signature( FunctionSignature< marshaling::JavaTypeSignature<TReturnType>, marshaling::JavaTypeSignature<TArgumentTypes>... >::GetString() )
+			, signature( FunctionSignature< Marshaling::JavaTypeSignature<TReturnType>, Marshaling::JavaTypeSignature<TArgumentTypes>... >::GetString() )
 			, name( func_name )
 		{
 			static_assert(

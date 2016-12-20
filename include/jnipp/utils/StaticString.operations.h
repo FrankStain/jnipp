@@ -3,9 +3,9 @@
 #pragma once
 
 
-namespace jnipp
+namespace Jni
 {
-namespace utils
+namespace Utils
 {
 	/**
 		@brief	Combiner of static strings.
@@ -43,7 +43,7 @@ namespace utils
 		@tparam	TStrings	Collection of static strings to be combined into single one.
 	*/
 	template< typename... TStrings >
-	using CombinedStaticString = typename utils::StringCombiner<TStrings...>::String;
+	using CombinedStaticString = typename Utils::StringCombiner<TStrings...>::String;
 
 	/// @brief	Helper for producing valid name of Java class.
 	template< char... CHARS >

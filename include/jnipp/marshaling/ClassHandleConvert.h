@@ -4,9 +4,9 @@
 
 
 /// @brief	Jni++ main namespace.
-namespace jnipp
+namespace Jni
 {
-namespace marshaling
+namespace Marshaling
 {
 	/// @brief	Translation of `jclass` type.
 	template<>
