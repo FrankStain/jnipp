@@ -35,15 +35,15 @@ namespace jnipp
 
 	const std::string ClassHandle::GetCanonicalName() const
 	{
-		CRET( !IsValid(), {} );
-		Expects( VirtualMachine::IsValid() );
+		JNI_RETURN_IF( !IsValid(), {} );
+		JNI_EXPECTS( VirtualMachine::IsValid() );
 		return VirtualMachine::GetInstance().m_get_canonical_name.Call( GetJniReference() );
 	};
 
 	const std::string ClassHandle::GetName() const
 	{
-		CRET( !IsValid(), {} );
-		Expects( VirtualMachine::IsValid() );
+		JNI_RETURN_IF( !IsValid(), {} );
+		JNI_EXPECTS( VirtualMachine::IsValid() );
 		std::string class_name{ VirtualMachine::GetInstance().m_get_name.Call( GetJniReference() ) };
 
 		for( char& stored_char : class_name )
@@ -59,15 +59,15 @@ namespace jnipp
 
 	const std::string ClassHandle::GetSimpleName() const
 	{
-		CRET( !IsValid(), {} );
-		Expects( VirtualMachine::IsValid() );
+		JNI_RETURN_IF( !IsValid(), {} );
+		JNI_EXPECTS( VirtualMachine::IsValid() );
 		return VirtualMachine::GetInstance().m_get_simple_name.Call( GetJniReference() );
 	};
 
 	ClassHandle ClassHandle::GetParentClassHandle() const
 	{
-		CRET( !IsValid(), {} );
-		Expects( VirtualMachine::IsValid() );
+		JNI_RETURN_IF( !IsValid(), {} );
+		JNI_EXPECTS( VirtualMachine::IsValid() );
 		return VirtualMachine::GetInstance().m_get_super_class_func.Call( GetJniReference() );
 	};
 
@@ -75,22 +75,22 @@ namespace jnipp
 	{
 		Invalidate();
 		
-		Expects( class_name != nullptr );
-		Expects( strlen( class_name ) > 0 );
+		JNI_EXPECTS( class_name != nullptr );
+		JNI_EXPECTS( strlen( class_name ) > 0 );
 
 		m_class_ref = VirtualMachine::GetInstance().GetClass( class_name );
 
-		Ensures( IsValid() );
+		JNI_ENSURES( IsValid() );
 	};
 
 	void ClassHandle::AcquireHandle( jobject object_ref )
 	{
 		Invalidate();
 		
-		CRET( object_ref == nullptr );
+		JNI_RETURN_IF( object_ref == nullptr );
 		m_class_ref = VirtualMachine::GetInstance().GetClass( object_ref );
 
-		Ensures( IsValid() );
+		JNI_ENSURES( IsValid() );
 	};
 
 	const ClassHandle& ClassHandle::operator=( jclass class_ref )

@@ -4,97 +4,97 @@
 
 
 /// @brief	Conditional return (c-ret) for shorter the service code.
-#if( !defined( CRET ) )
-	#define CRET( CONDITION, ... )				if( CONDITION ) { return __VA_ARGS__; }
+#if( !defined( JNI_RETURN_IF ) )
+	#define JNI_RETURN_IF( CONDITION, ... )				if( CONDITION ) { return __VA_ARGS__; }
 #endif
 
-#if( !defined( CRET_V ) )
-	#define CRET_V( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); return RESULT; }
+#if( !defined( JNI_RETURN_IF_V ) )
+	#define JNI_RETURN_IF_V( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); return RESULT; }
 #endif
 
-#if( !defined( CRET_D ) )
-	#define CRET_D( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Debug( __VA_ARGS__ ); return RESULT; }
+#if( !defined( JNI_RETURN_IF_D ) )
+	#define JNI_RETURN_IF_D( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Debug( __VA_ARGS__ ); return RESULT; }
 #endif
 
-#if( !defined( CRET_I ) )
-	#define CRET_I( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Info( __VA_ARGS__ ); return RESULT; }
+#if( !defined( JNI_RETURN_IF_I ) )
+	#define JNI_RETURN_IF_I( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Info( __VA_ARGS__ ); return RESULT; }
 #endif
 
-#if( !defined( CRET_W ) )
-	#define CRET_W( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Warning( __VA_ARGS__ ); return RESULT; }
+#if( !defined( JNI_RETURN_IF_W ) )
+	#define JNI_RETURN_IF_W( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Warning( __VA_ARGS__ ); return RESULT; }
 #endif
 
-#if( !defined( CRET_E ) )
-	#define CRET_E( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Error( __VA_ARGS__ ); return RESULT; }
+#if( !defined( JNI_RETURN_IF_E ) )
+	#define JNI_RETURN_IF_E( CONDITION, RESULT, ... )	if( CONDITION ) { jnipp::logging::Error( __VA_ARGS__ ); return RESULT; }
 #endif
 
 
 /// @brief	Conditional continuation (c-con) for shorter the service code.
-#if( !defined( CCON ) )
-	#define CCON( CONDITION )					if( CONDITION ) { continue; }
+#if( !defined( JNI_CONTINUE_IF ) )
+	#define JNI_CONTINUE_IF( CONDITION )				if( CONDITION ) { continue; }
 #endif
 
-#if( !defined( CCON_V ) )
-	#define CCON_V( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); continue; }
+#if( !defined( JNI_CONTINUE_IF_V ) )
+	#define JNI_CONTINUE_IF_V( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); continue; }
 #endif
 
-#if( !defined( CCON_D ) )
-	#define CCON_D( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Debug( __VA_ARGS__ ); continue; }
+#if( !defined( JNI_CONTINUE_IF_D ) )
+	#define JNI_CONTINUE_IF_D( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Debug( __VA_ARGS__ ); continue; }
 #endif
 
-#if( !defined( CCON_I ) )
-	#define CCON_I( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Info( __VA_ARGS__ ); continue; }
+#if( !defined( JNI_CONTINUE_IF_I ) )
+	#define JNI_CONTINUE_IF_I( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Info( __VA_ARGS__ ); continue; }
 #endif
 
-#if( !defined( CCON_W ) )
-	#define CCON_W( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Warning( __VA_ARGS__ ); continue; }
+#if( !defined( JNI_CONTINUE_IF_W ) )
+	#define JNI_CONTINUE_IF_W( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Warning( __VA_ARGS__ ); continue; }
 #endif
 
-#if( !defined( CCON_E ) )
-	#define CCON_E( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Error( __VA_ARGS__ ); continue; }
+#if( !defined( JNI_CONTINUE_IF_E ) )
+	#define JNI_CONTINUE_IF_E( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Error( __VA_ARGS__ ); continue; }
 #endif
 
 
 /// @brief	Conditional break (c-brk) for shorter the service code.
-#if( !defined( CBRK ) )
-	#define CBRK( CONDITION )					if( CONDITION ) { break; }
+#if( !defined( JNI_BREAK_IF ) )
+	#define JNI_BREAK_IF( CONDITION )					if( CONDITION ) { break; }
 #endif
 
-#if( !defined( CBRK_V ) )
-	#define CBRK_V( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); break; }
+#if( !defined( JNI_BREAK_IF_V ) )
+	#define JNI_BREAK_IF_V( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Verbose( __VA_ARGS__ ); break; }
 #endif
 
-#if( !defined( CBRK_D ) )
-	#define CBRK_D( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Debug( __VA_ARGS__ ); break; }
+#if( !defined( JNI_BREAK_IF_D ) )
+	#define JNI_BREAK_IF_D( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Debug( __VA_ARGS__ ); break; }
 #endif
 
-#if( !defined( CBRK_I ) )
-	#define CBRK_I( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Info( __VA_ARGS__ ); break; }
+#if( !defined( JNI_BREAK_IF_I ) )
+	#define JNI_BREAK_IF_I( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Info( __VA_ARGS__ ); break; }
 #endif
 
-#if( !defined( CBRK_W ) )
-	#define CBRK_W( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Warning( __VA_ARGS__ ); break; }
+#if( !defined( JNI_BREAK_IF_W ) )
+	#define JNI_BREAK_IF_W( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Warning( __VA_ARGS__ ); break; }
 #endif
 
-#if( !defined( CBRK_E ) )
-	#define CBRK_E( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Error( __VA_ARGS__ ); break; }
+#if( !defined( JNI_BREAK_IF_E ) )
+	#define JNI_BREAK_IF_E( CONDITION, ... )			if( CONDITION ) { jnipp::logging::Error( __VA_ARGS__ ); break; }
 #endif
 
 
-#if( !defined( JNIPP_STRINGIFY ) )
-	#define JNIPP_TO_STRING( EXPRESSION )	#EXPRESSION
-	#define JNIPP_STRINGIFY( EXPRESSION )	JNIPP_TO_STRING( EXPRESSION )
+#if( !defined( JNI_STRINGIFY ) )
+	#define JNI_PROMOTE_STRING( EXPRESSION )	#EXPRESSION
+	#define JNI_STRINGIFY( EXPRESSION )			JNI_PROMOTE_STRING( EXPRESSION )
 #endif
 
 
 /// @brief	Expectation macro.
-#if( !defined( Expects ) )
-	#define Expects( ... )										\
+#if( !defined( JNI_EXPECTS ) )
+	#define JNI_EXPECTS( ... )									\
 	if( !( __VA_ARGS__ ) )										\
 	{															\
 		jnipp::logging::Assert(									\
 			"%s:%d - Unexpected result of `%s` expression.",	\
-			__FILE__, __LINE__, JNIPP_STRINGIFY( __VA_ARGS__ )	\
+			__FILE__, __LINE__, JNI_STRINGIFY( __VA_ARGS__ )	\
 		);														\
 		std::terminate();										\
 	}
@@ -102,13 +102,14 @@
 
 
 // @brief	Ensuring macro.
-#if( !defined( Ensures ) )
-	#define Ensures( ... )										\
+#if( !defined( JNI_ENSURES ) )
+	#define JNI_ENSURES( ... )									\
 	if( !( __VA_ARGS__ ) )										\
 	{															\
 		jnipp::logging::Assert(									\
-			"%s:%d - Unexpected result of `%s` expression.",	\
-			__FILE__, __LINE__, JNIPP_STRINGIFY( __VA_ARGS__ )	\
+			"%s:%d - Insurance failed due to "					\
+			"unexpected result of `%s` expression.",			\
+			__FILE__, __LINE__, JNI_STRINGIFY( __VA_ARGS__ )	\
 		);														\
 		std::terminate();										\
 	}

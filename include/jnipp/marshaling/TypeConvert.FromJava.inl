@@ -20,7 +20,7 @@ namespace marshaling
 		const jsize string_length	= local_env->GetStringUTFLength( source );
 
 		destination.clear();
-		CRET( string_length == 0 );
+		JNI_RETURN_IF( string_length == 0 );
 
 		destination.resize( string_length, ' ' );
 		local_env->GetStringUTFRegion( source, 0, string_length, &destination.front() );
@@ -33,7 +33,7 @@ namespace marshaling
 		const jsize string_length	= local_env->GetStringLength( source );
 
 		destination.clear();
-		CRET( string_length == 0 );
+		JNI_RETURN_IF( string_length == 0 );
 
 		destination.resize( string_length, ' ' );
 		local_env->GetStringRegion( source, 0, string_length, reinterpret_cast<jchar*>( &destination.front() ) );

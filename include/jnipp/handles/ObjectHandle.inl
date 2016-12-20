@@ -10,17 +10,17 @@ namespace jnipp
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = utils::TotalLocalFrame<TNativeArguments...>::RESULT;
 		
-		CRET_E( !VirtualMachine::IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		const FunctionHandle<void, TNativeArguments...> construction_func{ class_handle, "<init>" };
-		CRET_E(
+		JNI_RETURN_IF_E(
 			!construction_func,
 			{},
 			"Failed to locate proper constructor with signature `%s` for object `%s`.", construction_func.GetSignature(), class_handle.GetName().c_str()
 		);
 
 		auto local_env = VirtualMachine::GetLocalEnvironment();
-		CRET_E( LOCAL_FRAME_SIZE && ( local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), {}, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
+		JNI_RETURN_IF_E( LOCAL_FRAME_SIZE && ( local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), {}, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
 		ObjectHandle result_handle;
 		result_handle.AcquireObjectRef( local_env->NewObject( *class_handle, *construction_func, jnipp::marshaling::ToJava( arguments )... ) );
@@ -34,7 +34,7 @@ namespace jnipp
 			result_handle.Invalidate();
 		};
 
-		CRET( LOCAL_FRAME_SIZE == 0, result_handle );
+		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, result_handle );
 		local_env->PopLocalFrame( nullptr );
 		return result_handle;
 	};

@@ -78,20 +78,20 @@ namespace jnipp
 
 	void ObjectHandle::DeleteObjectRef( jobject object_ref )
 	{
-		CRET_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		VirtualMachine::GetLocalEnvironment()->DeleteGlobalRef( object_ref );
 	};
 
 	void ObjectHandle::InitClassHandle() const
 	{
-		CRET( !m_object_ref || m_class_handle.IsValid() );
+		JNI_RETURN_IF( !m_object_ref || m_class_handle.IsValid() );
 		m_class_handle.AcquireHandle( m_object_ref.get() );
 	};
 
 	void ObjectHandle::AcquireObjectRef( jobject object_ref )
 	{
-		CRET_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
-		CRET_W( object_ref == nullptr, , "Attempt to get global ref of null object." );
+		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		JNI_RETURN_IF_W( object_ref == nullptr, , "Attempt to get global ref of null object." );
 
 		m_object_ref = { VirtualMachine::GetLocalEnvironment()->NewGlobalRef( object_ref ), ObjectHandle::DeleteObjectRef };
 		m_class_handle.Invalidate();

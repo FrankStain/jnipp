@@ -46,19 +46,19 @@ namespace jnipp
 	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::StaticFunctionHandle( const ClassHandle& class_handle, const char* function_name )
 		: m_class_handle( class_handle )
 	{
-		Expects( m_class_handle );
-		CRET_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		JNI_EXPECTS( m_class_handle );
+		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 		m_function_id	= local_env->GetStaticMethodID( *m_class_handle, function_name, Signature::GetString() );
 
-		Ensures( m_function_id != 0 );
+		JNI_ENSURES( m_function_id != 0 );
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
-		CRET_E( !VirtualMachine::IsValid(), TNativeReturnType(), "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
+		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), TNativeReturnType(), "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return Call( local_env, arguments... );
@@ -67,7 +67,7 @@ namespace jnipp
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const
 	{
-		CRET_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
+		JNI_RETURN_IF_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
 
 		return CallDecorator{ local_env, *m_class_handle, m_function_id }.Call( arguments... );
 	};

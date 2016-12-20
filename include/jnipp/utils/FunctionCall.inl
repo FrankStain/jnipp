@@ -40,8 +40,8 @@ namespace utils
 		, m_function_id( function_id )
 		, m_object_ref( object_ref )
 	{
-		Expects( m_object_ref != nullptr );
-		Expects( m_function_id != nullptr );
+		JNI_EXPECTS( m_object_ref != nullptr );
+		JNI_EXPECTS( m_function_id != nullptr );
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
@@ -49,8 +49,8 @@ namespace utils
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeReturnType, TNativeArguments...>::RESULT;
 
-		CRET_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
-		CRET_E(
+		JNI_RETURN_IF_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
+		JNI_RETURN_IF_E(
 			LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ),
 			{},
 			"Failed to push JVM local frame with size %d.",
@@ -61,7 +61,7 @@ namespace utils
 		TNativeReturnType native_result;
 		jnipp::marshaling::FromJava( function_result, native_result );
 
-		CRET( LOCAL_FRAME_SIZE == 0, native_result );
+		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, native_result );
 		m_local_env->PopLocalFrame( nullptr );
 		return native_result;
 	};
@@ -74,9 +74,9 @@ namespace utils
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeReturnType, TNativeArguments...>::RESULT;
 
-		Expects( class_ref != nullptr );
-		CRET_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
-		CRET_E(
+		JNI_EXPECTS( class_ref != nullptr );
+		JNI_RETURN_IF_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
+		JNI_RETURN_IF_E(
 			LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ),
 			{},
 			"Failed to push JVM local frame with size %d.",
@@ -93,7 +93,7 @@ namespace utils
 		TNativeReturnType native_result;
 		jnipp::marshaling::FromJava( function_result, native_result );
 
-		CRET( LOCAL_FRAME_SIZE == 0, native_result );
+		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, native_result );
 		m_local_env->PopLocalFrame( nullptr );
 		return native_result;
 	};
@@ -104,8 +104,8 @@ namespace utils
 		, m_function_id( function_id )
 		, m_object_ref( object_ref )
 	{
-		Expects( m_object_ref != nullptr );
-		Expects( m_function_id != nullptr )
+		JNI_EXPECTS( m_object_ref != nullptr );
+		JNI_EXPECTS( m_function_id != nullptr )
 	};
 
 	template< typename... TNativeArguments >
@@ -113,8 +113,8 @@ namespace utils
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeArguments...>::RESULT;
 
-		CRET_E( m_local_env == nullptr, , "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
-		CRET_E(
+		JNI_RETURN_IF_E( m_local_env == nullptr, , "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
+		JNI_RETURN_IF_E(
 			LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ),
 			,
 			"Failed to push JVM local frame with size %d.",
@@ -123,7 +123,7 @@ namespace utils
 
 		(m_local_env->*FUNCTION_HANDLER)( m_object_ref, m_function_id, jnipp::marshaling::ToJava( arguments )... );
 
-		CRET( LOCAL_FRAME_SIZE == 0 );
+		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0 );
 		m_local_env->PopLocalFrame( nullptr );
 	};
 
@@ -135,9 +135,9 @@ namespace utils
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeArguments...>::RESULT;
 
-		Expects( class_ref != nullptr );
-		CRET_E( m_local_env == nullptr, , "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
-		CRET_E(
+		JNI_EXPECTS( class_ref != nullptr );
+		JNI_RETURN_IF_E( m_local_env == nullptr, , "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
+		JNI_RETURN_IF_E(
 			LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ),
 			,
 			"Failed to push JVM local frame with size %d.",
@@ -151,7 +151,7 @@ namespace utils
 			jnipp::marshaling::ToJava( arguments )...
 		);
 
-		CRET( LOCAL_FRAME_SIZE == 0 );
+		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0 );
 		m_local_env->PopLocalFrame( nullptr );
 	};
 };
