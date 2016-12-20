@@ -74,6 +74,7 @@ namespace Marshaling {};
 #include <jnipp/utils/JniEnv.h>
 
 // Deferred implementation of Jni++ functionality.
+#include <jnipp/utils/JniEnv.inl>
 #include <jnipp/marshaling/TypeConvert.FromJava.inl>
 #include <jnipp/marshaling/TypeConvert.ToJava.inl>
 #include <jnipp/utils/FunctionCall.inl>
