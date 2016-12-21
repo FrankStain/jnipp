@@ -58,7 +58,7 @@ namespace Marshaling {};
 
 // Jni++ wrap for Java class fields.
 #include <jnipp/handles/MemberField.h>
-#include <jnipp/handles/StaticFieldHandle.h>
+#include <jnipp/handles/StaticField.h>
 
 // Jni++ wrap for Java functions.
 #include <jnipp/utils/FunctionCall.h>
@@ -81,6 +81,6 @@ namespace Marshaling {};
 #include <jnipp/utils/StaticFunctionCall.inl>
 #include <jnipp/handles/Object.inl>
 #include <jnipp/handles/MemberField.inl>
-#include <jnipp/handles/StaticFieldHandle.inl>
+#include <jnipp/handles/StaticField.inl>
 #include <jnipp/handles/FunctionHandle.inl>
 #include <jnipp/handles/StaticFunctionHandle.inl>
