@@ -5,7 +5,7 @@
 
 namespace Jni
 {
-	/// @brief	Java class handle through JNI interface.
+	/// @brief	Handle of arbitrary Java class.
 	class Class final
 	{
 		friend class ObjectHandle;	// Grant access to `AcquireClassReference` function.
@@ -29,7 +29,7 @@ namespace Jni
 		/// @brief	Returns the simple name of this class or empty string for invalid class.
 		const std::string GetSimpleName() const;
 
-		/// @brief	Get the handle to parent class, if available.
+		/// @brief	Get the handle of parent class, if available.
 		Class GetParentClass() const;
 
 		/// @brief	Check the class handle carries valid value.
