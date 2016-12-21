@@ -82,7 +82,7 @@ namespace Jni
 		VirtualMachine::GetLocalEnvironment()->DeleteGlobalRef( object_ref );
 	};
 
-	void Object::InitClassHandle() const
+	void Object::RetrieveClass() const
 	{
 		JNI_RETURN_IF( !m_object_ref || m_class_handle.IsValid() );
 		m_class_handle.AcquireClassReference( m_object_ref.get() );

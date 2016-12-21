@@ -28,7 +28,7 @@ namespace Jni
 		inline const bool IsValid() const					{ return m_object_ref != nullptr; };
 
 		/// @brief	Get the handle to class of stored object.
-		inline const Class& GetClassHandle() const	{ InitClassHandle(); return m_class_handle; };
+		inline const Class& GetClass() const				{ RetrieveClass(); return m_class_handle; };
 
 		/// @brief	Get the JNI representation of Java object reference.
 		inline jobject GetJniReference() const				{ return m_object_ref.get(); };
@@ -50,7 +50,7 @@ namespace Jni
 
 
 		/// @brief	Lazy initialization of `m_class_handle`.
-		void InitClassHandle() const;
+		void RetrieveClass() const;
 
 		/// @brief	Acquire the global ref to object.
 		void AcquireObjectRef( jobject object_ref );
