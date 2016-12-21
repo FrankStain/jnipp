@@ -71,10 +71,10 @@ namespace Marshaling {};
 
 // Jni++ major utility - virtual machine wrap.
 #include <jnipp/utils/VirtualMachine.h>
-#include <jnipp/utils/JniEnv.h>
+#include <jnipp/utils/Environment.h>
 
 // Deferred implementation of Jni++ functionality.
-#include <jnipp/utils/JniEnv.inl>
+#include <jnipp/utils/Environment.inl>
 #include <jnipp/marshaling/TypeConvert.FromJava.inl>
 #include <jnipp/marshaling/TypeConvert.ToJava.inl>
 #include <jnipp/utils/FunctionCall.inl>
