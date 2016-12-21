@@ -52,7 +52,7 @@ namespace Marshaling {};
 
 // Jni++ wrap for Java classes.
 #include <jnipp/handles/Class.h>
-#include <jnipp/handles/ObjectHandle.h>
+#include <jnipp/handles/Object.h>
 #include <jnipp/marshaling/ClassHandleConvert.h>
 #include <jnipp/marshaling/ObjectHandleConvert.h>
 
@@ -79,7 +79,7 @@ namespace Marshaling {};
 #include <jnipp/marshaling/TypeConvert.ToJava.inl>
 #include <jnipp/utils/FunctionCall.inl>
 #include <jnipp/utils/StaticFunctionCall.inl>
-#include <jnipp/handles/ObjectHandle.inl>
+#include <jnipp/handles/Object.inl>
 #include <jnipp/handles/FieldHandle.inl>
 #include <jnipp/handles/StaticFieldHandle.inl>
 #include <jnipp/handles/FunctionHandle.inl>
