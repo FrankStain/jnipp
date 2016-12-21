@@ -16,7 +16,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType, typename TValueType, typename >
-	inline const bool JniEnv::GetValue( const StaticFieldHandle<TNativeType>& field_handle, TValueType& value_storage ) const
+	inline const bool JniEnv::GetValue( const StaticField<TNativeType>& field_handle, TValueType& value_storage ) const
 	{
 		return field_handle.GetValue( m_local_env, value_storage );
 	};
@@ -32,7 +32,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType, typename TValueType, typename >
-	inline const bool JniEnv::SetValue( const StaticFieldHandle<TNativeType>& field_handle, const TValueType& value_storage ) const
+	inline const bool JniEnv::SetValue( const StaticField<TNativeType>& field_handle, const TValueType& value_storage ) const
 	{
 		return field_handle.SetValue( m_local_env, value_storage );
 	};

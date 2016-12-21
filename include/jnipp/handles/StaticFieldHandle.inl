@@ -6,7 +6,7 @@
 namespace Jni
 {
 	template< typename TNativeType >
-	StaticFieldHandle<TNativeType>::StaticFieldHandle( const StaticFieldHandle& other )
+	StaticField<TNativeType>::StaticField( const StaticField& other )
 		: m_class_handle( other.m_class_handle )
 		, m_field_id( other.m_field_id )
 	{
@@ -14,7 +14,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	StaticFieldHandle<TNativeType>::StaticFieldHandle<TNativeType>::StaticFieldHandle( StaticFieldHandle&& other )
+	StaticField<TNativeType>::StaticField<TNativeType>::StaticField( StaticField&& other )
 		: m_class_handle( std::move( other.m_class_handle ) )
 		, m_field_id( std::move( other.m_field_id ) )
 	{
@@ -22,28 +22,28 @@ namespace Jni
 	};
 	
 	template< typename TNativeType >
-	StaticFieldHandle<TNativeType>::StaticFieldHandle( const std::string& class_name, const std::string& field_name )
-		: StaticFieldHandle( class_name.c_str(), field_name.c_str() )
+	StaticField<TNativeType>::StaticField( const std::string& class_name, const std::string& field_name )
+		: StaticField( class_name.c_str(), field_name.c_str() )
 	{
 	
 	};
 	
 	template< typename TNativeType >
-	StaticFieldHandle<TNativeType>::StaticFieldHandle( const Class& class_handle, const std::string& field_name )
-		: StaticFieldHandle( class_handle, field_name.c_str() )
+	StaticField<TNativeType>::StaticField( const Class& class_handle, const std::string& field_name )
+		: StaticField( class_handle, field_name.c_str() )
 	{
 	
 	};
 	
 	template< typename TNativeType >
-	StaticFieldHandle<TNativeType>::StaticFieldHandle( const char* class_name, const char* field_name )
-		: StaticFieldHandle( Class{ class_name }, field_name )
+	StaticField<TNativeType>::StaticField( const char* class_name, const char* field_name )
+		: StaticField( Class{ class_name }, field_name )
 	{
 	
 	};
 	
 	template< typename TNativeType >
-	StaticFieldHandle<TNativeType>::StaticFieldHandle( const Class& class_handle, const char* field_name )
+	StaticField<TNativeType>::StaticField( const Class& class_handle, const char* field_name )
 		: m_class_handle( class_handle )
 	{
 		JNI_EXPECTS( m_class_handle.IsValid() );
@@ -56,7 +56,7 @@ namespace Jni
 	};
 		
 	template< typename TNativeType >
-	inline const bool StaticFieldHandle<TNativeType>::GetValue( TNativeType& value_storage ) const
+	inline const bool StaticField<TNativeType>::GetValue( TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), false, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
@@ -65,7 +65,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool StaticFieldHandle<TNativeType>::GetValue( JNIEnv* local_env, TNativeType& value_storage ) const
+	inline const bool StaticField<TNativeType>::GetValue( JNIEnv* local_env, TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !IsValid(), false, "Field handle was not initialized properly." );
 		JNI_RETURN_IF_E( LOCAL_FRAME_SIZE && ( local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), false, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
@@ -79,7 +79,7 @@ namespace Jni
 	};
 		
 	template< typename TNativeType >
-	inline const bool StaticFieldHandle<TNativeType>::SetValue( const TNativeType& value_storage ) const
+	inline const bool StaticField<TNativeType>::SetValue( const TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), false, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
@@ -88,7 +88,7 @@ namespace Jni
 	};
 		
 	template< typename TNativeType >
-	inline const bool StaticFieldHandle<TNativeType>::SetValue( JNIEnv* local_env, const TNativeType& value_storage ) const
+	inline const bool StaticField<TNativeType>::SetValue( JNIEnv* local_env, const TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !IsValid(), false, "Field handle was not initialized properly." );
 		JNI_RETURN_IF_E( LOCAL_FRAME_SIZE && ( local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), false, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
@@ -103,7 +103,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const StaticFieldHandle<TNativeType>& StaticFieldHandle<TNativeType>::operator=( const StaticFieldHandle& other )
+	inline const StaticField<TNativeType>& StaticField<TNativeType>::operator=( const StaticField& other )
 	{
 		m_class_handle	= other.m_class_handle;
 		m_field_id		= other.m_field_id;
@@ -111,7 +111,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const StaticFieldHandle<TNativeType>& StaticFieldHandle<TNativeType>::operator=( StaticFieldHandle&& other )
+	inline const StaticField<TNativeType>& StaticField<TNativeType>::operator=( StaticField&& other )
 	{
 		m_class_handle	= std::move( other.m_class_handle );
 		m_field_id		= std::move( other.m_field_id );

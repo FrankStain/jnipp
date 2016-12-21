@@ -37,7 +37,7 @@ namespace Jni
 
 		/// @brief	Get the value of static field using the local JNI environment.
 		template< typename TNativeType, typename TValueType, typename = EnableConvertible<TNativeType, TValueType> >
-		inline const bool GetValue( const StaticFieldHandle<TNativeType>& field_handle, TValueType& value_storage ) const;
+		inline const bool GetValue( const StaticField<TNativeType>& field_handle, TValueType& value_storage ) const;
 
 		/// @brief	Set the value of field belongs to object using the local JNI environment.
 		template< typename TNativeType, typename TValueType, typename = EnableConvertible<TNativeType, TValueType> >
@@ -49,7 +49,7 @@ namespace Jni
 
 		/// @brief	Set the value of static field using the local JNI environment.
 		template< typename TNativeType, typename TValueType, typename = EnableConvertible<TNativeType, TValueType> >
-		inline const bool SetValue( const StaticFieldHandle<TNativeType>& field_handle, const TValueType& value_storage ) const;
+		inline const bool SetValue( const StaticField<TNativeType>& field_handle, const TValueType& value_storage ) const;
 
 		/// @brief	Call the member function on object using the local JNI environment.
 		template<

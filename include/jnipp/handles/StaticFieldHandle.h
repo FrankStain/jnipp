@@ -5,19 +5,19 @@
 
 namespace Jni
 {
-	/// @brief	Handle to static field of Java class.
+	/// @brief	Handle of arbitrary Java static field.
 	template< typename TNativeType >
-	class StaticFieldHandle final
+	class StaticField final
 	{
 		friend class JniEnv;
 	public:
-		StaticFieldHandle() = default;
-		StaticFieldHandle( const StaticFieldHandle& other );
-		StaticFieldHandle( StaticFieldHandle&& other );
-		StaticFieldHandle( const std::string& class_name, const std::string& field_name );
-		StaticFieldHandle( const Class& class_handle, const std::string& field_name );
-		StaticFieldHandle( const char* class_name, const char* field_name );
-		StaticFieldHandle( const Class& class_handle, const char* field_name );
+		StaticField() = default;
+		StaticField( const StaticField& other );
+		StaticField( StaticField&& other );
+		StaticField( const std::string& class_name, const std::string& field_name );
+		StaticField( const Class& class_handle, const std::string& field_name );
+		StaticField( const char* class_name, const char* field_name );
+		StaticField( const Class& class_handle, const char* field_name );
 
 
 		/// @brief	Get the value of field.
@@ -34,8 +34,8 @@ namespace Jni
 		inline jfieldID GetFieldId() const				{ return m_field_id; };
 
 
-		inline const StaticFieldHandle& operator = ( const StaticFieldHandle& other );
-		inline const StaticFieldHandle& operator = ( StaticFieldHandle&& other );
+		inline const StaticField& operator = ( const StaticField& other );
+		inline const StaticField& operator = ( StaticField&& other );
 
 
 		inline explicit operator const bool () const	{ return IsValid(); };
@@ -56,7 +56,7 @@ namespace Jni
 		constexpr static auto FIELD_READ_HANDLER	= Marshaling::JniEnvFacade<TNativeType>::STATIC_FIELD_READ_HANDLER;
 		constexpr static auto FIELD_WRITE_HANDLER	= Marshaling::JniEnvFacade<TNativeType>::STATIC_FIELD_WRITE_HANDLER;
 
-		Class	m_class_handle;				// Handle to class of field.
+		Class		m_class_handle;				// Handle to class of field.
 		jfieldID	m_field_id		= nullptr;	// Field id for JNI.
 	};
 };
