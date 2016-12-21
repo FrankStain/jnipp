@@ -53,8 +53,8 @@ namespace Marshaling {};
 // Jni++ wrap for Java classes.
 #include <jnipp/handles/Class.h>
 #include <jnipp/handles/Object.h>
-#include <jnipp/marshaling/ClassHandleConvert.h>
-#include <jnipp/marshaling/ObjectHandleConvert.h>
+#include <jnipp/marshaling/ClassConverting.h>
+#include <jnipp/marshaling/ObjectConverting.h>
 
 // Jni++ wrap for Java class fields.
 #include <jnipp/handles/FieldHandle.h>
