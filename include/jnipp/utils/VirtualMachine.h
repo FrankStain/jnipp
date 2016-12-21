@@ -9,7 +9,7 @@ namespace Jni
 	/// @brief	
 	class VirtualMachine final
 	{
-		friend class Class;	// Intensively uses `GetClass` functions.
+		friend class Class;	// Intensively uses `GetClassReference` functions.
 	public:
 		constexpr static int32_t JNI_VERSION = JNI_VERSION_1_6;
 
@@ -50,10 +50,10 @@ namespace Jni
 		const bool CaptureClassLoader();
 		const bool AcquireClassInterface();
 
-		std::shared_ptr<_jclass> GetClass( jobject local_object_ref );
-		std::shared_ptr<_jclass> GetClass( jclass local_class_ref );
-		std::shared_ptr<_jclass> GetClass( const char* class_name );
-		std::shared_ptr<_jclass> LookupClass( const char* class_name );
+		std::shared_ptr<_jclass> GetClassReference( jobject local_object_ref );
+		std::shared_ptr<_jclass> GetClassReference( jclass local_class_ref );
+		std::shared_ptr<_jclass> GetClassReference( const char* class_name );
+		std::shared_ptr<_jclass> LoadClass( const char* class_name );
 
 	private:
 		// ['Java class name'] -> weak `jclass` pointer. Used for shared owning of `jclass` instances.

@@ -99,7 +99,7 @@ namespace Jni
 		JNI_RETURN_IF_E( !IsValid(), nullptr, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		auto local_env	= GetLocalEnvironment();
-		auto java_class	= GetInstance().GetClass( bindings.class_name );
+		auto java_class	= GetInstance().GetClassReference( bindings.class_name );
 		JNI_RETURN_IF_E( !java_class, false, "Class `%s` was not found.", bindings.class_name );
 
 		std::vector<JNINativeMethod> jni_natives;
@@ -163,7 +163,7 @@ namespace Jni
 		GetInstance().m_jvm->DetachCurrentThread();
 	};
 
-	std::shared_ptr<_jclass> VirtualMachine::GetClass( jobject local_object_ref )
+	std::shared_ptr<_jclass> VirtualMachine::GetClassReference( jobject local_object_ref )
 	{
 		JNI_RETURN_IF_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		JNI_RETURN_IF_V( local_object_ref == nullptr, {}, "Attempt to get Java class via null object." );
@@ -176,7 +176,7 @@ namespace Jni
 		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class ) ), VirtualMachine::DeleteSharedClass };
 	};
 
-	std::shared_ptr<_jclass> VirtualMachine::GetClass( jclass local_class_ref )
+	std::shared_ptr<_jclass> VirtualMachine::GetClassReference( jclass local_class_ref )
 	{
 		JNI_RETURN_IF_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		JNI_RETURN_IF_V( local_class_ref == nullptr, {}, "Attempt to get Java class via null class." );
@@ -187,7 +187,7 @@ namespace Jni
 		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class_ref ) ), VirtualMachine::DeleteSharedClass };
 	};
 
-	std::shared_ptr<_jclass> VirtualMachine::GetClass( const char* class_name )
+	std::shared_ptr<_jclass> VirtualMachine::GetClassReference( const char* class_name )
 	{
 		JNI_RETURN_IF_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		JNI_RETURN_IF_W( ( class_name == nullptr ) || !strlen( class_name ), {}, "Attempt to get Java class via empty class name." );
@@ -197,13 +197,13 @@ namespace Jni
 		JNI_RETURN_IF_V( !weak_class.expired(), weak_class.lock(), "Shared class found." );
 
 		// If shared class already lost or never been found, ask JNI to lookup it.
-		auto shared_class	= LookupClass( class_name );
+		auto shared_class	= LoadClass( class_name );
 		weak_class			= shared_class;
 
 		return shared_class;
 	};
 
-	std::shared_ptr<_jclass> VirtualMachine::LookupClass( const char* class_name )
+	std::shared_ptr<_jclass> VirtualMachine::LoadClass( const char* class_name )
 	{
 		JNI_RETURN_IF_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 

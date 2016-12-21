@@ -78,7 +78,7 @@ namespace Jni
 		JNI_EXPECTS( class_name != nullptr );
 		JNI_EXPECTS( strlen( class_name ) > 0 );
 
-		m_class_ref = VirtualMachine::GetInstance().GetClass( class_name );
+		m_class_ref = VirtualMachine::GetInstance().GetClassReference( class_name );
 
 		JNI_ENSURES( IsValid() );
 	};
@@ -88,14 +88,14 @@ namespace Jni
 		Invalidate();
 		
 		JNI_RETURN_IF( object_ref == nullptr );
-		m_class_ref = VirtualMachine::GetInstance().GetClass( object_ref );
+		m_class_ref = VirtualMachine::GetInstance().GetClassReference( object_ref );
 
 		JNI_ENSURES( IsValid() );
 	};
 
 	const Class& Class::operator=( jclass class_ref )
 	{
-		m_class_ref = VirtualMachine::GetInstance().GetClass( class_ref );
+		m_class_ref = VirtualMachine::GetInstance().GetClassReference( class_ref );
 		return *this;
 	};
 
