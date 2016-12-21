@@ -57,6 +57,6 @@ namespace Jni
 
 	private:
 		std::shared_ptr<_jobject>	m_object_ref;	// Shared JNI representation of Java object global reference.
-		mutable Class			m_class_handle;	// Handle to class of stored object.
+		mutable Class				m_class_handle;	// Handle to class of stored object.
 	};
 };
