@@ -5,7 +5,7 @@
 
 namespace Jni
 {
-	/// @brief	Handle to field of Java object.
+	/// @brief	Handle of arbitrary Java member field.
 	template< typename TNativeType >
 	class MemberField final
 	{
