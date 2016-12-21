@@ -13,43 +13,43 @@ namespace Marshaling
 	struct NativeTypeInfo<jobject> final
 	{
 		/// @brief	C++ `jobject` type.
-		using Type		= ObjectHandle;
+		using Type		= Object;
 	};
 
-	/// @brief	Translation of `ObjectHandle` type.
+	/// @brief	Translation of `Object` type.
 	template<>
-	struct JavaTypeInfo<ObjectHandle> final
+	struct JavaTypeInfo<Object> final
 	{
-		/// @brief	Java `ObjectHandle` type.
+		/// @brief	Java `Object` type.
 		using Type		= jobject;
 	};
 
-	/// @brief	Conversion from `jobject` to `ObjectHandle`.
+	/// @brief	Conversion from `jobject` to `Object`.
 	template<>
-	inline void FromJava<ObjectHandle>( const JavaType<ObjectHandle>& source, ObjectHandle& destination )
+	inline void FromJava<Object>( const JavaType<Object>& source, Object& destination )
 	{
 		destination = source;
 	};
 
-	/// @brief	Conversion from `ObjectHandle` to `jobject`.
+	/// @brief	Conversion from `Object` to `jobject`.
 	template<>
-	inline void ToJava<ObjectHandle>( const ObjectHandle& source, JavaType<ObjectHandle>& destination )
+	inline void ToJava<Object>( const Object& source, JavaType<Object>& destination )
 	{
 		destination = *source;
 	};
 
-	/// @brief	Facade specification for transferring the `ObjectHandle` objects from, and to, Java side.
+	/// @brief	Facade specification for transferring the `Object` objects from, and to, Java side.
 	template<>
-	struct JniEnvFacade<ObjectHandle> final
+	struct JniEnvFacade<Object> final
 	{
 		/// @brief	Size of JVM local frame, required to store local reference to object.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
 		
 		/// @brief	C++ `jobject` type.
-		using NativeType	= ObjectHandle;
+		using NativeType	= Object;
 
 		/// @brief	JNI representation of Java `jobject` type.
-		using JavaType		= JavaType<ObjectHandle>;
+		using JavaType		= JavaType<Object>;
 
 		/// @brief	Signature of `jobject` type.
 		using Signature		= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'C', 'l', 'a', 's', 's'>;

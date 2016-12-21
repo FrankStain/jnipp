@@ -60,7 +60,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( const ObjectHandle& object_handle, TNativeType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::GetValue( const Object& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( *object_handle, value_storage );
 	};
@@ -75,7 +75,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( JNIEnv* local_env, const ObjectHandle& object_handle, TNativeType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::GetValue( JNIEnv* local_env, const Object& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( local_env, *object_handle, value_storage );
 	};
@@ -96,7 +96,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( const ObjectHandle& object_handle, const TNativeType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::SetValue( const Object& object_handle, const TNativeType& value_storage ) const
 	{
 		return SetValue( *object_handle, value_storage );
 	};
@@ -111,7 +111,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( JNIEnv* local_env, const ObjectHandle& object_handle, const TNativeType& value_storage ) const
+	inline const bool FieldHandle<TNativeType>::SetValue( JNIEnv* local_env, const Object& object_handle, const TNativeType& value_storage ) const
 	{
 		return SetValue( local_env, *object_handle, value_storage );
 	};

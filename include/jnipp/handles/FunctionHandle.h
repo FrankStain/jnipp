@@ -21,13 +21,13 @@ namespace Jni
 
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType Call( const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
+		inline TNativeReturnType Call( const Object& object_handle, const TNativeArguments&... arguments ) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType Call( jobject object_ref, const TNativeArguments&... arguments ) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType CallNonVirtual( const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
+		inline TNativeReturnType CallNonVirtual( const Object& object_handle, const TNativeArguments&... arguments ) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType CallNonVirtual( jobject object_ref, const TNativeArguments&... arguments ) const;
@@ -55,7 +55,7 @@ namespace Jni
 		using CallDecorator	= Utils::FunctionCall<TNativeReturnType, TNativeArguments...>;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
-		inline TNativeReturnType Call( JNIEnv* local_env, const ObjectHandle& object_handle, const TNativeArguments&... arguments ) const;
+		inline TNativeReturnType Call( JNIEnv* local_env, const Object& object_handle, const TNativeArguments&... arguments ) const;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType Call( JNIEnv* local_env, jobject object_ref, const TNativeArguments&... arguments ) const;
@@ -63,7 +63,7 @@ namespace Jni
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType CallNonVirtual(
 			JNIEnv* local_env,
-			const ObjectHandle& object_handle,
+			const Object& object_handle,
 			const TNativeArguments&... arguments
 		) const;
 

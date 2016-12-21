@@ -5,20 +5,20 @@
 
 namespace Jni
 {
-	/// @brief	Java object handle through JNI interface.
-	class ObjectHandle
+	/// @brief	Handle of arbitrary Java object.
+	class Object
 	{
 	public:
 		/// @brief	Constructs new object of given class and using given construction arguments.
 		template< typename... TNativeArguments >
-		static ObjectHandle NewObject( const Class& class_handle, const TNativeArguments&... arguments );
+		static Object NewObject( const Class& class_handle, const TNativeArguments&... arguments );
 
-		ObjectHandle() = default;
-		ObjectHandle( jobject object_ref );
-		ObjectHandle( const Class& class_handle );
-		ObjectHandle( Class&& class_handle );
-		ObjectHandle( const ObjectHandle& other );
-		ObjectHandle( ObjectHandle&& other );
+		Object() = default;
+		Object( jobject object_ref );
+		Object( const Class& class_handle );
+		Object( Class&& class_handle );
+		Object( const Object& other );
+		Object( Object&& other );
 
 
 		/// @brief	Invalidate the handle.
@@ -34,11 +34,11 @@ namespace Jni
 		inline jobject GetJniReference() const				{ return m_object_ref.get(); };
 
 
-		const ObjectHandle& operator = ( jobject object_ref );
-		const ObjectHandle& operator = ( const Class& class_handle );
-		const ObjectHandle& operator = ( Class&& class_handle );
-		const ObjectHandle& operator = ( const ObjectHandle& other );
-		const ObjectHandle& operator = ( ObjectHandle&& other );
+		const Object& operator = ( jobject object_ref );
+		const Object& operator = ( const Class& class_handle );
+		const Object& operator = ( Class&& class_handle );
+		const Object& operator = ( const Object& other );
+		const Object& operator = ( Object&& other );
 
 
 		inline explicit operator const bool () const		{ return IsValid(); };

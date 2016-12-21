@@ -31,7 +31,7 @@ namespace Jni
 		template< typename TNativeType, typename TValueType, typename = EnableConvertible<TNativeType, TValueType> >
 		inline const bool GetValue(
 			const FieldHandle<TNativeType>& field_handle,
-			const ObjectHandle& object_handle,
+			const Object& object_handle,
 			TValueType& value_storage
 		) const;
 
@@ -43,7 +43,7 @@ namespace Jni
 		template< typename TNativeType, typename TValueType, typename = EnableConvertible<TNativeType, TValueType> >
 		inline const bool SetValue(
 			const FieldHandle<TNativeType>& field_handle,
-			const ObjectHandle& object_handle,
+			const Object& object_handle,
 			const TValueType& value_storage
 		) const;
 
@@ -58,7 +58,7 @@ namespace Jni
 		>
 		inline TNativeReturnType Call(
 			const FunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
-			const ObjectHandle& object_handle,
+			const Object& object_handle,
 			const TValueArguments&... arguments
 		);
 
@@ -69,7 +69,7 @@ namespace Jni
 		>
 		inline TNativeReturnType CallNonVirtual(
 			const FunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
-			const ObjectHandle& object_handle,
+			const Object& object_handle,
 			const TValueArguments&... arguments
 		);
 

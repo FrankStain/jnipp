@@ -6,7 +6,7 @@
 namespace Jni
 {
 	template< typename... TNativeArguments >
-	ObjectHandle ObjectHandle::NewObject( const Class& class_handle, const TNativeArguments&... arguments )
+	Object Object::NewObject( const Class& class_handle, const TNativeArguments&... arguments )
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = Utils::TotalLocalFrame<TNativeArguments...>::RESULT;
 		
@@ -22,7 +22,7 @@ namespace Jni
 		auto local_env = VirtualMachine::GetLocalEnvironment();
 		JNI_RETURN_IF_E( LOCAL_FRAME_SIZE && ( local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), {}, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
 
-		ObjectHandle result_handle;
+		Object result_handle;
 		result_handle.AcquireObjectRef( local_env->NewObject( *class_handle, *construction_func, Jni::Marshaling::ToJava( arguments )... ) );
 		result_handle.m_class_handle = class_handle;
 

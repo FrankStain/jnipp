@@ -7,17 +7,17 @@
 namespace Jni
 {
 	/// @brief	Handle to `java.lang.THread` object.
-	class ClassLoaderHandle : public ObjectHandle
+	class ClassLoaderHandle : public Object
 	{
 	public:
 		ClassLoaderHandle() = default;
-		ClassLoaderHandle( jobject object_ref ) : ObjectHandle( object_ref ) {};
-		ClassLoaderHandle( const ClassLoaderHandle& other ) : ObjectHandle( other ) {};
-		ClassLoaderHandle( ClassLoaderHandle&& other ) : ObjectHandle( other ) {};
+		ClassLoaderHandle( jobject object_ref ) : Object( object_ref ) {};
+		ClassLoaderHandle( const ClassLoaderHandle& other ) : Object( other ) {};
+		ClassLoaderHandle( ClassLoaderHandle&& other ) : Object( other ) {};
 
-		const ClassLoaderHandle& operator = ( jobject object_ref )					{ ObjectHandle::operator=( object_ref ); return *this; };
-		const ClassLoaderHandle& operator = ( const ClassLoaderHandle& other )		{ ObjectHandle::operator=( other ); return *this; };
-		const ClassLoaderHandle& operator = ( ClassLoaderHandle&& other )			{ ObjectHandle::operator=( other ); return *this; };
+		const ClassLoaderHandle& operator = ( jobject object_ref )					{ Object::operator=( object_ref ); return *this; };
+		const ClassLoaderHandle& operator = ( const ClassLoaderHandle& other )		{ Object::operator=( other ); return *this; };
+		const ClassLoaderHandle& operator = ( ClassLoaderHandle&& other )			{ Object::operator=( other ); return *this; };
 	};
 
 namespace Marshaling

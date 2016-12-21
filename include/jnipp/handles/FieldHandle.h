@@ -21,14 +21,14 @@ namespace Jni
 
 
 		/// @brief	Get the value of field from given handle to object.
-		inline const bool GetValue( const ObjectHandle& object_handle, TNativeType& value_storage ) const;
+		inline const bool GetValue( const Object& object_handle, TNativeType& value_storage ) const;
 		
 		/// @brief	Get the value of field from given object ref.
 		inline const bool GetValue( jobject object_ref, TNativeType& value_storage ) const;
 
 		
 		/// @brief	Set the value of field to given object by its handle.
-		inline const bool SetValue( const ObjectHandle& object_handle, const TNativeType& value_storage ) const;
+		inline const bool SetValue( const Object& object_handle, const TNativeType& value_storage ) const;
 		
 		/// @brief	Set the value of field to given object by its ref.
 		inline const bool SetValue( jobject object_ref, const TNativeType& value_storage ) const;
@@ -56,14 +56,14 @@ namespace Jni
 
 		
 		/// @brief	Get the value of field from given handle to object.
-		inline const bool GetValue( JNIEnv* local_env, const ObjectHandle& object_handle, TNativeType& value_storage ) const;
+		inline const bool GetValue( JNIEnv* local_env, const Object& object_handle, TNativeType& value_storage ) const;
 		
 		/// @brief	Get the value of field from given object ref.
 		inline const bool GetValue( JNIEnv* local_env, jobject object_ref, TNativeType& value_storage ) const;
 
 		
 		/// @brief	Set the value of field to given object by its handle.
-		inline const bool SetValue( JNIEnv* local_env, const ObjectHandle& object_handle, const TNativeType& value_storage ) const;
+		inline const bool SetValue( JNIEnv* local_env, const Object& object_handle, const TNativeType& value_storage ) const;
 		
 		/// @brief	Set the value of field to given object by its ref.
 		inline const bool SetValue( JNIEnv* local_env, jobject object_ref, const TNativeType& value_storage ) const;

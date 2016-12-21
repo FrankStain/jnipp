@@ -8,7 +8,7 @@ namespace Jni
 	template< typename TNativeType, typename TValueType, typename >
 	inline const bool JniEnv::GetValue(
 		const FieldHandle<TNativeType>& field_handle,
-		const ObjectHandle& object_handle,
+		const Object& object_handle,
 		TValueType& value_storage
 	) const
 	{
@@ -24,7 +24,7 @@ namespace Jni
 	template< typename TNativeType, typename TValueType, typename >
 	inline const bool JniEnv::SetValue(
 		const FieldHandle<TNativeType>& field_handle,
-		const ObjectHandle& object_handle,
+		const Object& object_handle,
 		const TValueType& value_storage
 	) const
 	{
@@ -40,7 +40,7 @@ namespace Jni
 	template< typename TNativeReturnType, typename... TNativeArguments, typename... TValueArguments, typename >
 	inline TNativeReturnType JniEnv::Call(
 		const FunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
-		const ObjectHandle& object_handle,
+		const Object& object_handle,
 		const TValueArguments&... arguments
 	)
 	{
@@ -50,7 +50,7 @@ namespace Jni
 	template< typename TNativeReturnType, typename... TNativeArguments, typename... TValueArguments, typename >
 	inline TNativeReturnType JniEnv::CallNonVirtual(
 		const FunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
-		const ObjectHandle& object_handle,
+		const Object& object_handle,
 		const TValueArguments&... arguments
 	)
 	{

@@ -8,7 +8,7 @@ namespace Jni
 	/// @brief	Handle of arbitrary Java class.
 	class Class final
 	{
-		friend class ObjectHandle;	// Grant access to `AcquireClassReference` function.
+		friend class Object;	// Grant access to `AcquireClassReference` function.
 	public:
 		Class() = default;
 		Class( const Class& other );

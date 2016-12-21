@@ -55,7 +55,7 @@ namespace Jni
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType FunctionHandle<TNativeReturnType, TNativeArguments...>::Call(
-		const ObjectHandle& object_handle,
+		const Object& object_handle,
 		const TNativeArguments&... arguments
 	) const
 	{
@@ -74,7 +74,7 @@ namespace Jni
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType FunctionHandle<TNativeReturnType, TNativeArguments...>::Call(
 		JNIEnv* local_env,
-		const ObjectHandle& object_handle,
+		const Object& object_handle,
 		const TNativeArguments&... arguments
 	) const
 	{
@@ -96,7 +96,7 @@ namespace Jni
 		
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType FunctionHandle<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
-		const ObjectHandle& object_handle,
+		const Object& object_handle,
 		const TNativeArguments&... arguments
 	) const
 	{
@@ -118,7 +118,7 @@ namespace Jni
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType FunctionHandle<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
 		JNIEnv* local_env,
-		const ObjectHandle& object_handle,
+		const Object& object_handle,
 		const TNativeArguments&... arguments
 	) const
 	{

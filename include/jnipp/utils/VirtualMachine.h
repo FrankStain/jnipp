@@ -68,7 +68,7 @@ namespace Jni
 		WeakClassStorage	m_shared_classes;				// Storage for found Java class descriptors.
 
 	private:
-		ObjectHandle	m_class_loader;
+		Object	m_class_loader;
 
 		FunctionHandle<Class, std::string>	m_load_class_func;		// `java.lang.Class java.lang.ClassLoader::loadClass( java.lang.String )`
 
