@@ -64,7 +64,7 @@ namespace Jni
 		return VirtualMachine::GetInstance().m_get_simple_name.Call( GetJniReference() );
 	};
 
-	Class Class::GetParentClassHandle() const
+	Class Class::GetParentClass() const
 	{
 		JNI_RETURN_IF( !IsValid(), {} );
 		JNI_EXPECTS( VirtualMachine::IsValid() );

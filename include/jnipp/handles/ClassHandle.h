@@ -30,7 +30,7 @@ namespace Jni
 		const std::string GetSimpleName() const;
 
 		/// @brief	Get the handle to parent class, if available.
-		Class GetParentClassHandle() const;
+		Class GetParentClass() const;
 
 		/// @brief	Check the class handle carries valid value.
 		inline const bool IsValid() const		{ return m_class_ref != nullptr; };
