@@ -25,7 +25,7 @@ namespace Jni
 
 	Class::Class( const char* class_name )
 	{
-		AcquireHandle( class_name );
+		AcquireClassReference( class_name );
 	};
 
 	void Class::Invalidate()
@@ -71,7 +71,7 @@ namespace Jni
 		return VirtualMachine::GetInstance().m_get_super_class_func.Call( GetJniReference() );
 	};
 
-	void Class::AcquireHandle( const char* class_name )
+	void Class::AcquireClassReference( const char* class_name )
 	{
 		Invalidate();
 		
@@ -83,7 +83,7 @@ namespace Jni
 		JNI_ENSURES( IsValid() );
 	};
 
-	void Class::AcquireHandle( jobject object_ref )
+	void Class::AcquireClassReference( jobject object_ref )
 	{
 		Invalidate();
 		
@@ -113,13 +113,13 @@ namespace Jni
 
 	const Class& Class::operator=( const std::string& class_name )
 	{
-		AcquireHandle( class_name.c_str() );
+		AcquireClassReference( class_name.c_str() );
 		return *this;
 	};
 
 	const Class& Class::operator=( const char* class_name )
 	{
-		AcquireHandle( class_name );
+		AcquireClassReference( class_name );
 		return *this;
 	};
 };

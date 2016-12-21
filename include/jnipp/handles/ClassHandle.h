@@ -8,7 +8,7 @@ namespace Jni
 	/// @brief	Java class handle through JNI interface.
 	class Class final
 	{
-		friend class ObjectHandle;	// Grant access to `AcquireHandle` function.
+		friend class ObjectHandle;	// Grant access to `AcquireClassReference` function.
 	public:
 		Class() = default;
 		Class( const Class& other );
@@ -50,11 +50,11 @@ namespace Jni
 		inline jclass operator * () const				{ return GetJniReference(); };
 
 	private:
-		/// @brief	Acquire the handle of class via it's name.
-		void AcquireHandle( const char* class_name );
+		/// @brief	Acquire the reference of class via its name.
+		void AcquireClassReference( const char* class_name );
 
-		/// @brief	Acquire the handle of class via handle of object.
-		void AcquireHandle( jobject object_ref );
+		/// @brief	Acquire the reference of class via reference of its object.
+		void AcquireClassReference( jobject object_ref );
 
 	private:
 		std::shared_ptr<_jclass>	m_class_ref;	// Shared JNI representation of Java class global reference.

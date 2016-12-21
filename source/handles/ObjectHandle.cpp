@@ -85,7 +85,7 @@ namespace Jni
 	void ObjectHandle::InitClassHandle() const
 	{
 		JNI_RETURN_IF( !m_object_ref || m_class_handle.IsValid() );
-		m_class_handle.AcquireHandle( m_object_ref.get() );
+		m_class_handle.AcquireClassReference( m_object_ref.get() );
 	};
 
 	void ObjectHandle::AcquireObjectRef( jobject object_ref )
