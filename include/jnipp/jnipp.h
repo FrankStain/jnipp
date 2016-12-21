@@ -63,7 +63,7 @@ namespace Marshaling {};
 // Jni++ wrap for Java functions.
 #include <jnipp/utils/FunctionCall.h>
 #include <jnipp/utils/StaticFunctionCall.h>
-#include <jnipp/handles/FunctionHandle.h>
+#include <jnipp/handles/MemberFunction.h>
 #include <jnipp/handles/StaticFunctionHandle.h>
 
 // Some crucial Jni++ types.
@@ -82,5 +82,5 @@ namespace Marshaling {};
 #include <jnipp/handles/Object.inl>
 #include <jnipp/handles/MemberField.inl>
 #include <jnipp/handles/StaticField.inl>
-#include <jnipp/handles/FunctionHandle.inl>
+#include <jnipp/handles/MemberFunction.inl>
 #include <jnipp/handles/StaticFunctionHandle.inl>
