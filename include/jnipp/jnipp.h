@@ -64,7 +64,7 @@ namespace Marshaling {};
 #include <jnipp/utils/FunctionCall.h>
 #include <jnipp/utils/StaticFunctionCall.h>
 #include <jnipp/handles/MemberFunction.h>
-#include <jnipp/handles/StaticFunctionHandle.h>
+#include <jnipp/handles/StaticFunction.h>
 
 // Some crucial Jni++ types.
 #include <jnipp/utils/types.h>
@@ -83,4 +83,4 @@ namespace Marshaling {};
 #include <jnipp/handles/MemberField.inl>
 #include <jnipp/handles/StaticField.inl>
 #include <jnipp/handles/MemberFunction.inl>
-#include <jnipp/handles/StaticFunctionHandle.inl>
+#include <jnipp/handles/StaticFunction.inl>
