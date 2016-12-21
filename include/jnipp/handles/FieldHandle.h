@@ -15,9 +15,9 @@ namespace Jni
 		FieldHandle( const FieldHandle& other );
 		FieldHandle( FieldHandle&& other );
 		FieldHandle( const std::string& class_name, const std::string& field_name );
-		FieldHandle( const ClassHandle& class_handle, const std::string& field_name );
+		FieldHandle( const Class& class_handle, const std::string& field_name );
 		FieldHandle( const char* class_name, const char* field_name );
-		FieldHandle( const ClassHandle& class_handle, const char* field_name );
+		FieldHandle( const Class& class_handle, const char* field_name );
 
 
 		/// @brief	Get the value of field from given handle to object.

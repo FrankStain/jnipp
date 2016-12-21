@@ -11,12 +11,12 @@ namespace Jni
 	public:
 		/// @brief	Constructs new object of given class and using given construction arguments.
 		template< typename... TNativeArguments >
-		static ObjectHandle NewObject( const ClassHandle& class_handle, const TNativeArguments&... arguments );
+		static ObjectHandle NewObject( const Class& class_handle, const TNativeArguments&... arguments );
 
 		ObjectHandle() = default;
 		ObjectHandle( jobject object_ref );
-		ObjectHandle( const ClassHandle& class_handle );
-		ObjectHandle( ClassHandle&& class_handle );
+		ObjectHandle( const Class& class_handle );
+		ObjectHandle( Class&& class_handle );
 		ObjectHandle( const ObjectHandle& other );
 		ObjectHandle( ObjectHandle&& other );
 
@@ -28,15 +28,15 @@ namespace Jni
 		inline const bool IsValid() const					{ return m_object_ref != nullptr; };
 
 		/// @brief	Get the handle to class of stored object.
-		inline const ClassHandle& GetClassHandle() const	{ InitClassHandle(); return m_class_handle; };
+		inline const Class& GetClassHandle() const	{ InitClassHandle(); return m_class_handle; };
 
 		/// @brief	Get the JNI representation of Java object reference.
 		inline jobject GetJniReference() const				{ return m_object_ref.get(); };
 
 
 		const ObjectHandle& operator = ( jobject object_ref );
-		const ObjectHandle& operator = ( const ClassHandle& class_handle );
-		const ObjectHandle& operator = ( ClassHandle&& class_handle );
+		const ObjectHandle& operator = ( const Class& class_handle );
+		const ObjectHandle& operator = ( Class&& class_handle );
 		const ObjectHandle& operator = ( const ObjectHandle& other );
 		const ObjectHandle& operator = ( ObjectHandle&& other );
 
@@ -57,6 +57,6 @@ namespace Jni
 
 	private:
 		std::shared_ptr<_jobject>	m_object_ref;	// Shared JNI representation of Java object global reference.
-		mutable ClassHandle			m_class_handle;	// Handle to class of stored object.
+		mutable Class			m_class_handle;	// Handle to class of stored object.
 	};
 };

@@ -6,15 +6,15 @@
 namespace Jni
 {
 	/// @brief	Java class handle through JNI interface.
-	class ClassHandle final
+	class Class final
 	{
 		friend class ObjectHandle;	// Grant access to `AcquireHandle` function.
 	public:
-		ClassHandle() = default;
-		ClassHandle( const ClassHandle& other );
-		ClassHandle( ClassHandle&& other );
-		ClassHandle( const std::string& class_name );
-		ClassHandle( const char* class_name );
+		Class() = default;
+		Class( const Class& other );
+		Class( Class&& other );
+		Class( const std::string& class_name );
+		Class( const char* class_name );
 
 
 		/// @brief	Invalidate the handle.
@@ -30,7 +30,7 @@ namespace Jni
 		const std::string GetSimpleName() const;
 
 		/// @brief	Get the handle to parent class, if available.
-		ClassHandle GetParentClassHandle() const;
+		Class GetParentClassHandle() const;
 
 		/// @brief	Check the class handle carries valid value.
 		inline const bool IsValid() const		{ return m_class_ref != nullptr; };
@@ -39,11 +39,11 @@ namespace Jni
 		inline jclass GetJniReference() const	{ return m_class_ref.get(); };
 
 
-		const ClassHandle& operator = ( jclass class_ref );
-		const ClassHandle& operator = ( const ClassHandle& other );
-		const ClassHandle& operator = ( ClassHandle&& other );
-		const ClassHandle& operator = ( const std::string& class_name );
-		const ClassHandle& operator = ( const char* class_name );
+		const Class& operator = ( jclass class_ref );
+		const Class& operator = ( const Class& other );
+		const Class& operator = ( Class&& other );
+		const Class& operator = ( const std::string& class_name );
+		const Class& operator = ( const char* class_name );
 
 		
 		inline explicit operator const bool () const	{ return IsValid(); };

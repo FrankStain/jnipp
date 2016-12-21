@@ -27,7 +27,7 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( const ClassHandle& class_handle, const std::string& field_name )
+	FieldHandle<TNativeType>::FieldHandle( const Class& class_handle, const std::string& field_name )
 		: FieldHandle( *class_handle, field_name.c_str() )
 	{
 
@@ -35,13 +35,13 @@ namespace Jni
 
 	template< typename TNativeType >
 	FieldHandle<TNativeType>::FieldHandle( const char* class_name, const char* field_name )
-		: FieldHandle( ClassHandle{ class_name }, field_name )
+		: FieldHandle( Class{ class_name }, field_name )
 	{
 
 	};
 
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( const ClassHandle& class_handle, const char* field_name )
+	FieldHandle<TNativeType>::FieldHandle( const Class& class_handle, const char* field_name )
 		: FieldHandle( *class_handle, field_name )
 	{
 

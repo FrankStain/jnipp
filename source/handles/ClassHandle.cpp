@@ -5,42 +5,42 @@
 
 namespace Jni
 {
-	ClassHandle::ClassHandle( const ClassHandle& other )
+	Class::Class( const Class& other )
 		: m_class_ref( other.m_class_ref )
 	{
 
 	};
 
-	ClassHandle::ClassHandle( ClassHandle&& other )
+	Class::Class( Class&& other )
 		: m_class_ref( std::move( other.m_class_ref ) )
 	{
 
 	};
 
-	ClassHandle::ClassHandle( const std::string& class_name )
-		: ClassHandle( class_name.c_str() )
+	Class::Class( const std::string& class_name )
+		: Class( class_name.c_str() )
 	{
 
 	};
 
-	ClassHandle::ClassHandle( const char* class_name )
+	Class::Class( const char* class_name )
 	{
 		AcquireHandle( class_name );
 	};
 
-	void ClassHandle::Invalidate()
+	void Class::Invalidate()
 	{
 		m_class_ref.reset();
 	};
 
-	const std::string ClassHandle::GetCanonicalName() const
+	const std::string Class::GetCanonicalName() const
 	{
 		JNI_RETURN_IF( !IsValid(), {} );
 		JNI_EXPECTS( VirtualMachine::IsValid() );
 		return VirtualMachine::GetInstance().m_get_canonical_name.Call( GetJniReference() );
 	};
 
-	const std::string ClassHandle::GetName() const
+	const std::string Class::GetName() const
 	{
 		JNI_RETURN_IF( !IsValid(), {} );
 		JNI_EXPECTS( VirtualMachine::IsValid() );
@@ -57,21 +57,21 @@ namespace Jni
 		return class_name;
 	};
 
-	const std::string ClassHandle::GetSimpleName() const
+	const std::string Class::GetSimpleName() const
 	{
 		JNI_RETURN_IF( !IsValid(), {} );
 		JNI_EXPECTS( VirtualMachine::IsValid() );
 		return VirtualMachine::GetInstance().m_get_simple_name.Call( GetJniReference() );
 	};
 
-	ClassHandle ClassHandle::GetParentClassHandle() const
+	Class Class::GetParentClassHandle() const
 	{
 		JNI_RETURN_IF( !IsValid(), {} );
 		JNI_EXPECTS( VirtualMachine::IsValid() );
 		return VirtualMachine::GetInstance().m_get_super_class_func.Call( GetJniReference() );
 	};
 
-	void ClassHandle::AcquireHandle( const char* class_name )
+	void Class::AcquireHandle( const char* class_name )
 	{
 		Invalidate();
 		
@@ -83,7 +83,7 @@ namespace Jni
 		JNI_ENSURES( IsValid() );
 	};
 
-	void ClassHandle::AcquireHandle( jobject object_ref )
+	void Class::AcquireHandle( jobject object_ref )
 	{
 		Invalidate();
 		
@@ -93,31 +93,31 @@ namespace Jni
 		JNI_ENSURES( IsValid() );
 	};
 
-	const ClassHandle& ClassHandle::operator=( jclass class_ref )
+	const Class& Class::operator=( jclass class_ref )
 	{
 		m_class_ref = VirtualMachine::GetInstance().GetClass( class_ref );
 		return *this;
 	};
 
-	const ClassHandle& ClassHandle::operator=( const ClassHandle& other )
+	const Class& Class::operator=( const Class& other )
 	{
 		m_class_ref = other.m_class_ref;
 		return *this;
 	};
 
-	const ClassHandle& ClassHandle::operator=( ClassHandle&& other )
+	const Class& Class::operator=( Class&& other )
 	{
 		m_class_ref = std::move( other.m_class_ref );
 		return *this;
 	};
 
-	const ClassHandle& ClassHandle::operator=( const std::string& class_name )
+	const Class& Class::operator=( const std::string& class_name )
 	{
 		AcquireHandle( class_name.c_str() );
 		return *this;
 	};
 
-	const ClassHandle& ClassHandle::operator=( const char* class_name )
+	const Class& Class::operator=( const char* class_name )
 	{
 		AcquireHandle( class_name );
 		return *this;

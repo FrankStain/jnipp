@@ -6,7 +6,7 @@
 namespace Jni
 {
 	template< typename... TNativeArguments >
-	ObjectHandle ObjectHandle::NewObject( const ClassHandle& class_handle, const TNativeArguments&... arguments )
+	ObjectHandle ObjectHandle::NewObject( const Class& class_handle, const TNativeArguments&... arguments )
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = Utils::TotalLocalFrame<TNativeArguments...>::RESULT;
 		

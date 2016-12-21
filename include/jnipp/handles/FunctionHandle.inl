@@ -27,7 +27,7 @@ namespace Jni
 	};
 	
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	FunctionHandle<TNativeReturnType, TNativeArguments...>::FunctionHandle( const ClassHandle& class_handle, const std::string& function_name )
+	FunctionHandle<TNativeReturnType, TNativeArguments...>::FunctionHandle( const Class& class_handle, const std::string& function_name )
 		: FunctionHandle( *class_handle, function_name.c_str() )
 	{
 	
@@ -35,13 +35,13 @@ namespace Jni
 	
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	FunctionHandle<TNativeReturnType, TNativeArguments...>::FunctionHandle( const char* class_name, const char* function_name )
-		: FunctionHandle( ClassHandle{ class_name }, function_name )
+		: FunctionHandle( Class{ class_name }, function_name )
 	{
 	
 	};
 	
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	FunctionHandle<TNativeReturnType, TNativeArguments...>::FunctionHandle( const ClassHandle& class_handle, const char* function_name )
+	FunctionHandle<TNativeReturnType, TNativeArguments...>::FunctionHandle( const Class& class_handle, const char* function_name )
 		: m_class_handle( class_handle )
 	{
 		JNI_EXPECTS( m_class_handle );

@@ -9,7 +9,7 @@ namespace Jni
 	/// @brief	
 	class VirtualMachine final
 	{
-		friend class ClassHandle;	// Intensively uses `GetClass` functions.
+		friend class Class;	// Intensively uses `GetClass` functions.
 	public:
 		constexpr static int32_t JNI_VERSION = JNI_VERSION_1_6;
 
@@ -70,9 +70,9 @@ namespace Jni
 	private:
 		ObjectHandle	m_class_loader;
 
-		FunctionHandle<ClassHandle, std::string>	m_load_class_func;		// `java.lang.Class java.lang.ClassLoader::loadClass( java.lang.String )`
+		FunctionHandle<Class, std::string>	m_load_class_func;		// `java.lang.Class java.lang.ClassLoader::loadClass( java.lang.String )`
 
-		FunctionHandle<ClassHandle>					m_get_super_class_func;	// `java.lang.Class java.lang.Class::getSuperClass()`
+		FunctionHandle<Class>					m_get_super_class_func;	// `java.lang.Class java.lang.Class::getSuperClass()`
 		FunctionHandle<std::string>					m_get_canonical_name;	// `java.lang.String java.lang.Class::getCanonicalName()`
 		FunctionHandle<std::string>					m_get_name;				// `java.lang.String java.lang.Class::getName()`
 		FunctionHandle<std::string>					m_get_simple_name;		// `java.lang.String java.lang.Class::getSimpleName()`

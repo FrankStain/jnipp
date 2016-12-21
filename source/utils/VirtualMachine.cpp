@@ -50,13 +50,13 @@ namespace Jni
 
 	const bool VirtualMachine::CaptureClassLoader()
 	{
-		ClassHandle loader_class{ "java/lang/ClassLoader" };
+		Class loader_class{ "java/lang/ClassLoader" };
 		JNI_RETURN_IF_E( !loader_class, false, "Failed to locate `java.lang.ClassLoader` class." );
 
 		m_load_class_func = { loader_class, "loadClass" };
 		JNI_RETURN_IF_E( !m_load_class_func, false, "Failed to locate `Class ClassLoader::findClass( String )` function." );
 
-		ClassHandle thread_class{ "java/lang/Thread" };
+		Class thread_class{ "java/lang/Thread" };
 		JNI_RETURN_IF_E( !thread_class, false, "Failed to locate `java.lang.Thread` class." );
 
 		StaticFunctionHandle<ThreadHandle> current_thread_func{ thread_class, "currentThread" };
@@ -76,7 +76,7 @@ namespace Jni
 
 	const bool VirtualMachine::AcquireClassInterface()
 	{
-		const ClassHandle class_handle{ "java/lang/Class" };
+		const Class class_handle{ "java/lang/Class" };
 		JNI_RETURN_IF_E( !class_handle, false, "Failed to locate `java.lang.Class` class." );
 
 		m_get_super_class_func = { class_handle, "getSuperclass" };

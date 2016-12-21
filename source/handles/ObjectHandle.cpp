@@ -10,13 +10,13 @@ namespace Jni
 		AcquireObjectRef( object_ref );
 	};
 
-	ObjectHandle::ObjectHandle( const ClassHandle& class_handle )
+	ObjectHandle::ObjectHandle( const Class& class_handle )
 		: m_object_ref( class_handle.m_class_ref )
 	{
 
 	};
 
-	ObjectHandle::ObjectHandle( ClassHandle&& class_handle )
+	ObjectHandle::ObjectHandle( Class&& class_handle )
 		: m_object_ref( std::move( class_handle.m_class_ref ) )
 	{
 
@@ -48,14 +48,14 @@ namespace Jni
 		return *this;
 	};
 
-	const ObjectHandle& ObjectHandle::operator=( const ClassHandle& class_handle )
+	const ObjectHandle& ObjectHandle::operator=( const Class& class_handle )
 	{
 		m_object_ref	= class_handle.m_class_ref;
 		m_class_handle.Invalidate();
 		return *this;
 	};
 
-	const ObjectHandle& ObjectHandle::operator=( ClassHandle&& class_handle )
+	const ObjectHandle& ObjectHandle::operator=( Class&& class_handle )
 	{
 		m_object_ref	= std::move( class_handle.m_class_ref );
 		m_class_handle.Invalidate();

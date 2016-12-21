@@ -14,9 +14,9 @@ namespace Jni
 		StaticFunctionHandle( const StaticFunctionHandle& other );
 		StaticFunctionHandle( StaticFunctionHandle&& other );
 		StaticFunctionHandle( const std::string& class_name, const std::string& function_name );
-		StaticFunctionHandle( const ClassHandle& class_handle, const std::string& function_name );
+		StaticFunctionHandle( const Class& class_handle, const std::string& function_name );
 		StaticFunctionHandle( const char* class_name, const char* function_name );
-		StaticFunctionHandle( const ClassHandle& class_handle, const char* function_name );
+		StaticFunctionHandle( const Class& class_handle, const char* function_name );
 
 
 		/// @brief	Call the function with given arguments.
@@ -45,7 +45,7 @@ namespace Jni
 		inline TNativeReturnType Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const;
 
 	private:
-		ClassHandle	m_class_handle;				// Handle to class owning the static method.
+		Class	m_class_handle;				// Handle to class owning the static method.
 		jmethodID	m_function_id	= nullptr;	// Id of Java static method.
 	};
 };
