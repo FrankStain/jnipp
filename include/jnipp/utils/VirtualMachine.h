@@ -9,7 +9,7 @@ namespace Jni
 	/// @brief	
 	class VirtualMachine final
 	{
-		friend class ClassHandle;	// 
+		friend class ClassHandle;	// Intensively uses `GetClass` functions.
 	public:
 		constexpr static int32_t JNI_VERSION = JNI_VERSION_1_6;
 
