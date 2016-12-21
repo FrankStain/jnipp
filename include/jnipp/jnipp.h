@@ -51,7 +51,7 @@ namespace Marshaling {};
 #include <jnipp/utils/forwards.h>
 
 // Jni++ wrap for Java classes.
-#include <jnipp/handles/ClassHandle.h>
+#include <jnipp/handles/Class.h>
 #include <jnipp/handles/ObjectHandle.h>
 #include <jnipp/marshaling/ClassHandleConvert.h>
 #include <jnipp/marshaling/ObjectHandleConvert.h>
