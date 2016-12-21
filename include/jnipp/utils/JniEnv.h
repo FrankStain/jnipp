@@ -30,7 +30,7 @@ namespace Jni
 		/// @brief	Get the value of field belongs to object using the local JNI environment.
 		template< typename TNativeType, typename TValueType, typename = EnableConvertible<TNativeType, TValueType> >
 		inline const bool GetValue(
-			const FieldHandle<TNativeType>& field_handle,
+			const MemberField<TNativeType>& field_handle,
 			const Object& object_handle,
 			TValueType& value_storage
 		) const;
@@ -42,7 +42,7 @@ namespace Jni
 		/// @brief	Set the value of field belongs to object using the local JNI environment.
 		template< typename TNativeType, typename TValueType, typename = EnableConvertible<TNativeType, TValueType> >
 		inline const bool SetValue(
-			const FieldHandle<TNativeType>& field_handle,
+			const MemberField<TNativeType>& field_handle,
 			const Object& object_handle,
 			const TValueType& value_storage
 		) const;

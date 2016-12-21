@@ -7,17 +7,17 @@ namespace Jni
 {
 	/// @brief	Handle to field of Java object.
 	template< typename TNativeType >
-	class FieldHandle final
+	class MemberField final
 	{
 		friend class JniEnv;
 	public:
-		FieldHandle() = default;
-		FieldHandle( const FieldHandle& other );
-		FieldHandle( FieldHandle&& other );
-		FieldHandle( const std::string& class_name, const std::string& field_name );
-		FieldHandle( const Class& class_handle, const std::string& field_name );
-		FieldHandle( const char* class_name, const char* field_name );
-		FieldHandle( const Class& class_handle, const char* field_name );
+		MemberField() = default;
+		MemberField( const MemberField& other );
+		MemberField( MemberField&& other );
+		MemberField( const std::string& class_name, const std::string& field_name );
+		MemberField( const Class& class_handle, const std::string& field_name );
+		MemberField( const char* class_name, const char* field_name );
+		MemberField( const Class& class_handle, const char* field_name );
 
 
 		/// @brief	Get the value of field from given handle to object.
@@ -41,8 +41,8 @@ namespace Jni
 		inline jfieldID GetFieldId() const									{ return m_field_id; };
 
 
-		inline const FieldHandle& operator = ( const FieldHandle& other )	{ m_field_id = other.m_field_id; return *this; };
-		inline const FieldHandle& operator = ( FieldHandle&& other )		{ m_field_id = std::move( other.m_field_id ); return *this; };
+		inline const MemberField& operator = ( const MemberField& other )	{ m_field_id = other.m_field_id; return *this; };
+		inline const MemberField& operator = ( MemberField&& other )		{ m_field_id = std::move( other.m_field_id ); return *this; };
 
 		
 		inline explicit operator const bool () const						{ return IsValid(); };
@@ -52,7 +52,7 @@ namespace Jni
 		using JavaType	= typename Marshaling::JniEnvFacade<TNativeType>::JavaType;
 		using Signature	= typename Marshaling::JniEnvFacade<TNativeType>::Signature;
 
-		FieldHandle( jclass class_ref, const char* field_name );
+		MemberField( jclass class_ref, const char* field_name );
 
 		
 		/// @brief	Get the value of field from given handle to object.

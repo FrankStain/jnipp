@@ -6,49 +6,49 @@
 namespace Jni
 {
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( const FieldHandle& other )
+	MemberField<TNativeType>::MemberField( const MemberField& other )
 		: m_field_id( other.m_field_id )
 	{
 
 	};
 
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( FieldHandle&& other )
+	MemberField<TNativeType>::MemberField( MemberField&& other )
 		: m_field_id( std::move( other.m_field_id ) )
 	{
 
 	};
 
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( const std::string& class_name, const std::string& field_name )
-		: FieldHandle( class_name.c_str(), field_name.c_str() )
+	MemberField<TNativeType>::MemberField( const std::string& class_name, const std::string& field_name )
+		: MemberField( class_name.c_str(), field_name.c_str() )
 	{
 
 	};
 
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( const Class& class_handle, const std::string& field_name )
-		: FieldHandle( *class_handle, field_name.c_str() )
+	MemberField<TNativeType>::MemberField( const Class& class_handle, const std::string& field_name )
+		: MemberField( *class_handle, field_name.c_str() )
 	{
 
 	};
 
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( const char* class_name, const char* field_name )
-		: FieldHandle( Class{ class_name }, field_name )
+	MemberField<TNativeType>::MemberField( const char* class_name, const char* field_name )
+		: MemberField( Class{ class_name }, field_name )
 	{
 
 	};
 
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( const Class& class_handle, const char* field_name )
-		: FieldHandle( *class_handle, field_name )
+	MemberField<TNativeType>::MemberField( const Class& class_handle, const char* field_name )
+		: MemberField( *class_handle, field_name )
 	{
 
 	};
 
 	template< typename TNativeType >
-	FieldHandle<TNativeType>::FieldHandle( jclass class_ref, const char* field_name )
+	MemberField<TNativeType>::MemberField( jclass class_ref, const char* field_name )
 	{
 		JNI_EXPECTS( class_ref != nullptr );
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
@@ -60,13 +60,13 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( const Object& object_handle, TNativeType& value_storage ) const
+	inline const bool MemberField<TNativeType>::GetValue( const Object& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( *object_handle, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( jobject object_ref, TNativeType& value_storage ) const
+	inline const bool MemberField<TNativeType>::GetValue( jobject object_ref, TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), false, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
@@ -75,13 +75,13 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( JNIEnv* local_env, const Object& object_handle, TNativeType& value_storage ) const
+	inline const bool MemberField<TNativeType>::GetValue( JNIEnv* local_env, const Object& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( local_env, *object_handle, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::GetValue( JNIEnv* local_env, jobject object_ref, TNativeType& value_storage ) const
+	inline const bool MemberField<TNativeType>::GetValue( JNIEnv* local_env, jobject object_ref, TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !IsValid(), false, "Field handle was not initialized properly." );
 		JNI_RETURN_IF_E( object_ref == nullptr, false, "Attempt to get the value of field from null object." );
@@ -96,13 +96,13 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( const Object& object_handle, const TNativeType& value_storage ) const
+	inline const bool MemberField<TNativeType>::SetValue( const Object& object_handle, const TNativeType& value_storage ) const
 	{
 		return SetValue( *object_handle, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( jobject object_ref, const TNativeType& value_storage ) const
+	inline const bool MemberField<TNativeType>::SetValue( jobject object_ref, const TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), false, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
@@ -111,13 +111,13 @@ namespace Jni
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( JNIEnv* local_env, const Object& object_handle, const TNativeType& value_storage ) const
+	inline const bool MemberField<TNativeType>::SetValue( JNIEnv* local_env, const Object& object_handle, const TNativeType& value_storage ) const
 	{
 		return SetValue( local_env, *object_handle, value_storage );
 	};
 
 	template< typename TNativeType >
-	inline const bool FieldHandle<TNativeType>::SetValue( JNIEnv* local_env, jobject object_ref, const TNativeType& value_storage ) const
+	inline const bool MemberField<TNativeType>::SetValue( JNIEnv* local_env, jobject object_ref, const TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !IsValid(), false, "Field handle was not initialized properly." );
 		JNI_RETURN_IF_E( object_ref == nullptr, false, "Attempt to set the value of field to null object." );

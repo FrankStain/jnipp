@@ -7,7 +7,7 @@ namespace Jni
 {
 	template< typename TNativeType, typename TValueType, typename >
 	inline const bool JniEnv::GetValue(
-		const FieldHandle<TNativeType>& field_handle,
+		const MemberField<TNativeType>& field_handle,
 		const Object& object_handle,
 		TValueType& value_storage
 	) const
@@ -23,7 +23,7 @@ namespace Jni
 
 	template< typename TNativeType, typename TValueType, typename >
 	inline const bool JniEnv::SetValue(
-		const FieldHandle<TNativeType>& field_handle,
+		const MemberField<TNativeType>& field_handle,
 		const Object& object_handle,
 		const TValueType& value_storage
 	) const
