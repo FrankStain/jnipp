@@ -79,7 +79,7 @@ namespace Jni
 			typename = typename std::enable_if<TrueFlags< std::is_convertible<TValueArguments, TNativeArguments>::value... >::value>::type
 		>
 		inline TNativeReturnType Call(
-			const StaticFunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
+			const StaticFunction<TNativeReturnType, TNativeArguments...>& function_handle,
 			const TValueArguments&... arguments
 		);
 

@@ -59,7 +59,7 @@ namespace Jni
 
 	template< typename TNativeReturnType, typename... TNativeArguments, typename... TValueArguments, typename >
 	inline TNativeReturnType JniEnv::Call(
-		const StaticFunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
+		const StaticFunction<TNativeReturnType, TNativeArguments...>& function_handle,
 		const TValueArguments&... arguments
 	)
 	{

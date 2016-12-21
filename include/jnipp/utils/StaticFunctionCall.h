@@ -7,7 +7,7 @@ namespace Jni
 {
 namespace Utils
 {
-	/// @brief	Java static method decorator. Used by `StaticFunctionHandle` to directly call the Java method.
+	/// @brief	Java static method decorator. Used by `StaticFunction` to directly call the Java method.
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	class StaticFunctionCall
 	{

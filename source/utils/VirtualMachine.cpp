@@ -59,7 +59,7 @@ namespace Jni
 		Class thread_class{ "java/lang/Thread" };
 		JNI_RETURN_IF_E( !thread_class, false, "Failed to locate `java.lang.Thread` class." );
 
-		StaticFunctionHandle<ThreadHandle> current_thread_func{ thread_class, "currentThread" };
+		StaticFunction<ThreadHandle> current_thread_func{ thread_class, "currentThread" };
 		JNI_RETURN_IF_E( !current_thread_func, false, "Failed to locate `Thread Thread::currentThread()` function." );
 
 		ThreadHandle current_thread{ current_thread_func.Call() };

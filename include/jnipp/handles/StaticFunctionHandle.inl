@@ -6,7 +6,7 @@
 namespace Jni
 {
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::StaticFunctionHandle( const StaticFunctionHandle& other )
+	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const StaticFunction& other )
 		: m_class_handle( other.m_class_handle )
 		, m_function_id( other.m_function_id )
 	{
@@ -14,7 +14,7 @@ namespace Jni
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::StaticFunctionHandle( StaticFunctionHandle&& other )
+	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( StaticFunction&& other )
 		: m_class_handle( std::move( other.m_class_handle ) )
 		, m_function_id( std::move( other.m_function_id ) )
 	{
@@ -22,28 +22,28 @@ namespace Jni
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::StaticFunctionHandle( const std::string& class_name, const std::string& function_name )
-		: StaticFunctionHandle( class_name.c_str(), function_name.c_str() )
+	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const std::string& class_name, const std::string& function_name )
+		: StaticFunction( class_name.c_str(), function_name.c_str() )
 	{
 
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::StaticFunctionHandle( const Class& class_handle, const std::string& function_name )
-		: StaticFunctionHandle( class_handle, function_name.c_str() )
+	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const Class& class_handle, const std::string& function_name )
+		: StaticFunction( class_handle, function_name.c_str() )
 	{
 
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::StaticFunctionHandle( const char* class_name, const char* function_name )
-		: StaticFunctionHandle( Class{ class_name }, function_name )
+	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const char* class_name, const char* function_name )
+		: StaticFunction( Class{ class_name }, function_name )
 	{
 
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::StaticFunctionHandle( const Class& class_handle, const char* function_name )
+	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const Class& class_handle, const char* function_name )
 		: m_class_handle( class_handle )
 	{
 		JNI_EXPECTS( m_class_handle );
@@ -56,7 +56,7 @@ namespace Jni
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline TNativeReturnType StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
+	inline TNativeReturnType StaticFunction<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), TNativeReturnType(), "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
@@ -65,7 +65,7 @@ namespace Jni
 	};
 	
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline TNativeReturnType StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const
+	inline TNativeReturnType StaticFunction<TNativeReturnType, TNativeArguments...>::Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const
 	{
 		JNI_RETURN_IF_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
 
@@ -73,8 +73,8 @@ namespace Jni
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline const StaticFunctionHandle<TNativeReturnType, TNativeArguments...>&
-	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::operator=( const StaticFunctionHandle& other )
+	inline const StaticFunction<TNativeReturnType, TNativeArguments...>&
+	StaticFunction<TNativeReturnType, TNativeArguments...>::operator=( const StaticFunction& other )
 	{
 		m_class_handle	= other.m_class_handle;
 		m_function_id	= other.m_function_id;
@@ -82,8 +82,8 @@ namespace Jni
 	};
 	
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline const StaticFunctionHandle<TNativeReturnType, TNativeArguments...>&
-	StaticFunctionHandle<TNativeReturnType, TNativeArguments...>::operator=( StaticFunctionHandle&& other )
+	inline const StaticFunction<TNativeReturnType, TNativeArguments...>&
+	StaticFunction<TNativeReturnType, TNativeArguments...>::operator=( StaticFunction&& other )
 	{
 		m_class_handle	= std::move( other.m_class_handle );
 		m_function_id	= std::move( other.m_function_id );
