@@ -9,7 +9,7 @@ namespace Jni
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	class MemberFunction final
 	{
-		friend class JniEnv;
+		friend class Environment;
 	public:
 		MemberFunction() = default;
 		MemberFunction( const MemberFunction& other );

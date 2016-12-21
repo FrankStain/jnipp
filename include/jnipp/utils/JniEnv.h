@@ -7,12 +7,12 @@ namespace Jni
 {
 	/**
 		@brief		JNI Environment instance wrap for thread-local environment.
-		@note		Instances of `JniEnv` may not be stored in global memory.
-		@warning	Instances of `JniEnv` may not be used across the threads.
+		@note		Instances of `Environment` may not be stored in global memory.
+		@warning	Instances of `Environment` may not be used across the threads.
 
-		`JniEnv` instance represents the thread-local environment of JNI.
+		`Environment` instance represents the thread-local environment of JNI.
 	*/
-	class JniEnv final
+	class Environment final
 	{
 	public:
 		template< typename TDesiredType, typename TGivenType >
@@ -25,7 +25,7 @@ namespace Jni
 		using TrueFlags = std::is_same< FlagsContainer<FLAGS..., true>, FlagsContainer<true, FLAGS...> >;
 
 	public:
-		JniEnv() = default;
+		Environment() = default;
 
 		/// @brief	Get the value of field belongs to object using the local JNI environment.
 		template< typename TNativeType, typename TValueType, typename = EnableConvertible<TNativeType, TValueType> >
@@ -89,11 +89,11 @@ namespace Jni
 		inline explicit operator const bool () const	{ return IsValid(); };
 
 	private:
-		JniEnv( const JniEnv& )					= delete;
-		JniEnv( JniEnv&& )						= delete;
+		Environment( const Environment& )				= delete;
+		Environment( Environment&& )					= delete;
 
-		JniEnv& operator = ( const JniEnv& )	= delete;
-		JniEnv& operator = ( JniEnv&& )			= delete;
+		Environment& operator = ( const Environment& )	= delete;
+		Environment& operator = ( Environment&& )		= delete;
 
 	private:
 		JNIEnv*	m_local_env	= VirtualMachine::GetLocalEnvironment();

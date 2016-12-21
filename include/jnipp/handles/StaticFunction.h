@@ -9,7 +9,7 @@ namespace Jni
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	class StaticFunction final
 	{
-		friend class JniEnv;
+		friend class Environment;
 	public:
 		StaticFunction() = default;
 		StaticFunction( const StaticFunction& other );

@@ -25,7 +25,7 @@ namespace Jni
 		/// @brief	Register native handlers for list of Java classes via given list of binding tables.
 		static const bool RegisterClassNatives( std::initializer_list<NativeBindingTable> bindings );
 
-		/// @brief	Get the `JniEnv` instance for current thread.
+		/// @brief	Get the `Environment` instance for current thread.
 		static JNIEnv* GetLocalEnvironment();
 
 		/// @brief	Get the global `JavaVM` instance.
@@ -61,7 +61,7 @@ namespace Jni
 		
 		Utils::Mutex		m_classes_mutex;				// Synchronization mutex for safe multi-thread access to class references.
 		JavaVM*				m_jvm				= nullptr;	// Instance of Java virtual machine.
-		JNIEnv*				m_main_env			= nullptr;	// Instance of JniEnv for the main thread.
+		JNIEnv*				m_main_env			= nullptr;	// Instance of Environment for the main thread.
 		int64_t				m_main_thread_id	= 0;		// TID of main thread, where the initialization was invoked from.
 		int64_t				m_detach_key		= 0;		// ID of thread-local key, which stores the local `JNIEnv` instance.
 

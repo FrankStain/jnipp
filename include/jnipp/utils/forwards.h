@@ -5,6 +5,6 @@
 
 namespace Jni
 {
-	class JniEnv;
+	class Environment;
 	class VirtualMachine;
 };

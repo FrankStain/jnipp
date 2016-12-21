@@ -9,7 +9,7 @@ namespace Jni
 	template< typename TNativeType >
 	class StaticField final
 	{
-		friend class JniEnv;
+		friend class Environment;
 	public:
 		StaticField() = default;
 		StaticField( const StaticField& other );

@@ -9,7 +9,7 @@ namespace Jni
 	template< typename TNativeType >
 	class MemberField final
 	{
-		friend class JniEnv;
+		friend class Environment;
 	public:
 		MemberField() = default;
 		MemberField( const MemberField& other );
