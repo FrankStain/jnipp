@@ -12,7 +12,7 @@ namespace Jni
 		
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
-		const FunctionHandle<void, TNativeArguments...> construction_func{ class_handle, "<init>" };
+		const MemberFunction<void, TNativeArguments...> construction_func{ class_handle, "<init>" };
 		JNI_RETURN_IF_E(
 			!construction_func,
 			{},

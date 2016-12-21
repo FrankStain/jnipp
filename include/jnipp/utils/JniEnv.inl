@@ -39,7 +39,7 @@ namespace Jni
 
 	template< typename TNativeReturnType, typename... TNativeArguments, typename... TValueArguments, typename >
 	inline TNativeReturnType JniEnv::Call(
-		const FunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
+		const MemberFunction<TNativeReturnType, TNativeArguments...>& function_handle,
 		const Object& object_handle,
 		const TValueArguments&... arguments
 	)
@@ -49,7 +49,7 @@ namespace Jni
 
 	template< typename TNativeReturnType, typename... TNativeArguments, typename... TValueArguments, typename >
 	inline TNativeReturnType JniEnv::CallNonVirtual(
-		const FunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
+		const MemberFunction<TNativeReturnType, TNativeArguments...>& function_handle,
 		const Object& object_handle,
 		const TValueArguments&... arguments
 	)

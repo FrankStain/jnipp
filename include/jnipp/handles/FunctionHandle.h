@@ -5,19 +5,19 @@
 
 namespace Jni
 {
-	/// @brief	Handle to member-function (method) of Java object.
+	/// @brief	Handle of arbitrary Java member function.
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	class FunctionHandle final
+	class MemberFunction final
 	{
 		friend class JniEnv;
 	public:
-		FunctionHandle() = default;
-		FunctionHandle( const FunctionHandle& other );
-		FunctionHandle( FunctionHandle&& other );
-		FunctionHandle( const std::string& class_name, const std::string& function_name );
-		FunctionHandle( const Class& class_handle, const std::string& function_name );
-		FunctionHandle( const char* class_name, const char* function_name );
-		FunctionHandle( const Class& class_handle, const char* function_name );
+		MemberFunction() = default;
+		MemberFunction( const MemberFunction& other );
+		MemberFunction( MemberFunction&& other );
+		MemberFunction( const std::string& class_name, const std::string& function_name );
+		MemberFunction( const Class& class_handle, const std::string& function_name );
+		MemberFunction( const char* class_name, const char* function_name );
+		MemberFunction( const Class& class_handle, const char* function_name );
 
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
@@ -43,8 +43,8 @@ namespace Jni
 		inline const char* GetSignature() const									{ return Signature::GetString(); };
 
 
-		inline const FunctionHandle& operator = ( const FunctionHandle& other )	{ m_function_id = other.m_function_id; return *this; };
-		inline const FunctionHandle& operator = ( FunctionHandle&& other )		{ m_function_id = std::move( other.m_function_id ); return *this; };
+		inline const MemberFunction& operator = ( const MemberFunction& other )	{ m_function_id = other.m_function_id; return *this; };
+		inline const MemberFunction& operator = ( MemberFunction&& other )		{ m_function_id = std::move( other.m_function_id ); return *this; };
 
 
 		inline explicit operator const bool () const							{ return IsValid(); };
@@ -75,7 +75,7 @@ namespace Jni
 		) const;
 
 	private:
-		Class	m_class_handle;				// Handle to class owning the static method.
+		Class		m_class_handle;				// Handle to class owning the static method.
 		jmethodID	m_function_id	= nullptr;	// Id of Java object method.
 	};
 };

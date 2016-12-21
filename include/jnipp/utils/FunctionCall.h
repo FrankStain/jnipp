@@ -7,7 +7,7 @@ namespace Jni
 {
 namespace Utils
 {
-	/// @brief	Java object method decorator. Used by `FunctionHandle` to directly call the Java method.
+	/// @brief	Java object method decorator. Used by `MemberFunction` to directly call the Java method.
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	class FunctionCall
 	{

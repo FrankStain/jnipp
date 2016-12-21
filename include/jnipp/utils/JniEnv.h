@@ -57,7 +57,7 @@ namespace Jni
 			typename = typename std::enable_if< TrueFlags< std::is_convertible<TValueArguments, TNativeArguments>::value... >::value >::type
 		>
 		inline TNativeReturnType Call(
-			const FunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
+			const MemberFunction<TNativeReturnType, TNativeArguments...>& function_handle,
 			const Object& object_handle,
 			const TValueArguments&... arguments
 		);
@@ -68,7 +68,7 @@ namespace Jni
 			typename = typename std::enable_if<TrueFlags< std::is_convertible<TValueArguments, TNativeArguments>::value... >::value>::type
 		>
 		inline TNativeReturnType CallNonVirtual(
-			const FunctionHandle<TNativeReturnType, TNativeArguments...>& function_handle,
+			const MemberFunction<TNativeReturnType, TNativeArguments...>& function_handle,
 			const Object& object_handle,
 			const TValueArguments&... arguments
 		);

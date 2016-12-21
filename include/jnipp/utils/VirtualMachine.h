@@ -70,11 +70,11 @@ namespace Jni
 	private:
 		Object	m_class_loader;
 
-		FunctionHandle<Class, std::string>	m_load_class_func;		// `java.lang.Class java.lang.ClassLoader::loadClass( java.lang.String )`
+		MemberFunction<Class, std::string>	m_load_class_func;		// `java.lang.Class java.lang.ClassLoader::loadClass( java.lang.String )`
 
-		FunctionHandle<Class>				m_get_super_class_func;	// `java.lang.Class java.lang.Class::getSuperClass()`
-		FunctionHandle<std::string>			m_get_canonical_name;	// `java.lang.String java.lang.Class::getCanonicalName()`
-		FunctionHandle<std::string>			m_get_name;				// `java.lang.String java.lang.Class::getName()`
-		FunctionHandle<std::string>			m_get_simple_name;		// `java.lang.String java.lang.Class::getSimpleName()`
+		MemberFunction<Class>				m_get_super_class_func;	// `java.lang.Class java.lang.Class::getSuperClass()`
+		MemberFunction<std::string>			m_get_canonical_name;	// `java.lang.String java.lang.Class::getCanonicalName()`
+		MemberFunction<std::string>			m_get_name;				// `java.lang.String java.lang.Class::getName()`
+		MemberFunction<std::string>			m_get_simple_name;		// `java.lang.String java.lang.Class::getSimpleName()`
 	};
 };
