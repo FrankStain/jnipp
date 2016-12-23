@@ -69,7 +69,7 @@ namespace Jni
 	{
 		JNI_RETURN_IF_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
 
-		return CallDecorator{ local_env, *m_class_handle, m_function_id }.Call( arguments... );
+		return FunctionInvocation{ local_env, *m_class_handle, m_function_id }.Call( arguments... );
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
