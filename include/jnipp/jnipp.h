@@ -61,7 +61,7 @@ namespace Marshaling {};
 #include <jnipp/handles/StaticField.h>
 
 // Jni++ wrap for Java functions.
-#include <jnipp/utils/FunctionCall.h>
+#include <jnipp/utils/MemberFunctionInvocation.h>
 #include <jnipp/utils/StaticFunctionCall.h>
 #include <jnipp/handles/MemberFunction.h>
 #include <jnipp/handles/StaticFunction.h>
@@ -77,7 +77,7 @@ namespace Marshaling {};
 #include <jnipp/utils/Environment.inl>
 #include <jnipp/marshaling/TypeConvert.FromJava.inl>
 #include <jnipp/marshaling/TypeConvert.ToJava.inl>
-#include <jnipp/utils/FunctionCall.inl>
+#include <jnipp/utils/MemberFunctionInvocation.inl>
 #include <jnipp/utils/StaticFunctionCall.inl>
 #include <jnipp/handles/Object.inl>
 #include <jnipp/handles/MemberField.inl>
