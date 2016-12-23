@@ -7,12 +7,12 @@ namespace Jni
 {
 namespace Utils
 {
-	/// @brief	Java static method decorator. Used by `StaticFunction` to directly call the Java method.
+	/// @brief	Invocation of Java static function. Directly used by `MemberFunction` to invoke the Java code.
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	class StaticFunctionCall
+	class StaticFunctionInvocation
 	{
 	public:
-		inline StaticFunctionCall( JNIEnv* local_env, jclass class_ref, jmethodID function_id );
+		inline StaticFunctionInvocation( JNIEnv* local_env, jclass class_ref, jmethodID function_id );
 
 		/// @brief	Call the Java method on given Java class with given function arguments.
 		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;
@@ -29,12 +29,12 @@ namespace Utils
 		jmethodID	m_function_id	= 0;		// Id of function.
 	};
 
-	/// @brief	Private specialization of Java static method decorator for case of `void` call result.
+	/// @brief	Invocation of Java static function with `void` result type. Directly used by `MemberFunction` to invoke the Java code.
 	template< typename... TNativeArguments >
-	class StaticFunctionCall<void, TNativeArguments...>
+	class StaticFunctionInvocation<void, TNativeArguments...>
 	{
 	public:
-		inline StaticFunctionCall( JNIEnv* local_env, jclass class_ref, jmethodID function_id );
+		inline StaticFunctionInvocation( JNIEnv* local_env, jclass class_ref, jmethodID function_id );
 
 		/// @brief	Call the Java method on given Java class with given function arguments.
 		inline void Call( const TNativeArguments&... arguments ) const;

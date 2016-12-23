@@ -43,7 +43,7 @@ namespace Jni
 
 	private:
 		using Signature				= FunctionSignature< Marshaling::TypeSignature<TNativeReturnType>, Marshaling::TypeSignature<TNativeArguments>... >;
-		using FunctionInvocation	= Utils::StaticFunctionCall<TNativeReturnType, TNativeArguments...>;
+		using FunctionInvocation	= Utils::StaticFunctionInvocation<TNativeReturnType, TNativeArguments...>;
 
 		/// @brief	Call the function with given arguments.
 		inline TNativeReturnType Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const;

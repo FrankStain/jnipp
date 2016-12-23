@@ -8,7 +8,7 @@ namespace Jni
 namespace Utils
 {
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline StaticFunctionCall<TNativeReturnType, TNativeArguments...>::StaticFunctionCall( JNIEnv* local_env, jclass class_ref, jmethodID function_id )
+	inline StaticFunctionInvocation<TNativeReturnType, TNativeArguments...>::StaticFunctionInvocation( JNIEnv* local_env, jclass class_ref, jmethodID function_id )
 		: m_local_env( local_env )
 		, m_class_ref( class_ref )
 		, m_function_id( function_id )
@@ -18,12 +18,17 @@ namespace Utils
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline TNativeReturnType StaticFunctionCall<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
+	inline TNativeReturnType StaticFunctionInvocation<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeReturnType, TNativeArguments...>::RESULT;
 		
 		JNI_RETURN_IF_E( m_local_env == nullptr, {}, "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
-		JNI_RETURN_IF_E( LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), {}, "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
+		JNI_RETURN_IF_E(
+			LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ),
+			{},
+			"Failed to push JVM local frame with size %d.",
+			LOCAL_FRAME_SIZE
+		);
 
 		auto function_result = (JavaType)(m_local_env->*FUNCTION_HANDLER)( m_class_ref, m_function_id, Jni::Marshaling::ToJava( arguments )... );
 
@@ -36,7 +41,7 @@ namespace Utils
 	};
 
 	template< typename... TNativeArguments >
-	inline StaticFunctionCall<void, TNativeArguments...>::StaticFunctionCall( JNIEnv* local_env, jclass class_ref, jmethodID function_id )
+	inline StaticFunctionInvocation<void, TNativeArguments...>::StaticFunctionInvocation( JNIEnv* local_env, jclass class_ref, jmethodID function_id )
 		: m_local_env( local_env )
 		, m_class_ref( class_ref )
 		, m_function_id( function_id )
@@ -46,12 +51,17 @@ namespace Utils
 	};
 
 	template< typename... TNativeArguments >
-	inline void StaticFunctionCall<void, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
+	inline void StaticFunctionInvocation<void, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeArguments...>::RESULT;
 		
 		JNI_RETURN_IF_E( m_local_env == nullptr, , "%s:%d - Attempt to call function while local JNI environment not initialized.", __func__, __LINE__ );
-		JNI_RETURN_IF_E( LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ), , "Failed to push JVM local frame with size %d.", LOCAL_FRAME_SIZE );
+		JNI_RETURN_IF_E(
+			LOCAL_FRAME_SIZE && ( m_local_env->PushLocalFrame( LOCAL_FRAME_SIZE ) != JNI_OK ),
+			,
+			"Failed to push JVM local frame with size %d.",
+			LOCAL_FRAME_SIZE
+		);
 
 		(m_local_env->*FUNCTION_HANDLER)( m_class_ref, m_function_id, Jni::Marshaling::ToJava( arguments )... );
 
