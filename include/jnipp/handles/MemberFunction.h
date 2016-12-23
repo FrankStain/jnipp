@@ -51,8 +51,8 @@ namespace Jni
 		inline jmethodID operator * () const									{ return GetFunctionId(); };
 
 	private:
-		using Signature		= FunctionSignature< Marshaling::TypeSignature<TNativeReturnType>, Marshaling::TypeSignature<TNativeArguments>... >;
-		using CallDecorator	= Utils::MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>;
+		using Signature				= FunctionSignature< Marshaling::TypeSignature<TNativeReturnType>, Marshaling::TypeSignature<TNativeArguments>... >;
+		using FunctionInvocation	= Utils::MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType Call( JNIEnv* local_env, const Object& object_handle, const TNativeArguments&... arguments ) const;

@@ -91,7 +91,7 @@ namespace Jni
 		JNI_RETURN_IF_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
 		JNI_RETURN_IF_E( object_ref == nullptr, TNativeReturnType(), "Attempt to call member function of null object." );
 
-		return CallDecorator{ local_env, object_ref, m_function_id }.Call( arguments... );
+		return FunctionInvocation{ local_env, object_ref, m_function_id }.Call( arguments... );
 	};
 		
 	template< typename TNativeReturnType, typename... TNativeArguments >
@@ -135,6 +135,6 @@ namespace Jni
 		JNI_RETURN_IF_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
 		JNI_RETURN_IF_E( object_ref == nullptr, TNativeReturnType(), "Attempt to call member function of null object." );
 
-		return CallDecorator{ local_env, object_ref, m_function_id }.CallNonVirtual( *m_class_handle, arguments... );
+		return FunctionInvocation{ local_env, object_ref, m_function_id }.CallNonVirtual( *m_class_handle, arguments... );
 	};
 };
