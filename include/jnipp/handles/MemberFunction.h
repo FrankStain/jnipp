@@ -52,7 +52,7 @@ namespace Jni
 
 	private:
 		using Signature		= FunctionSignature< Marshaling::TypeSignature<TNativeReturnType>, Marshaling::TypeSignature<TNativeArguments>... >;
-		using CallDecorator	= Utils::FunctionCall<TNativeReturnType, TNativeArguments...>;
+		using CallDecorator	= Utils::MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>;
 
 		/// @brief	Call the function with given arguments for given Java object and return result.
 		inline TNativeReturnType Call( JNIEnv* local_env, const Object& object_handle, const TNativeArguments&... arguments ) const;

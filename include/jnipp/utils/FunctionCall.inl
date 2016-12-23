@@ -35,7 +35,7 @@ namespace Utils
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline FunctionCall<TNativeReturnType, TNativeArguments...>::FunctionCall( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
+	inline MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>::MemberFunctionInvocation( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
 		: m_local_env( local_env )
 		, m_function_id( function_id )
 		, m_object_ref( object_ref )
@@ -45,7 +45,7 @@ namespace Utils
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline TNativeReturnType FunctionCall<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
+	inline TNativeReturnType MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeReturnType, TNativeArguments...>::RESULT;
 
@@ -67,7 +67,7 @@ namespace Utils
 	};
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	inline TNativeReturnType FunctionCall<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
+	inline TNativeReturnType MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
 		jclass class_ref,
 		const TNativeArguments&... arguments
 	) const
@@ -99,7 +99,7 @@ namespace Utils
 	};
 
 	template< typename... TNativeArguments >
-	inline FunctionCall<void, TNativeArguments...>::FunctionCall( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
+	inline MemberFunctionInvocation<void, TNativeArguments...>::MemberFunctionInvocation( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
 		: m_local_env( local_env )
 		, m_function_id( function_id )
 		, m_object_ref( object_ref )
@@ -109,7 +109,7 @@ namespace Utils
 	};
 
 	template< typename... TNativeArguments >
-	inline void FunctionCall<void, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
+	inline void MemberFunctionInvocation<void, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = TotalLocalFrame<TNativeArguments...>::RESULT;
 
@@ -128,7 +128,7 @@ namespace Utils
 	};
 
 	template< typename... TNativeArguments >
-	inline void FunctionCall<void, TNativeArguments...>::CallNonVirtual(
+	inline void MemberFunctionInvocation<void, TNativeArguments...>::CallNonVirtual(
 		jclass class_ref,
 		const TNativeArguments&... arguments
 	) const

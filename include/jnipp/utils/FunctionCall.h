@@ -7,12 +7,12 @@ namespace Jni
 {
 namespace Utils
 {
-	/// @brief	Java object method decorator. Used by `MemberFunction` to directly call the Java method.
+	/// @brief	Invocation of Java member-function. Directly used by `MemberFunction` to invoke the Java code.
 	template< typename TNativeReturnType, typename... TNativeArguments >
-	class FunctionCall
+	class MemberFunctionInvocation
 	{
 	public:
-		inline FunctionCall( JNIEnv* local_env, jobject object_ref, jmethodID function_id );
+		inline MemberFunctionInvocation( JNIEnv* local_env, jobject object_ref, jmethodID function_id );
 
 		/// @brief	Call the Java method on given Java object with given function arguments.
 		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;
@@ -33,12 +33,12 @@ namespace Utils
 		jobject		m_object_ref	= nullptr;	// Reference to Java object.
 	};
 
-	/// @brief	Private specialization of Java object method decorator for case of `void` call result.
+	/// @brief	Invocation of Java member-function with `void` result type. Directly used by `MemberFunction` to invoke the Java code.
 	template< typename... TNativeArguments >
-	class FunctionCall<void, TNativeArguments...>
+	class MemberFunctionInvocation<void, TNativeArguments...>
 	{
 	public:
-		inline FunctionCall( JNIEnv* local_env, jobject object_ref, jmethodID function_id );
+		inline MemberFunctionInvocation( JNIEnv* local_env, jobject object_ref, jmethodID function_id );
 
 		/// @brief	Call the Java method on given Java object with given function arguments.
 		inline void Call( const TNativeArguments&... arguments ) const;
