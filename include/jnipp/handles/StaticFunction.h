@@ -42,7 +42,7 @@ namespace Jni
 		inline jmethodID operator * () const			{ return GetFunctionId(); };
 
 	private:
-		using Signature		= FunctionSignature< Marshaling::TypeSignature<TNativeReturnType>, Marshaling::TypeSignature<TNativeArguments>... >;
+		using Signature				= FunctionSignature< Marshaling::TypeSignature<TNativeReturnType>, Marshaling::TypeSignature<TNativeArguments>... >;
 		using FunctionInvocation	= Utils::StaticFunctionCall<TNativeReturnType, TNativeArguments...>;
 
 		/// @brief	Call the function with given arguments.
