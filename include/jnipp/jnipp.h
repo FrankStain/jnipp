@@ -24,8 +24,10 @@ namespace Marshaling {};
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <deque>
 #include <list>
 #include <set>
+#include <map>
 #include <unordered_map>
 #include <algorithm>
 #include <iterator>
