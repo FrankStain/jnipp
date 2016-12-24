@@ -159,7 +159,7 @@ namespace Marshaling
 	template< typename TCollectedType, typename TElementAllocator >
 	struct JavaTypeInfo< std::vector<TCollectedType, TElementAllocator> > final
 	{
-		/// @brief	Java array type.
+		/// @brief	Java `ArrayList` type.
 		using Type		= jobject;
 	};
 
@@ -167,7 +167,7 @@ namespace Marshaling
 	template< typename TCollectedType, typename TElementAllocator >
 	struct JavaTypeInfo< std::deque<TCollectedType, TElementAllocator> > final
 	{
-		/// @brief	Java array type.
+		/// @brief	Java `Deque` type.
 		using Type		= jobject;
 	};
 
