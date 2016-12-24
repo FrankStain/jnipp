@@ -154,5 +154,53 @@ namespace Marshaling
 		/// @brief	Java `long` type.
 		using Type		= jlong;
 	};
+
+	/// @brief	Translation of `std::vector` type.
+	template< typename TCollectedType, typename TElementAllocator >
+	struct JavaTypeInfo< std::vector<TCollectedType, TElementAllocator> > final
+	{
+		/// @brief	Java array type.
+		using Type		= jobject;
+	};
+
+	/// @brief	Translation of `std::vector` type.
+	template< typename TCollectedType, typename TElementAllocator >
+	struct JavaTypeInfo< std::deque<TCollectedType, TElementAllocator> > final
+	{
+		/// @brief	Java array type.
+		using Type		= jobject;
+	};
+
+	/// @brief	Translation of `std::list` type.
+	template< typename TCollectedType, typename TElementAllocator >
+	struct JavaTypeInfo< std::list<TCollectedType, TElementAllocator> > final
+	{
+		/// @brief	Java `List` type.
+		using Type		= jobject;
+	};
+
+	/// @brief	Translation of `std::set` type.
+	template< typename TCollectedType, typename TElementAllocator, typename TElementComparator >
+	struct JavaTypeInfo< std::set<TCollectedType, TElementComparator, TElementAllocator> > final
+	{
+		/// @brief	Java `Set` type.
+		using Type		= jobject;
+	};
+
+	/// @brief	Translation of `std::map` type.
+	template< typename TKeyType, typename TCollectedType, typename TElementAllocator, typename TElementComparator >
+	struct JavaTypeInfo< std::map<TKeyType, TCollectedType, TElementComparator, TElementAllocator> > final
+	{
+		/// @brief	Java `TreeMap` type.
+		using Type		= jobject;
+	};
+
+	/// @brief	Translation of `std::unordered_map` type.
+	template< typename TKeyType, typename TCollectedType, typename TElementAllocator, typename TElementComparator, typename TElementHasher >
+	struct JavaTypeInfo< std::unordered_map<TKeyType, TCollectedType, TElementHasher, TElementComparator, TElementAllocator> > final
+	{
+		/// @brief	Java `HashMap` type.
+		using Type		= jobject;
+	};
 };
 };
