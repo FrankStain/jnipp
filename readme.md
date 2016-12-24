@@ -1,7 +1,7 @@
 ﻿Jni++
 ============
 
-**Jni++** is designed to be used in projects for Android© OS.
+**Jni++** is designed to be used in projects for Android OS.
 
 **Jni++** shows how the JNI could looks like if it was written using C++11.
 
