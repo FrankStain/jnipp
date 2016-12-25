@@ -69,7 +69,7 @@ namespace Marshaling {};
 #include <jnipp/handles/StaticFunction.h>
 
 // Some crucial Jni++ types.
-#include <jnipp/utils/types.h>
+#include <jnipp/utils/NativeFunction.h>
 
 // Jni++ major utility - virtual machine wrap.
 #include <jnipp/utils/VirtualMachine.h>
