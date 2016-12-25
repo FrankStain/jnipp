@@ -3,4 +3,4 @@
 #pragma once
 
 
-// @TODO: Macros here plz.
+#define JNI_NATIVE_HANDLER( NAME, FUNC )	Jni::Utils::NativeFunctionBuilder<decltype( FUNC )>::GetNativeFunction<FUNC>( NAME )

@@ -35,6 +35,7 @@ namespace Jni
 			);
 		};
 
+		/// @brief	Regular const-expression constructor.
 		constexpr NativeFunction( void* address, const char* signature, const char* name )
 			: address( address )
 			, signature( signature )
@@ -59,54 +60,4 @@ namespace Jni
 		const char*								class_name;	// Name of Java class.
 		std::initializer_list<NativeFunction>	natives;	// List of native handlers.
 	};
-
-namespace Utils
-{
-	template< typename TSenderType, typename TNativeReturnType, typename... TNativeArgumentTypes >
-	struct NativeFunctionWrapper final
-	{
-		/// @brief	The native function wrap, which will convert the arguments for origin native function.
-		template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... ) >
-		static Jni::Marshaling::JavaType<TNativeReturnType> Wrap( JNIEnv* local_env, TSenderType sender, Jni::Marshaling::JavaType<TNativeArgumentTypes>... arguments );
-	};
-
-	template< typename TSenderType, typename... TNativeArgumentTypes >
-	struct NativeFunctionWrapper<TSenderType, void, TNativeArgumentTypes...> final
-	{
-		/// @brief	The native function wrap, which will convert the arguments for origin native function.
-		template< void (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... ) >
-		static void Wrap( JNIEnv* local_env, TSenderType sender, Jni::Marshaling::JavaType<TNativeArgumentTypes>... arguments );
-	};
-
-	template< typename >
-	struct NativeFunctionBuilder;
-	
-	template< typename TSenderType, typename TNativeReturnType, typename... TNativeArgumentTypes >
-	struct NativeFunctionBuilder<TNativeReturnType (*)( JNIEnv*, TSenderType, TNativeArgumentTypes... )> final
-	{
-		static_assert(
-			std::is_same<jobject, TSenderType>::value || std::is_same<jclass, TSenderType>::value,
-			"The function handler must be `jobject` or `jclass`."
-		);
-
-		/// @brief	Valid JNI function signature for given function pointer.
-		using Signature = FunctionSignature<Jni::Marshaling::TypeSignature<TNativeReturnType>, Jni::Marshaling::TypeSignature<TNativeArgumentTypes>...>;
-
-		/// @brief	Wrapper for given native function.
-		using Wrapper = NativeFunctionWrapper<TSenderType, TNativeReturnType, TNativeArgumentTypes...>;
-
-		/// @brief	
-		template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, TNativeArgumentTypes... ) >
-		static inline NativeFunction GetNativeFunction( const char* function_name )
-		{
-			return {
-				reinterpret_cast<void*>( Wrapper::template Wrap<NATIVE_FUNCTION> ),
-				Signature::GetString(),
-				function_name
-			};
-		};
-	};
 };
-};
-
-#define JNI_NATIVE_HANDLER( FUNC, NAME )	Jni::Utils::NativeFunctionBuilder<decltype( FUNC )>::GetNativeFunction<FUNC>( NAME )

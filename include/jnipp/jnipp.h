@@ -70,6 +70,8 @@ namespace Marshaling {};
 
 // Some crucial Jni++ types.
 #include <jnipp/utils/NativeFunction.h>
+#include <jnipp/utils/NativeFunction.utils.h>
+#include <jnipp/utils/NativeFunction.macros.h>
 
 // Jni++ major utility - virtual machine wrap.
 #include <jnipp/utils/VirtualMachine.h>
@@ -77,6 +79,7 @@ namespace Marshaling {};
 
 // Deferred implementation of Jni++ functionality.
 #include <jnipp/utils/Environment.inl>
+#include <jnipp/utils/NativeFunction.utils.inl>
 #include <jnipp/marshaling/TypeConvert.FromJava.inl>
 #include <jnipp/marshaling/TypeConvert.ToJava.inl>
 #include <jnipp/utils/MemberFunctionInvocation.inl>
