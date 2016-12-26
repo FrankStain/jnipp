@@ -8,6 +8,10 @@ namespace Jni
 	/**
 		@brief	Facade for native binding.
 		@note	This type is designed to be brace-initialized.
+
+		Instance of `NativeFunction` can be gained via two different ways.
+		1 - Direct 'Brace initialization' using template constructor. Any plain native handler may be registered this way, or if you need the JNI types and values directly.
+		2 - Construction of wrapped native handler using `JNI_NATIVE_HANDLER` macro. Use this way if you prefer to use only native C++ types and automatic type translation.
 	*/
 	struct NativeFunction final
 	{

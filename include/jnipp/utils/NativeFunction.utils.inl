@@ -36,7 +36,7 @@ namespace Utils
 	inline NativeFunction NativeFunctionBuilder<TNativeReturnType (*)( JNIEnv*, TSenderType, TNativeArgumentTypes... )>::GetNativeFunction( const char* function_name )
 	{
 		return {
-			reinterpret_cast<void*>( Wrapper::template Wrap<NATIVE_FUNCTION> ),
+			reinterpret_cast<void*>( &Wrapper::template Wrap<NATIVE_FUNCTION> ),
 			Signature::GetString(),
 			function_name
 		};
