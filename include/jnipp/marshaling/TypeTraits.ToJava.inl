@@ -7,10 +7,6 @@ namespace Jni
 {
 namespace Marshaling
 {
-	/// @brief	Common specification of type translation traits.
-	template< typename TNativeType >
-	struct TypeTraits;
-
-
+	
 };
 };
