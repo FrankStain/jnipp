@@ -5,6 +5,8 @@
 
 namespace Jni
 {
+namespace Utils
+{
 	template< typename TSenderType, typename TNativeReturnType, typename... TNativeArgumentTypes >
 	template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... ) >
 	Jni::Marshaling::JavaType<TNativeReturnType> NativeFunctionWrapper<TSenderType, TNativeReturnType, TNativeArgumentTypes...>::Wrap(
@@ -13,7 +15,9 @@ namespace Jni
 		Jni::Marshaling::JavaType<TNativeArgumentTypes>... arguments
 	)
 	{
-		return Jni::Marshaling::ToJava<TNativeReturnType>( NATIVE_FUNCTION( local_env, sender, Jni::Marshaling::FromJava<TNativeArgumentTypes>( arguments )... ) );
+		return (Jni::Marshaling::JavaType<TNativeReturnType>)Jni::Marshaling::ToJava<TNativeReturnType>(
+			NATIVE_FUNCTION( local_env, sender, Jni::Marshaling::FromJava<TNativeArgumentTypes>( arguments )... )
+		);
 	};
 
 	template< typename TSenderType, typename... TNativeArgumentTypes >
@@ -37,4 +41,5 @@ namespace Jni
 			function_name
 		};
 	};
+};
 };
