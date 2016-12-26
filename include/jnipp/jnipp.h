@@ -44,6 +44,8 @@ namespace Marshaling {};
 #include <jnipp/utils/StaticString.operations.h>
 
 // Jni++ type marshaling.
+#include <jnipp/marshaling/EnvironmentTraits.h>
+#include <jnipp/marshaling/TypeTraits.h>
 #include <jnipp/marshaling/NativeType.h>
 #include <jnipp/marshaling/JavaType.h>
 #include <jnipp/marshaling/TypeConvert.h>
@@ -80,12 +82,14 @@ namespace Marshaling {};
 // Deferred implementation of Jni++ functionality.
 #include <jnipp/utils/Environment.inl>
 #include <jnipp/utils/NativeFunction.utils.inl>
-#include <jnipp/marshaling/TypeConvert.FromJava.inl>
-#include <jnipp/marshaling/TypeConvert.ToJava.inl>
-#include <jnipp/utils/MemberFunctionInvocation.inl>
-#include <jnipp/utils/StaticFunctionInvocation.inl>
 #include <jnipp/handles/Object.inl>
 #include <jnipp/handles/MemberField.inl>
 #include <jnipp/handles/StaticField.inl>
 #include <jnipp/handles/MemberFunction.inl>
 #include <jnipp/handles/StaticFunction.inl>
+#include <jnipp/utils/MemberFunctionInvocation.inl>
+#include <jnipp/utils/StaticFunctionInvocation.inl>
+#include <jnipp/marshaling/EnvironmentTraits.inl>
+#include <jnipp/marshaling/TypeTraits.inl>
+#include <jnipp/marshaling/TypeConvert.FromJava.inl>
+#include <jnipp/marshaling/TypeConvert.ToJava.inl>
