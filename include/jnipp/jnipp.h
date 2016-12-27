@@ -14,6 +14,9 @@ namespace Utils {};
 
 /// @brief	Type marshaling for Jni++.
 namespace Marshaling {};
+
+/// @brief	Regular Java classes from Android SDK.
+namespace Android {};
 };
 
 
@@ -44,21 +47,19 @@ namespace Marshaling {};
 #include <jnipp/utils/StaticString.operations.h>
 
 // Jni++ type marshaling.
+#include <jnipp/marshaling/JavaTypeSignature.h>
 #include <jnipp/marshaling/EnvironmentTraits.h>
 #include <jnipp/marshaling/TypeTraits.h>
-#include <jnipp/marshaling/NativeType.h>
-#include <jnipp/marshaling/JavaType.h>
-#include <jnipp/marshaling/TypeConvert.h>
-#include <jnipp/marshaling/JniEnvFacade.h>
 
-// Jni++ forward declarations.
+// Jni++ forward declarations and useful types.
 #include <jnipp/utils/forwards.h>
+#include <jnipp/utils/types.h>
 
 // Jni++ wrap for Java classes.
 #include <jnipp/handles/Class.h>
 #include <jnipp/handles/Object.h>
-#include <jnipp/marshaling/ClassConverting.h>
-#include <jnipp/marshaling/ObjectConverting.h>
+#include <jnipp/marshaling/TypeTraits.Object.h>
+#include <jnipp/marshaling/TypeTraits.Class.h>
 
 // Jni++ wrap for Java class fields.
 #include <jnipp/handles/MemberField.h>
@@ -89,7 +90,5 @@ namespace Marshaling {};
 #include <jnipp/handles/StaticFunction.inl>
 #include <jnipp/utils/MemberFunctionInvocation.inl>
 #include <jnipp/utils/StaticFunctionInvocation.inl>
-#include <jnipp/marshaling/EnvironmentTraits.inl>
-#include <jnipp/marshaling/TypeTraits.inl>
-#include <jnipp/marshaling/TypeConvert.FromJava.inl>
-#include <jnipp/marshaling/TypeConvert.ToJava.inl>
+#include <jnipp/marshaling/TypeTraits.FromJava.inl>
+#include <jnipp/marshaling/TypeTraits.ToJava.inl>
