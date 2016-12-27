@@ -49,8 +49,8 @@ namespace Jni
 		inline jfieldID operator * () const									{ return GetFieldId(); };
 
 	private:
-		using JavaType	= typename Marshaling::JniEnvFacade<TNativeType>::JavaType;
-		using Signature	= typename Marshaling::JniEnvFacade<TNativeType>::Signature;
+		using JavaType	= typename Marshaling::JavaType<TNativeType>;
+		using Signature	= typename Marshaling::TypeSignature<TNativeType>;
 
 		MemberField( jclass class_ref, const char* field_name );
 
@@ -69,9 +69,9 @@ namespace Jni
 		inline const bool SetValue( JNIEnv* local_env, jobject object_ref, const TNativeType& value_storage ) const;
 
 	private:
-		constexpr static size_t LOCAL_FRAME_SIZE	= Marshaling::JniEnvFacade<TNativeType>::LOCAL_FRAME_SIZE;
-		constexpr static auto FIELD_READ_HANDLER	= Marshaling::JniEnvFacade<TNativeType>::FIELD_READ_HANDLER;
-		constexpr static auto FIELD_WRITE_HANDLER	= Marshaling::JniEnvFacade<TNativeType>::FIELD_WRITE_HANDLER;
+		constexpr static size_t LOCAL_FRAME_SIZE	= Marshaling::TypeTraits<TNativeType>::LOCAL_FRAME_SIZE;
+		constexpr static auto FIELD_READ_HANDLER	= Marshaling::TypeTraits<TNativeType>::FIELD_READ_HANDLER;
+		constexpr static auto FIELD_WRITE_HANDLER	= Marshaling::TypeTraits<TNativeType>::FIELD_WRITE_HANDLER;
 
 		jfieldID	m_field_id	= nullptr;	// Field id for JNI.
 	};

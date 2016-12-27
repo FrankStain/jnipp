@@ -19,10 +19,10 @@ namespace Utils
 
 	private:
 		/// @brief	Java type of function call result.
-		using JavaType	= typename Jni::Marshaling::JniEnvFacade<TNativeReturnType>::JavaType;
+		using JavaType	= typename Jni::Marshaling::JavaType<TNativeReturnType>;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER	= Marshaling::JniEnvFacade<TNativeReturnType>::STATIC_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER	= Marshaling::TypeTraits<TNativeReturnType>::STATIC_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.
@@ -40,7 +40,7 @@ namespace Utils
 		inline void Call( const TNativeArguments&... arguments ) const;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER	= Marshaling::JniEnvFacade<void>::STATIC_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER	= Marshaling::TypeTraits<void>::STATIC_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.

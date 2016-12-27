@@ -59,13 +59,13 @@ namespace Jni
 		Class thread_class{ "java/lang/Thread" };
 		JNI_RETURN_IF_E( !thread_class, false, "Failed to locate `java.lang.Thread` class." );
 
-		StaticFunction<ThreadHandle> current_thread_func{ thread_class, "currentThread" };
+		StaticFunction<Android::Thread> current_thread_func{ thread_class, "currentThread" };
 		JNI_RETURN_IF_E( !current_thread_func, false, "Failed to locate `Thread Thread::currentThread()` function." );
 
-		ThreadHandle current_thread{ current_thread_func.Call() };
+		Android::Thread current_thread{ current_thread_func.Call() };
 		JNI_RETURN_IF_E( !current_thread, false, "Failed to get object of current thread." );
 
-		MemberFunction<ClassLoaderHandle> get_class_loader_func{ thread_class, "getContextClassLoader" };
+		MemberFunction<Android::ClassLoader> get_class_loader_func{ thread_class, "getContextClassLoader" };
 		JNI_RETURN_IF_E( !get_class_loader_func, false, "Failed to locate `ClassLoader Thread::getContextClassLoader()` function." );
 
 		m_class_loader = get_class_loader_func.Call( current_thread );

@@ -29,7 +29,7 @@ namespace Utils
 	};
 
 	template< typename... TNativeTypes >
-	struct TotalLocalFrame : NumberSumm<Jni::Marshaling::JniEnvFacade<TNativeTypes>::LOCAL_FRAME_SIZE...>
+	struct TotalLocalFrame : NumberSumm<Jni::Marshaling::TypeTraits<TNativeTypes>::LOCAL_FRAME_SIZE...>
 	{
 	
 	};
