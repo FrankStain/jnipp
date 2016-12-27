@@ -5,7 +5,7 @@
 
 namespace Jni
 {
-namespace Anroid
+namespace Android
 {
 	/// @brief	Handle to `java.lang.ClassLoader` object.
 	class ClassLoader : public Object
@@ -26,7 +26,7 @@ namespace Marshaling
 {
 	/// @brief	Traits specification for native `std::u16string` type.
 	template<>
-	struct TypeTraits<Jni::Anroid::ClassLoader> : EnvironmentTraits<jobject>
+	struct TypeTraits<Jni::Android::ClassLoader> : EnvironmentTraits<jobject>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
@@ -35,7 +35,7 @@ namespace Marshaling
 		using Signature	= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'C', 'l', 'a', 's', 's', 'L', 'o', 'a', 'd', 'e', 'r'>;
 
 		/// @brief	C++ native type.
-		using NativeType	= Jni::Anroid::ClassLoader;
+		using NativeType	= Jni::Android::ClassLoader;
 
 		/// @brief	JNI representation of Java type.
 		using JavaType		= jobject;
