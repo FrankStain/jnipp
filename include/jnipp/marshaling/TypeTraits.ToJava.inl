@@ -26,12 +26,12 @@ namespace Marshaling
 
 	inline void TypeTraits<std::string>::ToJava( const NativeType& source, JavaType& destination )
 	{
-		ToJava( source.c_str(), destination );
+		TypeTraits<const char*>::ToJava( source.c_str(), destination );
 	};
 
 	inline void TypeTraits<std::u16string>::ToJava( const NativeType& source, JavaType& destination )
 	{
-		ToJava( source.c_str(), destination );
+		TypeTraits<const char16_t*>::ToJava( source.c_str(), destination );
 	};
 
 	inline void TypeTraits<float>::ToJava( const NativeType& source, JavaType& destination )
