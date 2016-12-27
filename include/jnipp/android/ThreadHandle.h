@@ -3,7 +3,6 @@
 #pragma once
 
 
-/// @brief	Jni++ main namespace.
 namespace Jni
 {
 namespace Android
