@@ -24,7 +24,7 @@ namespace Android
 
 namespace Marshaling
 {
-	/// @brief	Traits specification for native `std::u16string` type.
+	/// @brief	Traits specification for native `Jni::Android::ClassLoader` type.
 	template<>
 	struct TypeTraits<Jni::Android::ClassLoader> : EnvironmentTraits<jobject>
 	{
