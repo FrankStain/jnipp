@@ -7,33 +7,6 @@ namespace Jni
 {
 namespace Utils
 {
-	template< size_t... NUMBERS >
-	struct NumberSumm;
-
-	template< size_t NUMBER, size_t... REST_NUMBERS >
-	struct NumberSumm<NUMBER, REST_NUMBERS...>
-	{
-		constexpr static const size_t RESULT = NUMBER + NumberSumm<REST_NUMBERS...>::RESULT;
-	};
-
-	template< size_t NUMBER >
-	struct NumberSumm<NUMBER>
-	{
-		constexpr static const size_t RESULT = NUMBER;
-	};
-
-	template<>
-	struct NumberSumm<>
-	{
-		constexpr static const size_t RESULT = 0;
-	};
-
-	template< typename... TNativeTypes >
-	struct TotalLocalFrame : NumberSumm<Jni::Marshaling::TypeTraits<TNativeTypes>::LOCAL_FRAME_SIZE...>
-	{
-	
-	};
-
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>::MemberFunctionInvocation( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
 		: m_local_env( local_env )
