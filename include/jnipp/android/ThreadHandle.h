@@ -6,7 +6,7 @@
 /// @brief	Jni++ main namespace.
 namespace Jni
 {
-namespace Anroid
+namespace Android
 {
 	/// @brief	Handle to `java.lang.Thread` object.
 	class Thread : public Object
@@ -27,7 +27,7 @@ namespace Marshaling
 {
 	/// @brief	Traits specification for native `std::u16string` type.
 	template<>
-	struct TypeTraits<Jni::Anroid::Thread> : EnvironmentTraits<jobject>
+	struct TypeTraits<Jni::Android::Thread> : EnvironmentTraits<jobject>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
@@ -36,7 +36,7 @@ namespace Marshaling
 		using Signature	= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'T', 'h', 'r', 'e', 'a', 'd'>;
 
 		/// @brief	C++ native type.
-		using NativeType	= Jni::Anroid::Thread;
+		using NativeType	= Jni::Android::Thread;
 
 		/// @brief	JNI representation of Java type.
 		using JavaType		= jobject;
