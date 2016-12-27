@@ -50,9 +50,9 @@
 // Use STL synchronization by default.
 #include <mutex>
 
-namespace jnipp
+namespace Jni
 {
-namespace utils
+namespace Utils
 {
 	using Mutex		= std::recursive_mutex;
 	using MutexLock	= std::lock_guard<Mutex>;
