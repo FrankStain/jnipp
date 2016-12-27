@@ -6,80 +6,52 @@
 /// @brief	Jni++ main namespace.
 namespace Jni
 {
-	/// @brief	Handle to `java.lang.THread` object.
-	class ThreadHandle : public Object
+namespace Anroid
+{
+	/// @brief	Handle to `java.lang.Thread` object.
+	class Thread : public Object
 	{
 	public:
-		ThreadHandle() = default;
-		ThreadHandle( jobject object_ref ) : Object( object_ref ) {};
-		ThreadHandle( const ThreadHandle& other ) : Object( other ) {};
-		ThreadHandle( ThreadHandle&& other ) : Object( other ) {};
+		Thread() = default;
+		Thread( jobject object_ref ) : Object( object_ref ) {};
+		Thread( const Thread& other ) : Object( other ) {};
+		Thread( Thread&& other ) : Object( other ) {};
 
-		const ThreadHandle& operator = ( jobject object_ref )			{ Object::operator=( object_ref ); return *this; };
-		const ThreadHandle& operator = ( const ThreadHandle& other )	{ Object::operator=( other ); return *this; };
-		const ThreadHandle& operator = ( ThreadHandle&& other )			{ Object::operator=( other ); return *this; };
+		const Thread& operator = ( jobject object_ref )		{ Object::operator=( object_ref ); return *this; };
+		const Thread& operator = ( const Thread& other )	{ Object::operator=( other ); return *this; };
+		const Thread& operator = ( Thread&& other )			{ Object::operator=( other ); return *this; };
 	};
+};
 
 namespace Marshaling
 {
-	/// @brief	Translation of `ThreadHandle` type.
+	/// @brief	Traits specification for native `std::u16string` type.
 	template<>
-	struct JavaTypeInfo<ThreadHandle> final
+	struct TypeTraits<Jni::Anroid::Thread> : EnvironmentTraits<jobject>
 	{
-		/// @brief	Java `ThreadHandle` type.
-		using Type		= jobject;
-	};
-
-	/// @brief	Conversion from `jobject` to `ThreadHandle`.
-	template<>
-	inline void FromJava<ThreadHandle>( const JavaType<ThreadHandle>& source, ThreadHandle& destination )
-	{
-		destination = source;
-	};
-
-	/// @brief	Conversion from `ThreadHandle` to `jobject`.
-	template<>
-	inline void ToJava<ThreadHandle>( const ThreadHandle& source, JavaType<ThreadHandle>& destination )
-	{
-		destination = *source;
-	};
-
-	/// @brief	Facade specification for transferring the `ThreadHandle` objects from, and to, Java side.
-	template<>
-	struct JniEnvFacade<ThreadHandle> final
-	{
-		/// @brief	Size of JVM local frame, required to store local reference to object.
+		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-		
-		/// @brief	C++ `jobject` type.
-		using NativeType	= ThreadHandle;
 
-		/// @brief	JNI representation of Java `jobject` type.
-		using JavaType		= JavaType<ThreadHandle>;
+		/// @brief	Java type signature.
+		using Signature	= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'T', 'h', 'r', 'e', 'a', 'd'>;
 
-		/// @brief	Signature of `jobject` type.
-		using Signature		= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'T', 'h', 'r', 'e', 'a', 'd'>;
+		/// @brief	C++ native type.
+		using NativeType	= Jni::Anroid::Thread;
 
-		/// @brief	Pointer to member function of `JNIEnv` to read `jobject` member fields.
-		static constexpr auto FIELD_READ_HANDLER			= &JNIEnv::GetObjectField;
+		/// @brief	JNI representation of Java type.
+		using JavaType		= jobject;
 
-		/// @brief	Pointer to member function of `JNIEnv` to write `jobject` member fields.
-		static constexpr auto FIELD_WRITE_HANDLER			= &JNIEnv::SetObjectField;
+		/// @brief	Type translation from Java space to C++ space.
+		static inline void FromJava( const JavaType& source, NativeType& destination )
+		{
+			destination = source;
+		};
 
-		/// @brief	Pointer to member function of `JNIEnv` to read `jobject` static fields.
-		static constexpr auto STATIC_FIELD_READ_HANDLER		= &JNIEnv::GetStaticObjectField;
-
-		/// @brief	Pointer to member function of `JNIEnv` to write `jobject` static fields.
-		static constexpr auto STATIC_FIELD_WRITE_HANDLER	= &JNIEnv::SetStaticObjectField;
-
-		/// @brief	Pointer to member function of `JNIEnv` to call regular method.
-		static constexpr auto FUNCTION_HANDLER				= &JNIEnv::CallObjectMethod;
-
-		/// @brief	Pointer to member function of `JNIEnv` to call static method.
-		static constexpr auto STATIC_FUNCTION_HANDLER		= &JNIEnv::CallStaticObjectMethod;
-
-		/// @brief	Pointer to member function of `JNIEnv` to call non-virtual method.
-		static constexpr auto NONVIRTUAL_FUNCTION_HANDLER	= &JNIEnv::CallNonvirtualObjectMethod;
+		/// @brief	Type translation from C++ space to Java space.
+		static inline void ToJava( const NativeType& source, JavaType& destination )
+		{
+			destination = *source;
+		};
 	};
 };
 };

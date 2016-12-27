@@ -3,83 +3,54 @@
 #pragma once
 
 
-/// @brief	Jni++ main namespace.
 namespace Jni
 {
-	/// @brief	Handle to `java.lang.THread` object.
-	class ClassLoaderHandle : public Object
+namespace Anroid
+{
+	/// @brief	Handle to `java.lang.ClassLoader` object.
+	class ClassLoader : public Object
 	{
 	public:
-		ClassLoaderHandle() = default;
-		ClassLoaderHandle( jobject object_ref ) : Object( object_ref ) {};
-		ClassLoaderHandle( const ClassLoaderHandle& other ) : Object( other ) {};
-		ClassLoaderHandle( ClassLoaderHandle&& other ) : Object( other ) {};
+		ClassLoader() = default;
+		ClassLoader( jobject object_ref ) : Object( object_ref ) {};
+		ClassLoader( const ClassLoader& other ) : Object( other ) {};
+		ClassLoader( ClassLoader&& other ) : Object( other ) {};
 
-		const ClassLoaderHandle& operator = ( jobject object_ref )					{ Object::operator=( object_ref ); return *this; };
-		const ClassLoaderHandle& operator = ( const ClassLoaderHandle& other )		{ Object::operator=( other ); return *this; };
-		const ClassLoaderHandle& operator = ( ClassLoaderHandle&& other )			{ Object::operator=( other ); return *this; };
+		const ClassLoader& operator = ( jobject object_ref )			{ Object::operator=( object_ref ); return *this; };
+		const ClassLoader& operator = ( const ClassLoader& other )		{ Object::operator=( other ); return *this; };
+		const ClassLoader& operator = ( ClassLoader&& other )			{ Object::operator=( other ); return *this; };
 	};
+};
 
 namespace Marshaling
 {
-	/// @brief	Translation of `ClassLoaderHandle` type.
+	/// @brief	Traits specification for native `std::u16string` type.
 	template<>
-	struct JavaTypeInfo<ClassLoaderHandle> final
+	struct TypeTraits<Jni::Anroid::ClassLoader> : EnvironmentTraits<jobject>
 	{
-		/// @brief	Java `ClassLoaderHandle` type.
-		using Type		= jobject;
-	};
-
-	/// @brief	Conversion from `jobject` to `ClassLoaderHandle`.
-	template<>
-	inline void FromJava<ClassLoaderHandle>( const JavaType<ClassLoaderHandle>& source, ClassLoaderHandle& destination )
-	{
-		destination = source;
-	};
-
-	/// @brief	Conversion from `ClassLoaderHandle` to `jobject`.
-	template<>
-	inline void ToJava<ClassLoaderHandle>( const ClassLoaderHandle& source, JavaType<ClassLoaderHandle>& destination )
-	{
-		destination = *source;
-	};
-
-	/// @brief	Facade specification for transferring the `ClassLoaderHandle` objects from, and to, Java side.
-	template<>
-	struct JniEnvFacade<ClassLoaderHandle> final
-	{
-		/// @brief	Size of JVM local frame, required to store local reference to object.
+		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-		
-		/// @brief	C++ `jobject` type.
-		using NativeType	= ClassLoaderHandle;
 
-		/// @brief	JNI representation of Java `jobject` type.
-		using JavaType		= JavaType<ClassLoaderHandle>;
+		/// @brief	Java type signature.
+		using Signature	= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'C', 'l', 'a', 's', 's', 'L', 'o', 'a', 'd', 'e', 'r'>;
 
-		/// @brief	Signature of `jobject` type.
-		using Signature		= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'C', 'l', 'a', 's', 's', 'L', 'o', 'a', 'd', 'e', 'r'>;
+		/// @brief	C++ native type.
+		using NativeType	= Jni::Anroid::ClassLoader;
 
-		/// @brief	Pointer to member function of `JNIEnv` to read `jobject` member fields.
-		static constexpr auto FIELD_READ_HANDLER			= &JNIEnv::GetObjectField;
+		/// @brief	JNI representation of Java type.
+		using JavaType		= jobject;
 
-		/// @brief	Pointer to member function of `JNIEnv` to write `jobject` member fields.
-		static constexpr auto FIELD_WRITE_HANDLER			= &JNIEnv::SetObjectField;
+		/// @brief	Type translation from Java space to C++ space.
+		static inline void FromJava( const JavaType& source, NativeType& destination )
+		{
+			destination = source;
+		};
 
-		/// @brief	Pointer to member function of `JNIEnv` to read `jobject` static fields.
-		static constexpr auto STATIC_FIELD_READ_HANDLER		= &JNIEnv::GetStaticObjectField;
-
-		/// @brief	Pointer to member function of `JNIEnv` to write `jobject` static fields.
-		static constexpr auto STATIC_FIELD_WRITE_HANDLER	= &JNIEnv::SetStaticObjectField;
-
-		/// @brief	Pointer to member function of `JNIEnv` to call regular method.
-		static constexpr auto FUNCTION_HANDLER				= &JNIEnv::CallObjectMethod;
-
-		/// @brief	Pointer to member function of `JNIEnv` to call static method.
-		static constexpr auto STATIC_FUNCTION_HANDLER		= &JNIEnv::CallStaticObjectMethod;
-
-		/// @brief	Pointer to member function of `JNIEnv` to call non-virtual method.
-		static constexpr auto NONVIRTUAL_FUNCTION_HANDLER	= &JNIEnv::CallNonvirtualObjectMethod;
+		/// @brief	Type translation from C++ space to Java space.
+		static inline void ToJava( const NativeType& source, JavaType& destination )
+		{
+			destination = *source;
+		};
 	};
 };
 };
