@@ -30,6 +30,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jboolean>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= true;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewBooleanArray;
 
@@ -71,6 +74,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jbyte>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= true;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewByteArray;
 
@@ -112,6 +118,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jchar>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= true;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewCharArray;
 
@@ -153,6 +162,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jshort>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= true;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewShortArray;
 
@@ -194,6 +206,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jint>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= true;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewIntArray;
 
@@ -235,6 +250,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jlong>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= true;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewLongArray;
 
@@ -276,6 +294,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jfloat>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= true;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewFloatArray;
 
@@ -317,6 +338,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jdouble>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= true;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewDoubleArray;
 
@@ -358,6 +382,9 @@ namespace Marshaling
 	template<>
 	struct EnvironmentTraits<jobject>
 	{
+		/// @brief	Is this type plain?
+		static constexpr bool IS_PLAIN							= false;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewObjectArray;
 
