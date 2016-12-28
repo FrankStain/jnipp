@@ -90,5 +90,11 @@ namespace Marshaling
 	{
 		destination = source;
 	};
+
+	template< typename TNativeElementType, typename TAllocatorType >
+	inline void NativeTypeTraits<std::vector<TNativeElementType, TAllocatorType>>::FromJava( const JavaType& source, NativeType& destination )
+	{
+
+	};
 };
 };

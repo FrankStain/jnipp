@@ -88,5 +88,11 @@ namespace Marshaling
 	{
 		destination = reinterpret_cast<const int64_t&>( source );
 	};
+
+	template< typename TNativeElementType, typename TAllocatorType >
+	inline void NativeTypeTraits<std::vector<TNativeElementType, TAllocatorType>>::ToJava( const NativeType& source, JavaType& destination )
+	{
+
+	};
 };
 };

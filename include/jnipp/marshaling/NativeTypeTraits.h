@@ -79,7 +79,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= void;
 
@@ -99,7 +99,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= bool;
 
@@ -119,7 +119,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= char16_t;
 
@@ -139,7 +139,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= int8_t;
 
@@ -159,7 +159,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= int16_t;
 
@@ -179,7 +179,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= int32_t;
 
@@ -199,7 +199,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= int64_t;
 
@@ -219,7 +219,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= uint8_t;
 
@@ -239,7 +239,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= uint16_t;
 
@@ -259,7 +259,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= uint32_t;
 
@@ -279,7 +279,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= uint64_t;
 
@@ -299,7 +299,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= float;
 
@@ -319,7 +319,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= double;
 
@@ -339,7 +339,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= const char*;
 
@@ -359,7 +359,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= const char16_t*;
 
@@ -379,7 +379,7 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= std::string;
 
@@ -399,12 +399,35 @@ namespace Marshaling
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-		
+
 		/// @brief	C++ native type.
 		using NativeType	= std::u16string;
 
 		/// @brief	JNI representation of Java type.
 		using JavaType		= jstring;
+
+		/// @brief	Type translation from Java space to C++ space.
+		static inline void FromJava( const JavaType& source, NativeType& destination );
+
+		/// @brief	Type translation from C++ space to Java space.
+		static inline void ToJava( const NativeType& source, JavaType& destination );
+	};
+
+	/// @brief	Traits specification for native `std::u16string` type.
+	template< typename TNativeElementType, typename TAllocatorType >
+	struct NativeTypeTraits< std::vector<TNativeElementType, TAllocatorType> > : EnvironmentTraits<jobject>
+	{
+		/// @brief	Count of local references required to store this type in Java local frame.
+		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
+
+		/// @brief	Java type signature.
+		using Signature		= ArrayName<TypeSignature<TNativeElementType>>;
+
+		/// @brief	C++ native type.
+		using NativeType	= std::vector<TNativeElementType, TAllocatorType>;
+
+		/// @brief	JNI representation of Java type.
+		using JavaType		= jarray;
 
 		/// @brief	Type translation from Java space to C++ space.
 		static inline void FromJava( const JavaType& source, NativeType& destination );
