@@ -115,7 +115,7 @@ namespace Marshaling
 				array_elements, array_elements + array_length, std::back_inserter( destination ),
 				[]( const ElementTraits::JavaType& stored_value )
 				{
-					return FromJava( stored_value );
+					return Jni::Marshaling::FromJava<TNativeElementType>( stored_value );
 				}
 			);
 
@@ -128,7 +128,7 @@ namespace Marshaling
 			for( jsize element_index = 0; element_index < array_length; ++element_index )
 			{
 				auto element = (local_env->*ARRAY_ELEMENT_READ_HANDLER)( source, element_index );
-				destination.emplace_back( FromJava( element ) );
+				destination.emplace_back( Jni::Marshaling::FromJava<TNativeElementType>( element ) );
 			};
 		};
 	};
