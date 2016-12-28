@@ -47,9 +47,9 @@ namespace Android {};
 #include <jnipp/utils/StaticString.operations.h>
 
 // Jni++ type marshaling.
-#include <jnipp/marshaling/JavaTypeSignature.h>
+#include <jnipp/marshaling/JavaTypeTraits.h>
 #include <jnipp/marshaling/EnvironmentTraits.h>
-#include <jnipp/marshaling/TypeTraits.h>
+#include <jnipp/marshaling/NativeTypeTraits.h>
 
 // Jni++ forward declarations and useful types.
 #include <jnipp/utils/forwards.h>
@@ -58,8 +58,8 @@ namespace Android {};
 // Jni++ wrap for Java classes.
 #include <jnipp/handles/Class.h>
 #include <jnipp/handles/Object.h>
-#include <jnipp/marshaling/TypeTraits.Object.h>
-#include <jnipp/marshaling/TypeTraits.Class.h>
+#include <jnipp/marshaling/NativeTypeTraits.Object.h>
+#include <jnipp/marshaling/NativeTypeTraits.Class.h>
 
 // Jni++ wrap for Java class fields.
 #include <jnipp/handles/MemberField.h>
@@ -90,5 +90,5 @@ namespace Android {};
 #include <jnipp/handles/StaticFunction.inl>
 #include <jnipp/utils/MemberFunctionInvocation.inl>
 #include <jnipp/utils/StaticFunctionInvocation.inl>
-#include <jnipp/marshaling/TypeTraits.FromJava.inl>
-#include <jnipp/marshaling/TypeTraits.ToJava.inl>
+#include <jnipp/marshaling/NativeTypeTraits.FromJava.inl>
+#include <jnipp/marshaling/NativeTypeTraits.ToJava.inl>
