@@ -9,15 +9,15 @@ namespace Marshaling
 {
 	/// @brief	Common specification of type translation traits.
 	template< typename TNativeType >
-	struct TypeTraits;
+	struct NativeTypeTraits;
 
 
 	/// @brief	JNI signature of arbitrary native type.
 	template< typename TNativeType >
-	using TypeSignature = typename TypeTraits<TNativeType>::Signature;
+	using TypeSignature = typename NativeTypeTraits<TNativeType>::Signature;
 
 	template< typename TNativeType >
-	using JavaType = typename TypeTraits<TNativeType>::JavaType;
+	using JavaType = typename NativeTypeTraits<TNativeType>::JavaType;
 
 
 	/**
@@ -29,7 +29,7 @@ namespace Marshaling
 	template< typename TNativeType >
 	inline void FromJava( const JavaType<TNativeType>& source, TNativeType& destination )
 	{
-		TypeTraits<TNativeType>::FromJava( source, destination );
+		NativeTypeTraits<TNativeType>::FromJava( source, destination );
 	};
 
 	/**
@@ -41,7 +41,7 @@ namespace Marshaling
 	template< typename TNativeType >
 	inline void ToJava( const TNativeType& source, JavaType<TNativeType>& destination )
 	{
-		TypeTraits<TNativeType>::ToJava( source, destination );
+		NativeTypeTraits<TNativeType>::ToJava( source, destination );
 	};
 
 	/**
@@ -54,7 +54,7 @@ namespace Marshaling
 	inline TNativeType FromJava( const JavaType<TNativeType>& source )
 	{
 		TNativeType destination;
-		TypeTraits<TNativeType>::FromJava( source, destination );
+		NativeTypeTraits<TNativeType>::FromJava( source, destination );
 		return destination;
 	};
 
@@ -68,14 +68,14 @@ namespace Marshaling
 	inline JavaType<TNativeType> ToJava( const TNativeType& source )
 	{
 		JavaType<TNativeType> destination;
-		TypeTraits<TNativeType>::ToJava( source, destination );
+		NativeTypeTraits<TNativeType>::ToJava( source, destination );
 		return destination;
 	};
 
 
 	/// @brief	Traits specification for native `void` type.
 	template<>
-	struct TypeTraits<void> : EnvironmentTraits<void>, JavaTypeTraits<void>
+	struct NativeTypeTraits<void> : EnvironmentTraits<void>, JavaTypeTraits<void>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -95,7 +95,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `bool` type.
 	template<>
-	struct TypeTraits<bool> : EnvironmentTraits<jboolean>, JavaTypeTraits<jboolean>
+	struct NativeTypeTraits<bool> : EnvironmentTraits<jboolean>, JavaTypeTraits<jboolean>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -115,7 +115,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `char16_t` type.
 	template<>
-	struct TypeTraits<char16_t> : EnvironmentTraits<jchar>, JavaTypeTraits<jchar>
+	struct NativeTypeTraits<char16_t> : EnvironmentTraits<jchar>, JavaTypeTraits<jchar>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -135,7 +135,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `int8_t` type.
 	template<>
-	struct TypeTraits<int8_t> : EnvironmentTraits<jbyte>, JavaTypeTraits<jbyte>
+	struct NativeTypeTraits<int8_t> : EnvironmentTraits<jbyte>, JavaTypeTraits<jbyte>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -155,7 +155,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `int16_t` type.
 	template<>
-	struct TypeTraits<int16_t> : EnvironmentTraits<jshort>, JavaTypeTraits<jshort>
+	struct NativeTypeTraits<int16_t> : EnvironmentTraits<jshort>, JavaTypeTraits<jshort>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -175,7 +175,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `int32_t` type.
 	template<>
-	struct TypeTraits<int32_t> : EnvironmentTraits<jint>, JavaTypeTraits<jint>
+	struct NativeTypeTraits<int32_t> : EnvironmentTraits<jint>, JavaTypeTraits<jint>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -195,7 +195,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `int64_t` type.
 	template<>
-	struct TypeTraits<int64_t> : EnvironmentTraits<jlong>, JavaTypeTraits<jlong>
+	struct NativeTypeTraits<int64_t> : EnvironmentTraits<jlong>, JavaTypeTraits<jlong>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -215,7 +215,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `uint8_t` type.
 	template<>
-	struct TypeTraits<uint8_t> : EnvironmentTraits<jshort>, JavaTypeTraits<jshort>
+	struct NativeTypeTraits<uint8_t> : EnvironmentTraits<jshort>, JavaTypeTraits<jshort>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -235,7 +235,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `uint16_t` type.
 	template<>
-	struct TypeTraits<uint16_t> : EnvironmentTraits<jint>, JavaTypeTraits<jint>
+	struct NativeTypeTraits<uint16_t> : EnvironmentTraits<jint>, JavaTypeTraits<jint>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -255,7 +255,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `uint32_t` type.
 	template<>
-	struct TypeTraits<uint32_t> : EnvironmentTraits<jlong>, JavaTypeTraits<jlong>
+	struct NativeTypeTraits<uint32_t> : EnvironmentTraits<jlong>, JavaTypeTraits<jlong>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -275,7 +275,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `uint64_t` type.
 	template<>
-	struct TypeTraits<uint64_t> : EnvironmentTraits<jlong>, JavaTypeTraits<jlong>
+	struct NativeTypeTraits<uint64_t> : EnvironmentTraits<jlong>, JavaTypeTraits<jlong>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -295,7 +295,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `float` type.
 	template<>
-	struct TypeTraits<float> : EnvironmentTraits<jfloat>, JavaTypeTraits<jfloat>
+	struct NativeTypeTraits<float> : EnvironmentTraits<jfloat>, JavaTypeTraits<jfloat>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -315,7 +315,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `double` type.
 	template<>
-	struct TypeTraits<double> : EnvironmentTraits<jdouble>, JavaTypeTraits<jdouble>
+	struct NativeTypeTraits<double> : EnvironmentTraits<jdouble>, JavaTypeTraits<jdouble>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 0;
@@ -335,7 +335,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `const char*` type.
 	template<>
-	struct TypeTraits<const char*> : EnvironmentTraits<jobject>, JavaTypeTraits<jstring>
+	struct NativeTypeTraits<const char*> : EnvironmentTraits<jobject>, JavaTypeTraits<jstring>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
@@ -355,7 +355,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `const char16_t*` type.
 	template<>
-	struct TypeTraits<const char16_t*> : EnvironmentTraits<jobject>, JavaTypeTraits<jstring>
+	struct NativeTypeTraits<const char16_t*> : EnvironmentTraits<jobject>, JavaTypeTraits<jstring>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
@@ -375,7 +375,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `std::string` type.
 	template<>
-	struct TypeTraits<std::string> : EnvironmentTraits<jobject>, JavaTypeTraits<jstring>
+	struct NativeTypeTraits<std::string> : EnvironmentTraits<jobject>, JavaTypeTraits<jstring>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
@@ -395,7 +395,7 @@ namespace Marshaling
 
 	/// @brief	Traits specification for native `std::u16string` type.
 	template<>
-	struct TypeTraits<std::u16string> : EnvironmentTraits<jobject>, JavaTypeTraits<jstring>
+	struct NativeTypeTraits<std::u16string> : EnvironmentTraits<jobject>, JavaTypeTraits<jstring>
 	{
 		/// @brief	Count of local references required to store this type in Java local frame.
 		constexpr static const size_t LOCAL_FRAME_SIZE = 1;

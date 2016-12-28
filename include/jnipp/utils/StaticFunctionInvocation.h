@@ -22,7 +22,7 @@ namespace Utils
 		using JavaType	= typename Jni::Marshaling::JavaType<TNativeReturnType>;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER	= Marshaling::TypeTraits<TNativeReturnType>::STATIC_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER	= Jni::Marshaling::NativeTypeTraits<TNativeReturnType>::STATIC_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.
@@ -40,7 +40,7 @@ namespace Utils
 		inline void Call( const TNativeArguments&... arguments ) const;
 
 	private:
-		constexpr static auto FUNCTION_HANDLER	= Marshaling::TypeTraits<void>::STATIC_FUNCTION_HANDLER;
+		constexpr static auto FUNCTION_HANDLER	= Jni::Marshaling::NativeTypeTraits<void>::STATIC_FUNCTION_HANDLER;
 		
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.
