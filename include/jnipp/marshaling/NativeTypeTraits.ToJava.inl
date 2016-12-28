@@ -92,7 +92,36 @@ namespace Marshaling
 	template< typename TNativeElementType, typename TAllocatorType >
 	inline void NativeTypeTraits<std::vector<TNativeElementType, TAllocatorType>>::ToJava( const NativeType& source, JavaType& destination )
 	{
+		using ElementTraits = NativeTypeTraits<TNativeElementType>;
 
+		constexpr auto ARRAY_CONSTRUCT_HANDLER	= ElementTraits::ARRAY_CONSTRUCT_HANDLER;
+
+		auto local_env = VirtualMachine::GetLocalEnvironment();
+		if( ElementTraits::IS_PLAIN )
+		{
+			constexpr auto ARRAY_ELEMENTS_ACQUIRE_HANDLER	= ElementTraits::ARRAY_ELEMENTS_ACQUIRE_HANDLER;
+			constexpr auto ARRAY_ELEMENTS_RELEASE_HANDLER	= ElementTraits::ARRAY_ELEMENTS_RELEASE_HANDLER;
+
+			destination = (local_env->*ARRAY_CONSTRUCT_HANDLER)( static_cast<jsize>( source.size() ) );
+			JNI_RETURN_IF( source.empty() );
+
+			auto array_elements = (local_env->*ARRAY_ELEMENTS_ACQUIRE_HANDLER)( source, nullptr );
+			JNI_RETURN_IF_E( array_elements == nullptr, , "Failed to read elements of array." );
+
+			std::transform(
+				source.begin(), source.end(), array_elements,
+				[]( const TNativeElementType& stored_value )
+				{
+					return Jni::Marshaling::ToJava<TNativeElementType>( stored_value );
+				}
+			);
+
+			(local_env->*ARRAY_ELEMENTS_RELEASE_HANDLER)( source, array_elements, JNI_OK );
+		}
+		else
+		{
+
+		};
 	};
 };
 };
