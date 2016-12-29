@@ -113,7 +113,7 @@ namespace Marshaling
 
 			std::transform(
 				array_elements, array_elements + array_length, std::back_inserter( destination ),
-				[]( const ElementTraits::JavaType& stored_value )
+				[]( const typename ElementTraits::JavaType& stored_value )
 				{
 					return Jni::Marshaling::FromJava<TNativeElementType>( stored_value );
 				}
