@@ -35,6 +35,39 @@ namespace Utils
 	{
 		using String = typename StringCombiner< StaticString<CHARS...>, typename StringCombiner<TStrings...>::String >::String;
 	};
+
+	/// @brief	Static string trimming tool. Trims the right side of string.
+	template< size_t NUMBER, bool IS_ENDED, typename TStoredString, char... CHARS >
+	struct StringRightStripper;
+
+	template< char... REST_CHARS, char... STORED_CHARS >
+	struct StringRightStripper<0, true, StaticString<STORED_CHARS...>, REST_CHARS...>
+	{
+		using String = StaticString<STORED_CHARS...>;
+	};
+
+	template< size_t NUMBER, char CURRENT_CHAR, char... REST_CHARS, char... STORED_CHARS >
+	struct StringRightStripper<NUMBER, false, StaticString<STORED_CHARS...>, CURRENT_CHAR, REST_CHARS...>
+		: StringRightStripper<NUMBER - 1, NUMBER == 1, StaticString<STORED_CHARS..., CURRENT_CHAR>, REST_CHARS...>
+	{
+
+	};
+
+	/// @brief	Class path extractor from `ClassName` and `ArrayName` static strings.
+	template< typename TClassPathString >
+	struct ClassPathExtractor;
+
+	template< char... CHARS >
+	struct ClassPathExtractor< StaticString<'L', CHARS...> >
+	{
+		using String = typename StringRightStripper<sizeof...( CHARS ) - 1, sizeof...( CHARS ) == 1, StaticString<>, CHARS...>::String;
+	};
+
+	template< char... CHARS >
+	struct ClassPathExtractor< StaticString<'[', CHARS...> >
+	{
+		using String = StaticString<'[', CHARS...>;
+	};
 };
 
 	/**
@@ -47,21 +80,17 @@ namespace Utils
 
 	/// @brief	Helper for producing valid name of Java class.
 	template< char... CHARS >
-	struct ClassName : CombinedStaticString< StaticString<'L'>, StaticString<CHARS...>, StaticString<';'> >
-	{
-		/// @brief	Get the class path for given class name.
-		static inline const char* GetClassPath() { return StaticString<CHARS...>::GetString(); };
-	};
+	using ClassName = CombinedStaticString< StaticString<'L'>, StaticString<CHARS...>, StaticString<';'> >;
 
 	/// @brief	Helper for producing valid name of Java array.
 	template< typename TElementNameString >
-	struct ArrayName : CombinedStaticString< StaticString<'['>, TElementNameString >
-	{
-		/// @brief	Get the class path for given class name.
-		static inline const char* GetClassPath() { return GetString(); };
-	};
+	using ArrayName = CombinedStaticString< StaticString<'['>, TElementNameString >;
 
 	/// @brief	Helper for producing valid name of Java function.
 	template< typename TReturnTypeName, typename... TArgumentTypeNames >
 	using FunctionSignature = CombinedStaticString< StaticString<'('>, TArgumentTypeNames..., StaticString<')'>, TReturnTypeName >;
+
+	/// @brief	Class path extractor from `ClassName` and `ArrayName` static strings.
+	template< typename TClassNameString >
+	using ClassPath = typename Utils::ClassPathExtractor<TClassNameString>::String;
 };
