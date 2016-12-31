@@ -47,11 +47,19 @@ namespace Utils
 
 	/// @brief	Helper for producing valid name of Java class.
 	template< char... CHARS >
-	using ClassName = CombinedStaticString< StaticString<'L'>, StaticString<CHARS...>, StaticString<';'> >;
+	struct ClassName : CombinedStaticString< StaticString<'L'>, StaticString<CHARS...>, StaticString<';'> >
+	{
+		/// @brief	Get the class path for given class name.
+		static inline const char* GetClassPath() { return StaticString<CHARS...>::GetString(); };
+	};
 
 	/// @brief	Helper for producing valid name of Java array.
 	template< typename TElementNameString >
-	using ArrayName = CombinedStaticString< StaticString<'['>, TElementNameString >;
+	struct ArrayName : CombinedStaticString< StaticString<'['>, TElementNameString >
+	{
+		/// @brief	Get the class path for given class name.
+		static inline const char* GetClassPath() { return GetString(); };
+	};
 
 	/// @brief	Helper for producing valid name of Java function.
 	template< typename TReturnTypeName, typename... TArgumentTypeNames >
