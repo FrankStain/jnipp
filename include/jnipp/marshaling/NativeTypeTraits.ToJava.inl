@@ -92,7 +92,8 @@ namespace Marshaling
 	template< typename TNativeElementType, typename TAllocatorType >
 	inline void NativeTypeTraits<std::vector<TNativeElementType, TAllocatorType>>::ToJava( const NativeType& source, JavaType& destination )
 	{
-		using ElementTraits = NativeTypeTraits<TNativeElementType>;
+		using ElementTraits		= NativeTypeTraits<TNativeElementType>;
+		using ElementSignature	= typename ElementTraits::Signature;
 
 		constexpr auto ARRAY_CONSTRUCT_HANDLER	= ElementTraits::ARRAY_CONSTRUCT_HANDLER;
 
@@ -120,7 +121,18 @@ namespace Marshaling
 		}
 		else
 		{
+			constexpr auto ARRAY_ELEMENT_WRITE_HANDLER = ElementTraits::ARRAY_ELEMENT_WRITE_HANDLER;
 
+			const Class element_class{ ClassPath<ElementSignature>::GetString() };
+
+			destination = (local_env->*ARRAY_CONSTRUCT_HANDLER)( static_cast<jsize>( source.size() ) );
+			JNI_RETURN_IF( source.empty() );
+
+			jsize element_index = 0;
+			for( const auto& stored_element : source )
+			{
+				(local_env->*ARRAY_ELEMENT_WRITE_HANDLER)( destination, element_index++, Jni::Marshaling::ToJava<TNativeElementType>( stored_element ) );
+			};
 		};
 	};
 };
