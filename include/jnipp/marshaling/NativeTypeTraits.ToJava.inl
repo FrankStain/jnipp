@@ -93,47 +93,10 @@ namespace Marshaling
 	inline void NativeTypeTraits<std::vector<TNativeElementType, TAllocatorType>>::ToJava( const NativeType& source, JavaType& destination )
 	{
 		using ElementTraits		= NativeTypeTraits<TNativeElementType>;
-		using ElementSignature	= typename ElementTraits::Signature;
+		using JavaArrayType		= typename ElementTraits::JavaArrayType;
+		using TranslationTraits	= ArrayTranslationTraits<ElementTraits>;
 
-		constexpr auto ARRAY_CONSTRUCT_HANDLER	= ElementTraits::ARRAY_CONSTRUCT_HANDLER;
-
-		auto local_env = VirtualMachine::GetLocalEnvironment();
-		if( ElementTraits::IS_PLAIN )
-		{
-			constexpr auto ARRAY_ELEMENTS_ACQUIRE_HANDLER	= ElementTraits::ARRAY_ELEMENTS_ACQUIRE_HANDLER;
-			constexpr auto ARRAY_ELEMENTS_RELEASE_HANDLER	= ElementTraits::ARRAY_ELEMENTS_RELEASE_HANDLER;
-
-			destination = (local_env->*ARRAY_CONSTRUCT_HANDLER)( static_cast<jsize>( source.size() ) );
-			JNI_RETURN_IF( source.empty() );
-
-			auto array_elements = (local_env->*ARRAY_ELEMENTS_ACQUIRE_HANDLER)( source, nullptr );
-			JNI_RETURN_IF_E( array_elements == nullptr, , "Failed to read elements of array." );
-
-			std::transform(
-				source.begin(), source.end(), array_elements,
-				[]( const TNativeElementType& stored_value )
-				{
-					return Jni::Marshaling::ToJava<TNativeElementType>( stored_value );
-				}
-			);
-
-			(local_env->*ARRAY_ELEMENTS_RELEASE_HANDLER)( source, array_elements, JNI_OK );
-		}
-		else
-		{
-			constexpr auto ARRAY_ELEMENT_WRITE_HANDLER = ElementTraits::ARRAY_ELEMENT_WRITE_HANDLER;
-
-			const Class element_class{ ClassPath<ElementSignature>::GetString() };
-
-			destination = (local_env->*ARRAY_CONSTRUCT_HANDLER)( static_cast<jsize>( source.size() ) );
-			JNI_RETURN_IF( source.empty() );
-
-			jsize element_index = 0;
-			for( const auto& stored_element : source )
-			{
-				(local_env->*ARRAY_ELEMENT_WRITE_HANDLER)( destination, element_index++, Jni::Marshaling::ToJava<TNativeElementType>( stored_element ) );
-			};
-		};
+		TranslationTraits::ToJava( source, reinterpret_cast<JavaArrayType&>( destination ) );
 	};
 };
 };
