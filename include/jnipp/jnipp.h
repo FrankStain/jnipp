@@ -49,6 +49,7 @@ namespace Android {};
 // Jni++ type marshaling.
 #include <jnipp/marshaling/JavaTypeTraits.h>
 #include <jnipp/marshaling/EnvironmentTraits.h>
+#include <jnipp/marshaling/ArrayTranslationTraits.h>
 #include <jnipp/marshaling/NativeTypeTraits.h>
 
 // Jni++ forward declarations and useful types.
@@ -92,3 +93,5 @@ namespace Android {};
 #include <jnipp/utils/StaticFunctionInvocation.inl>
 #include <jnipp/marshaling/NativeTypeTraits.FromJava.inl>
 #include <jnipp/marshaling/NativeTypeTraits.ToJava.inl>
+#include <jnipp/marshaling/ArrayTranslationTraits.FromJava.inl>
+#include <jnipp/marshaling/ArrayTranslationTraits.ToJava.inl>
