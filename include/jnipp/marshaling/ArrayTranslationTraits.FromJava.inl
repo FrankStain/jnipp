@@ -22,7 +22,7 @@ namespace Marshaling
 		local_env->PushLocalFrame( TElementTraits::LOCAL_FRAME_SIZE * array_length );
 		for( jsize element_index = 0; element_index < array_length; ++element_index )
 		{
-			auto element = (local_env->*ARRAY_ELEMENT_READ_HANDLER)( source, element_index );
+			auto element = static_cast<ElementJavaType>( (local_env->*ARRAY_ELEMENT_READ_HANDLER)( source, element_index ) );
 			destination.emplace_back( Jni::Marshaling::FromJava<ElementNativeType>( element ) );
 		};
 		local_env->PopLocalFrame( nullptr );
