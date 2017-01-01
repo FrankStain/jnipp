@@ -14,10 +14,11 @@ namespace Marshaling
 
 	inline void NativeTypeTraits<std::string>::FromJava( const JavaType& source, NativeType& destination )
 	{
+		destination.clear();
+		JNI_RETURN_IF( source == nullptr );
+
 		auto local_env				= VirtualMachine::GetLocalEnvironment();
 		const jsize string_length	= local_env->GetStringUTFLength( source );
-
-		destination.clear();
 		JNI_RETURN_IF( string_length == 0 );
 
 		destination.resize( static_cast<size_t>( string_length ), ' ' );
@@ -26,10 +27,11 @@ namespace Marshaling
 
 	inline void NativeTypeTraits<std::u16string>::FromJava( const JavaType& source, NativeType& destination )
 	{
+		destination.clear();
+		JNI_RETURN_IF( source == nullptr );
+
 		auto local_env				= VirtualMachine::GetLocalEnvironment();
 		const jsize string_length	= local_env->GetStringLength( source );
-
-		destination.clear();
 		JNI_RETURN_IF( string_length == 0 );
 
 		destination.resize( static_cast<size_t>( string_length ), ' ' );
@@ -97,6 +99,7 @@ namespace Marshaling
 		using ElementTraits = NativeTypeTraits<TNativeElementType>;
 
 		destination.clear();
+		JNI_RETURN_IF( source == nullptr );
 
 		auto local_env				= VirtualMachine::GetLocalEnvironment();
 		const jsize array_length	= local_env->GetArrayLength( source );
