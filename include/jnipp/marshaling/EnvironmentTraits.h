@@ -33,6 +33,9 @@ namespace Marshaling
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= true;
 
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jbooleanArray;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewBooleanArray;
 
@@ -76,6 +79,9 @@ namespace Marshaling
 	{
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= true;
+
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jbyteArray;
 
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewByteArray;
@@ -121,6 +127,9 @@ namespace Marshaling
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= true;
 
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jcharArray;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewCharArray;
 
@@ -164,6 +173,9 @@ namespace Marshaling
 	{
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= true;
+
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jshortArray;
 
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewShortArray;
@@ -209,6 +221,9 @@ namespace Marshaling
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= true;
 
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jintArray;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewIntArray;
 
@@ -252,6 +267,9 @@ namespace Marshaling
 	{
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= true;
+
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jlongArray;
 
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewLongArray;
@@ -297,6 +315,9 @@ namespace Marshaling
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= true;
 
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jfloatArray;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewFloatArray;
 
@@ -341,6 +362,9 @@ namespace Marshaling
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= true;
 
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jdoubleArray;
+
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewDoubleArray;
 
@@ -384,6 +408,9 @@ namespace Marshaling
 	{
 		/// @brief	Is this type plain?
 		static constexpr bool IS_PLAIN							= false;
+
+		/// @brief	Type of JNI array representation, which can be consumed by array functions.
+		using JavaArrayType										= jobjectArray;
 
 		/// @brief	Array allocator.
 		static constexpr auto ARRAY_CONSTRUCT_HANDLER			= &JNIEnv::NewObjectArray;
