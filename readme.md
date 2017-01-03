@@ -1,6 +1,8 @@
 ﻿Jni++
 ============
 
+[![Github license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](license.txt)
+
 **Jni++** is designed to be used in projects for Android OS.
 
 **Jni++** shows how the JNI could looks like if it was written using C++11.
