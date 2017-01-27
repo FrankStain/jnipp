@@ -3,6 +3,11 @@
 #pragma once
 
 
+// "printf format" diagnostic irrelevant for next functions.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat"
+
+
 namespace Jni
 {
 namespace Logging
@@ -116,3 +121,5 @@ namespace Logging
 	};
 };
 };
+
+#pragma GCC diagnostic pop
