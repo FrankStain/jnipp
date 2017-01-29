@@ -24,7 +24,7 @@ namespace Android
 
 namespace Marshaling
 {
-	/// @brief	Traits specification for native `android.content.res.Configuration` type.
+	/// @brief	Traits specification for native `Jni::Android::Configuration` type.
 	template<>
 	struct NativeTypeTraits<Jni::Android::Configuration> : EnvironmentTraits<jobject>
 	{
