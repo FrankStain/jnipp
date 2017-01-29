@@ -34,7 +34,7 @@ namespace Utils
 
 	/// @brief	Partial specialization of builder for native function handlers. Used to wrap the handler into type-converting wrap.
 	template< typename TSenderType, typename TNativeReturnType, typename... TNativeArgumentTypes >
-	struct NativeFunctionBuilder<TNativeReturnType (*)( JNIEnv*, TSenderType, TNativeArgumentTypes... )> final
+	struct NativeFunctionBuilder<TNativeReturnType (*)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... )> final
 	{
 		static_assert(
 			std::is_same<jobject, TSenderType>::value || std::is_same<jclass, TSenderType>::value,
@@ -47,8 +47,11 @@ namespace Utils
 		/// @brief	Wrapper for given native function.
 		using Wrapper	= NativeFunctionWrapper<TSenderType, TNativeReturnType, TNativeArgumentTypes...>;
 
+		/// @brief	Type of function, which will wrap the original function.
+		using WrapperFunction = Jni::Marshaling::JavaType<TNativeReturnType> (*)( JNIEnv*, TSenderType, Jni::Marshaling::JavaType<TNativeArgumentTypes>... );
+
 		/// @brief	Factory function for descriptions of native function handlers.
-		template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, TNativeArgumentTypes... ) >
+		template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... ) >
 		static inline NativeFunction GetNativeFunction( const char* function_name );
 	};
 };

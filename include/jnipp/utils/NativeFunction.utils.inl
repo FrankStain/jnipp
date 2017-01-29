@@ -32,11 +32,12 @@ namespace Utils
 	};
 
 	template< typename TSenderType, typename TNativeReturnType, typename... TNativeArgumentTypes >
-	template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, TNativeArgumentTypes... ) >
-	inline NativeFunction NativeFunctionBuilder<TNativeReturnType (*)( JNIEnv*, TSenderType, TNativeArgumentTypes... )>::GetNativeFunction( const char* function_name )
+	template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... ) >
+	inline NativeFunction NativeFunctionBuilder<TNativeReturnType (*)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... )>::GetNativeFunction( const char* function_name )
 	{
+		WrapperFunction func = &Wrapper::template Wrap<NATIVE_FUNCTION>;
 		return {
-			reinterpret_cast<void*>( &Wrapper::template Wrap<NATIVE_FUNCTION> ),
+			reinterpret_cast<void*>( func ),
 			Signature::GetString(),
 			function_name
 		};
