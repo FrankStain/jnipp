@@ -12,7 +12,7 @@ namespace Marshaling
 	inline void ArrayTranslationTraits<TElementTraits, IS_ELEMENT_PLAIN>::ToJava( const NativeType<TAllocatorType>& source, JavaType& destination )
 	{
 		using ElementSignature	= typename TElementTraits::Signature;
-		
+
 		constexpr auto ARRAY_CONSTRUCT_HANDLER		= TElementTraits::ARRAY_CONSTRUCT_HANDLER;
 		constexpr auto ARRAY_ELEMENT_WRITE_HANDLER	= TElementTraits::ARRAY_ELEMENT_WRITE_HANDLER;
 

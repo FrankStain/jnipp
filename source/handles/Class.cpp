@@ -74,7 +74,7 @@ namespace Jni
 	void Class::AcquireClassReference( const char* class_name )
 	{
 		Invalidate();
-		
+
 		JNI_EXPECTS( class_name != nullptr );
 		JNI_EXPECTS( strlen( class_name ) > 0 );
 
@@ -86,7 +86,7 @@ namespace Jni
 	void Class::AcquireClassReference( jobject object_ref )
 	{
 		Invalidate();
-		
+
 		JNI_RETURN_IF( object_ref == nullptr );
 		m_class_ref = VirtualMachine::GetInstance().GetClassReference( object_ref );
 

@@ -5,7 +5,7 @@
 
 namespace Jni
 {
-	/// @brief	
+	/// @brief
 	class VirtualMachine final
 	{
 		friend class Class;	// Intensively uses `GetClassReference` functions.
@@ -57,7 +57,7 @@ namespace Jni
 	private:
 		// ['Java class name'] -> weak `jclass` pointer. Used for shared owning of `jclass` instances.
 		using WeakClassStorage = std::unordered_map< std::string, std::weak_ptr<_jclass> >;
-		
+
 		Utils::Mutex		m_classes_mutex;				// Synchronization mutex for safe multi-thread access to class references.
 		JavaVM*				m_jvm				= nullptr;	// Instance of Java virtual machine.
 		JNIEnv*				m_main_env			= nullptr;	// Instance of Environment for the main thread.

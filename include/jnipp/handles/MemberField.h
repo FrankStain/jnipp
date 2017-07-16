@@ -22,14 +22,14 @@ namespace Jni
 
 		/// @brief	Get the value of field from given handle to object.
 		inline const bool GetValue( const Object& object_handle, TNativeType& value_storage ) const;
-		
+
 		/// @brief	Get the value of field from given object ref.
 		inline const bool GetValue( jobject object_ref, TNativeType& value_storage ) const;
 
-		
+
 		/// @brief	Set the value of field to given object by its handle.
 		inline const bool SetValue( const Object& object_handle, const TNativeType& value_storage ) const;
-		
+
 		/// @brief	Set the value of field to given object by its ref.
 		inline const bool SetValue( jobject object_ref, const TNativeType& value_storage ) const;
 
@@ -44,7 +44,7 @@ namespace Jni
 		inline const MemberField& operator = ( const MemberField& other )	{ m_field_id = other.m_field_id; return *this; };
 		inline const MemberField& operator = ( MemberField&& other )		{ m_field_id = std::move( other.m_field_id ); return *this; };
 
-		
+
 		inline explicit operator const bool () const						{ return IsValid(); };
 		inline jfieldID operator * () const									{ return GetFieldId(); };
 
@@ -54,17 +54,17 @@ namespace Jni
 
 		MemberField( jclass class_ref, const char* field_name );
 
-		
+
 		/// @brief	Get the value of field from given handle to object.
 		inline const bool GetValue( JNIEnv* local_env, const Object& object_handle, TNativeType& value_storage ) const;
-		
+
 		/// @brief	Get the value of field from given object ref.
 		inline const bool GetValue( JNIEnv* local_env, jobject object_ref, TNativeType& value_storage ) const;
 
-		
+
 		/// @brief	Set the value of field to given object by its handle.
 		inline const bool SetValue( JNIEnv* local_env, const Object& object_handle, const TNativeType& value_storage ) const;
-		
+
 		/// @brief	Set the value of field to given object by its ref.
 		inline const bool SetValue( JNIEnv* local_env, jobject object_ref, const TNativeType& value_storage ) const;
 

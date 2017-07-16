@@ -23,7 +23,7 @@ namespace Utils
 
 	private:
 		constexpr static auto FUNCTION_HANDLER	= Jni::Marshaling::NativeTypeTraits<TNativeReturnType>::STATIC_FUNCTION_HANDLER;
-		
+
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.
 		jmethodID	m_function_id	= 0;		// Id of function.
@@ -41,7 +41,7 @@ namespace Utils
 
 	private:
 		constexpr static auto FUNCTION_HANDLER	= Jni::Marshaling::NativeTypeTraits<void>::STATIC_FUNCTION_HANDLER;
-		
+
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.
 		jmethodID	m_function_id	= 0;		// Id of function.
