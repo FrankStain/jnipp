@@ -63,7 +63,7 @@ namespace Jni
 
 		return Call( local_env, arguments... );
 	};
-	
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType StaticFunction<TNativeReturnType, TNativeArguments...>::Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const
 	{
@@ -80,7 +80,7 @@ namespace Jni
 		m_function_id	= other.m_function_id;
 		return *this;
 	};
-	
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline const StaticFunction<TNativeReturnType, TNativeArguments...>&
 	StaticFunction<TNativeReturnType, TNativeArguments...>::operator=( StaticFunction&& other )

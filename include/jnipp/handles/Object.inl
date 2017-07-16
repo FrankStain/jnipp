@@ -9,7 +9,7 @@ namespace Jni
 	Object Object::NewObject( const Class& class_handle, const TNativeArguments&... arguments )
 	{
 		constexpr const size_t LOCAL_FRAME_SIZE = Utils::TotalLocalFrame<TNativeArguments...>::RESULT;
-		
+
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		const MemberFunction<void, TNativeArguments...> construction_func{ class_handle, "<init>" };

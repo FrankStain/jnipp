@@ -10,7 +10,7 @@ namespace Jni
 		: m_class_handle( other.m_class_handle )
 		, m_field_id( other.m_field_id )
 	{
-	
+
 	};
 
 	template< typename TNativeType >
@@ -18,30 +18,30 @@ namespace Jni
 		: m_class_handle( std::move( other.m_class_handle ) )
 		, m_field_id( std::move( other.m_field_id ) )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const std::string& class_name, const std::string& field_name )
 		: StaticField( class_name.c_str(), field_name.c_str() )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const Class& class_handle, const std::string& field_name )
 		: StaticField( class_handle, field_name.c_str() )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const char* class_name, const char* field_name )
 		: StaticField( Class{ class_name }, field_name )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const Class& class_handle, const char* field_name )
 		: m_class_handle( class_handle )
@@ -54,7 +54,7 @@ namespace Jni
 
 		JNI_ENSURES( m_field_id != 0 );
 	};
-		
+
 	template< typename TNativeType >
 	inline const bool StaticField<TNativeType>::GetValue( TNativeType& value_storage ) const
 	{
@@ -77,7 +77,7 @@ namespace Jni
 		local_env->PopLocalFrame( nullptr );
 		return true;
 	};
-		
+
 	template< typename TNativeType >
 	inline const bool StaticField<TNativeType>::SetValue( const TNativeType& value_storage ) const
 	{
@@ -86,7 +86,7 @@ namespace Jni
 
 		return SetValue( local_env, value_storage );
 	};
-		
+
 	template< typename TNativeType >
 	inline const bool StaticField<TNativeType>::SetValue( JNIEnv* local_env, const TNativeType& value_storage ) const
 	{

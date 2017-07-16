@@ -26,7 +26,7 @@ namespace Jni
 		/// @brief	Set the value of field.
 		inline const bool SetValue( const TNativeType& value_storage ) const;
 
-		
+
 		/// @brief	Check the field handle carries valid value.
 		inline const bool IsValid() const				{ return m_class_handle.IsValid() && ( m_field_id != 0 ); };
 

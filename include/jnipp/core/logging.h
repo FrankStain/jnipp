@@ -13,7 +13,7 @@ namespace Jni
 namespace Logging
 {
 	constexpr static const char TAG[] = "Jni++";
-	
+
 	/**
 		@brief	Write arbitrary message into android log-cat.
 		@note	This function makes stuff only in debug build or if `JNIPP_LOGS_ENABLED` is set to `1`.

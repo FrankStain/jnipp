@@ -11,7 +11,7 @@ namespace Marshaling
 	template< typename TJavaType >
 	struct JavaTypeTraits;
 
-	
+
 	/// @brief	Signature of arbitrary regular Java type.
 	template< typename TJavaType >
 	using JavaTypeSignature = typename JavaTypeTraits<TJavaType>::Signature;

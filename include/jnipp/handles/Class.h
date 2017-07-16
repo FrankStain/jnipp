@@ -45,7 +45,7 @@ namespace Jni
 		const Class& operator = ( const std::string& class_name );
 		const Class& operator = ( const char* class_name );
 
-		
+
 		inline explicit operator const bool () const	{ return IsValid(); };
 		inline jclass operator * () const				{ return GetJniReference(); };
 

@@ -45,7 +45,7 @@ namespace Jni
 			, signature( signature )
 			, name( name )
 		{
-		
+
 		};
 
 		/// @brief	Get JNI-consumable form of native function.

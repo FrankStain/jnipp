@@ -16,7 +16,7 @@ namespace Utils
 
 		/// @brief	Call the Java method on given Java object with given function arguments.
 		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;
-		
+
 		/// @brief	Call the non-virtual Java method on given Java object with given function arguments.
 		inline TNativeReturnType CallNonVirtual( jclass class_ref, const TNativeArguments&... arguments ) const;
 
@@ -27,7 +27,7 @@ namespace Utils
 	private:
 		constexpr static auto FUNCTION_HANDLER				= Jni::Marshaling::NativeTypeTraits<TNativeReturnType>::FUNCTION_HANDLER;
 		constexpr static auto NONVIRTUAL_FUNCTION_HANDLER	= Jni::Marshaling::NativeTypeTraits<TNativeReturnType>::NONVIRTUAL_FUNCTION_HANDLER;
-		
+
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jmethodID	m_function_id	= nullptr;	// Id of function.
 		jobject		m_object_ref	= nullptr;	// Reference to Java object.
@@ -42,14 +42,14 @@ namespace Utils
 
 		/// @brief	Call the Java method on given Java object with given function arguments.
 		inline void Call( const TNativeArguments&... arguments ) const;
-		
+
 		/// @brief	Call the non-virtual Java method on given Java object with given function arguments.
 		inline void CallNonVirtual( jclass class_ref, const TNativeArguments&... arguments ) const;
 
 	private:
 		constexpr static auto FUNCTION_HANDLER				= Jni::Marshaling::NativeTypeTraits<void>::FUNCTION_HANDLER;
 		constexpr static auto NONVIRTUAL_FUNCTION_HANDLER	= Jni::Marshaling::NativeTypeTraits<void>::NONVIRTUAL_FUNCTION_HANDLER;
-		
+
 		JNIEnv*		m_local_env		= nullptr;	// Current thread-local JNI environment.
 		jmethodID	m_function_id	= nullptr;	// Id of function.
 		jobject		m_object_ref	= nullptr;	// Reference to Java object.

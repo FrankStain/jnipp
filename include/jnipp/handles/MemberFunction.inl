@@ -9,37 +9,37 @@ namespace Jni
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const MemberFunction& other )
 		: m_function_id( other.m_function_id )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( MemberFunction&& other )
 		: m_function_id( std::move( other.m_function_id ) )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const std::string& class_name, const std::string& function_name )
 		: MemberFunction( class_name.c_str(), function_name.c_str() )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const Class& class_handle, const std::string& function_name )
 		: MemberFunction( *class_handle, function_name.c_str() )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const char* class_name, const char* function_name )
 		: MemberFunction( Class{ class_name }, function_name )
 	{
-	
+
 	};
-	
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const Class& class_handle, const char* function_name )
 		: m_class_handle( class_handle )
@@ -61,7 +61,7 @@ namespace Jni
 	{
 		return Call( *object_handle, arguments... );
 	};
-		
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::Call( jobject object_ref, const TNativeArguments&... arguments ) const
 	{
@@ -70,7 +70,7 @@ namespace Jni
 
 		return Call( local_env, object_ref, arguments... );
 	};
-		
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::Call(
 		JNIEnv* local_env,
@@ -80,7 +80,7 @@ namespace Jni
 	{
 		return Call( local_env, *object_handle, arguments... );
 	};
-		
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::Call(
 		JNIEnv* local_env,
@@ -93,7 +93,7 @@ namespace Jni
 
 		return FunctionInvocation{ local_env, object_ref, m_function_id }.Call( arguments... );
 	};
-		
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
 		const Object& object_handle,
@@ -102,7 +102,7 @@ namespace Jni
 	{
 		return CallNonVirtual( *object_handle, arguments... );
 	};
-		
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
 		jobject object_ref,
@@ -114,7 +114,7 @@ namespace Jni
 
 		return CallNonVirtual( local_env, object_ref, arguments... );
 	};
-		
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
 		JNIEnv* local_env,
@@ -124,7 +124,7 @@ namespace Jni
 	{
 		return CallNonVirtual( local_env, *object_handle, arguments... );
 	};
-		
+
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
 		JNIEnv* local_env,

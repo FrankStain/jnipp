@@ -31,7 +31,7 @@ namespace Utils
 	template< typename... TNativeTypes >
 	struct TotalLocalFrame : NumberSumm<Jni::Marshaling::NativeTypeTraits<TNativeTypes>::LOCAL_FRAME_SIZE...>
 	{
-	
+
 	};
 };
 };

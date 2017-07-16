@@ -13,7 +13,7 @@ namespace Marshaling
 		using ElementJavaType	= typename TElementTraits::JavaType;
 
 		using ElementNativeType	= typename TElementTraits::NativeType;
-		
+
 		using JavaType			= typename TElementTraits::JavaArrayType;
 
 		template< typename TAllocatorType >
@@ -32,7 +32,7 @@ namespace Marshaling
 		using ElementJavaType	= typename TElementTraits::JavaType;
 
 		using ElementNativeType	= typename TElementTraits::NativeType;
-		
+
 		using JavaType			= typename TElementTraits::JavaArrayType;
 
 		template< typename TAllocatorType >
