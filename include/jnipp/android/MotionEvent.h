@@ -36,6 +36,9 @@ namespace Android
 		/// @brief	Get the time (in ms) when the user originally pressed down to start a stream of position events.
 		inline const int64_t GetDownTime() const				{ return m_handles->get_down_time.Call( *this ); };
 
+		/// @brief	Gets the state of all buttons that are pressed such as a mouse or stylus button.
+		inline const int32_t GetButtonState() const				{ return m_handles->get_buton_state.Call( *this ); };
+
 
 		/// @brief	Get the id of point by given index.
 		inline const int32_t GetPointId( const int32_t index ) const		{ return m_handles->get_pointer_id.Call( *this, index ); };
@@ -64,6 +67,7 @@ namespace Android
 			MemberFunction<MotionActionType>	get_action_masked	= { jni_class, "getActionMasked" };
 			MemberFunction<int32_t>				get_action_index	= { jni_class, "getActionIndex" };
 			MemberFunction<int64_t>				get_down_time		= { jni_class, "getDownTime" };
+			MemberFunction<int32_t>				get_buton_state		= { jni_class, "getButtonState" };
 
 			MemberFunction<int32_t, int32_t>	get_pointer_id			= { jni_class, "getPointerId" };
 			MemberFunction<float, int32_t>		get_pointer_x			= { jni_class, "getX" };
