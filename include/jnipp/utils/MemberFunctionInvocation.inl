@@ -15,7 +15,7 @@ namespace Utils
 	{
 		JNI_EXPECTS( m_object_ref != nullptr );
 		JNI_EXPECTS( m_function_id != nullptr );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
@@ -37,7 +37,7 @@ namespace Utils
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, native_result );
 		m_local_env->PopLocalFrame( nullptr );
 		return native_result;
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunctionInvocation<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
@@ -69,7 +69,7 @@ namespace Utils
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, native_result );
 		m_local_env->PopLocalFrame( nullptr );
 		return native_result;
-	};
+	}
 
 	template< typename... TNativeArguments >
 	inline MemberFunctionInvocation<void, TNativeArguments...>::MemberFunctionInvocation( JNIEnv* local_env, jobject object_ref, jmethodID function_id )
@@ -79,7 +79,7 @@ namespace Utils
 	{
 		JNI_EXPECTS( m_object_ref != nullptr );
 		JNI_EXPECTS( m_function_id != nullptr )
-	};
+	}
 
 	template< typename... TNativeArguments >
 	inline void MemberFunctionInvocation<void, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
@@ -98,7 +98,7 @@ namespace Utils
 
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0 );
 		m_local_env->PopLocalFrame( nullptr );
-	};
+	}
 
 	template< typename... TNativeArguments >
 	inline void MemberFunctionInvocation<void, TNativeArguments...>::CallNonVirtual(
@@ -126,6 +126,6 @@ namespace Utils
 
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0 );
 		m_local_env->PopLocalFrame( nullptr );
-	};
-};
-};
+	}
+}
+}

@@ -98,4 +98,4 @@ namespace Jni
 	private:
 		JNIEnv*	m_local_env	= VirtualMachine::GetLocalEnvironment();
 	};
-};
+}

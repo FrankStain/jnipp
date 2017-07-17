@@ -17,7 +17,7 @@ namespace Marshaling {};
 
 /// @brief	Regular Java classes from Android SDK.
 namespace Android {};
-};
+}
 
 
 // Jni++ configuration.
@@ -78,6 +78,7 @@ namespace Android {};
 #include <jnipp/utils/NativeFunction.macros.h>
 
 // Jni++ major utility - virtual machine wrap.
+#include <jnipp/utils/SharedObjectHandles.h>
 #include <jnipp/utils/VirtualMachine.h>
 #include <jnipp/utils/Environment.h>
 

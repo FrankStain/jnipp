@@ -37,7 +37,7 @@ namespace Jni
 				std::is_same<jobject, TSenderType>::value || std::is_same<jclass, TSenderType>::value,
 				"The function handler must be `jobject` or `jclass`."
 			);
-		};
+		}
 
 		/// @brief	Regular const-expression constructor.
 		constexpr NativeFunction( void* address, const char* signature, const char* name )
@@ -46,14 +46,14 @@ namespace Jni
 			, name( name )
 		{
 
-		};
+		}
 
 		/// @brief	Get JNI-consumable form of native function.
 		inline JNINativeMethod GetJniNativeMethod() const
 		{
 			return { name, signature, address };
-		};
-	};
+		}
+	}
 
 	/**
 		@brief	Binding table for native handlers of Java classes.
@@ -63,5 +63,5 @@ namespace Jni
 	{
 		const char*								class_name;	// Name of Java class.
 		std::initializer_list<NativeFunction>	natives;	// List of native handlers.
-	};
-};
+	}
+}

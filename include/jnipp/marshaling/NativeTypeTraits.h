@@ -30,7 +30,7 @@ namespace Marshaling
 	inline void FromJava( const JavaType<TNativeType>& source, TNativeType& destination )
 	{
 		NativeTypeTraits<TNativeType>::FromJava( source, destination );
-	};
+	}
 
 	/**
 		@brief	Regular converting function from C++ type to Java one.
@@ -42,7 +42,7 @@ namespace Marshaling
 	inline void ToJava( const TNativeType& source, JavaType<TNativeType>& destination )
 	{
 		NativeTypeTraits<TNativeType>::ToJava( source, destination );
-	};
+	}
 
 	/**
 		@brief	NRVO-optimizable converting function from Java type to C++ one.
@@ -56,7 +56,7 @@ namespace Marshaling
 		TNativeType destination;
 		NativeTypeTraits<TNativeType>::FromJava( source, destination );
 		return destination;
-	};
+	}
 
 	/**
 		@brief	NRVO-optimizable converting function from C++ type to Java one.
@@ -70,7 +70,7 @@ namespace Marshaling
 		JavaType<TNativeType> destination;
 		NativeTypeTraits<TNativeType>::ToJava( source, destination );
 		return destination;
-	};
+	}
 
 
 	/// @brief	Traits specification for native `void` type.
@@ -435,5 +435,5 @@ namespace Marshaling
 		/// @brief	Type translation from C++ space to Java space.
 		static inline void ToJava( const NativeType& source, JavaType& destination );
 	};
-};
-};
+}
+}

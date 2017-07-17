@@ -18,6 +18,6 @@ namespace Jni
 		{
 			static const char string[] = { CHARS..., 0 };
 			return string;
-		};
+		}
 	};
-};
+}

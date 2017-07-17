@@ -442,5 +442,5 @@ namespace Marshaling
 		/// @brief	Member-function non-virtual invocation.
 		static constexpr auto NONVIRTUAL_FUNCTION_HANDLER		= &JNIEnv::CallNonvirtualObjectMethod;
 	};
-};
-};
+}
+}

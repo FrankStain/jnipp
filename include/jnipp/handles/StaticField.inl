@@ -11,7 +11,7 @@ namespace Jni
 		, m_field_id( other.m_field_id )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField<TNativeType>::StaticField( StaticField&& other )
@@ -19,28 +19,28 @@ namespace Jni
 		, m_field_id( std::move( other.m_field_id ) )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const std::string& class_name, const std::string& field_name )
 		: StaticField( class_name.c_str(), field_name.c_str() )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const Class& class_handle, const std::string& field_name )
 		: StaticField( class_handle, field_name.c_str() )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const char* class_name, const char* field_name )
 		: StaticField( Class{ class_name }, field_name )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const Class& class_handle, const char* field_name )
@@ -53,7 +53,7 @@ namespace Jni
 		m_field_id		= local_env->GetStaticFieldID( *m_class_handle, field_name, Signature::GetString() );
 
 		JNI_ENSURES( m_field_id != 0 );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool StaticField<TNativeType>::GetValue( TNativeType& value_storage ) const
@@ -62,7 +62,7 @@ namespace Jni
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return GetValue( local_env, value_storage );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool StaticField<TNativeType>::GetValue( JNIEnv* local_env, TNativeType& value_storage ) const
@@ -76,7 +76,7 @@ namespace Jni
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, true );
 		local_env->PopLocalFrame( nullptr );
 		return true;
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool StaticField<TNativeType>::SetValue( const TNativeType& value_storage ) const
@@ -85,7 +85,7 @@ namespace Jni
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return SetValue( local_env, value_storage );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool StaticField<TNativeType>::SetValue( JNIEnv* local_env, const TNativeType& value_storage ) const
@@ -100,7 +100,7 @@ namespace Jni
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, true );
 		local_env->PopLocalFrame( nullptr );
 		return true;
-	};
+	}
 
 	template< typename TNativeType >
 	inline const StaticField<TNativeType>& StaticField<TNativeType>::operator=( const StaticField& other )
@@ -108,7 +108,7 @@ namespace Jni
 		m_class_handle	= other.m_class_handle;
 		m_field_id		= other.m_field_id;
 		return *this;
-	};
+	}
 
 	template< typename TNativeType >
 	inline const StaticField<TNativeType>& StaticField<TNativeType>::operator=( StaticField&& other )
@@ -116,5 +116,5 @@ namespace Jni
 		m_class_handle	= std::move( other.m_class_handle );
 		m_field_id		= std::move( other.m_field_id );
 		return *this;
-	};
-};
+	}
+}

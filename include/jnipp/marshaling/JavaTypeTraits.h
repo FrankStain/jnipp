@@ -116,5 +116,5 @@ namespace Marshaling
 		/// @brief	Java type signature.
 		using Signature	= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'S', 't', 'r', 'i', 'n', 'g'>;
 	};
-};
-};
+}
+}

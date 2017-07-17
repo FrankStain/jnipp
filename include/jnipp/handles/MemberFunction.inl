@@ -10,35 +10,35 @@ namespace Jni
 		: m_function_id( other.m_function_id )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( MemberFunction&& other )
 		: m_function_id( std::move( other.m_function_id ) )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const std::string& class_name, const std::string& function_name )
 		: MemberFunction( class_name.c_str(), function_name.c_str() )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const Class& class_handle, const std::string& function_name )
 		: MemberFunction( *class_handle, function_name.c_str() )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const char* class_name, const char* function_name )
 		: MemberFunction( Class{ class_name }, function_name )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	MemberFunction<TNativeReturnType, TNativeArguments...>::MemberFunction( const Class& class_handle, const char* function_name )
@@ -51,7 +51,7 @@ namespace Jni
 		m_function_id	= local_env->GetMethodID( *m_class_handle, function_name, Signature::GetString() );
 
 		JNI_ENSURES( m_function_id != 0 );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::Call(
@@ -60,7 +60,7 @@ namespace Jni
 	) const
 	{
 		return Call( *object_handle, arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::Call( jobject object_ref, const TNativeArguments&... arguments ) const
@@ -69,7 +69,7 @@ namespace Jni
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return Call( local_env, object_ref, arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::Call(
@@ -79,7 +79,7 @@ namespace Jni
 	) const
 	{
 		return Call( local_env, *object_handle, arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::Call(
@@ -92,7 +92,7 @@ namespace Jni
 		JNI_RETURN_IF_E( object_ref == nullptr, TNativeReturnType(), "Attempt to call member function of null object." );
 
 		return FunctionInvocation{ local_env, object_ref, m_function_id }.Call( arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
@@ -101,7 +101,7 @@ namespace Jni
 	) const
 	{
 		return CallNonVirtual( *object_handle, arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
@@ -113,7 +113,7 @@ namespace Jni
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return CallNonVirtual( local_env, object_ref, arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
@@ -123,7 +123,7 @@ namespace Jni
 	) const
 	{
 		return CallNonVirtual( local_env, *object_handle, arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType MemberFunction<TNativeReturnType, TNativeArguments...>::CallNonVirtual(
@@ -136,5 +136,5 @@ namespace Jni
 		JNI_RETURN_IF_E( object_ref == nullptr, TNativeReturnType(), "Attempt to call member function of null object." );
 
 		return FunctionInvocation{ local_env, object_ref, m_function_id }.CallNonVirtual( *m_class_handle, arguments... );
-	};
-};
+	}
+}

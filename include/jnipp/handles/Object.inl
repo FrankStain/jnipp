@@ -32,10 +32,10 @@ namespace Jni
 			local_env->ExceptionDescribe();
 			local_env->ExceptionClear();
 			result_handle.Invalidate();
-		};
+		}
 
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, result_handle );
 		local_env->PopLocalFrame( nullptr );
 		return result_handle;
-	};
-};
+	}
+}

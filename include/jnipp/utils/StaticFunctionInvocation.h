@@ -46,5 +46,5 @@ namespace Utils
 		jclass		m_class_ref		= nullptr;	// Reference to Java object.
 		jmethodID	m_function_id	= 0;		// Id of function.
 	};
-};
-};
+}
+}

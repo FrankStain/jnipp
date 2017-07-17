@@ -24,9 +24,9 @@ namespace Marshaling
 		{
 			auto element = static_cast<ElementJavaType>( (local_env->*ARRAY_ELEMENT_READ_HANDLER)( source, element_index ) );
 			destination.emplace_back( Jni::Marshaling::FromJava<ElementNativeType>( element ) );
-		};
+		}
 		local_env->PopLocalFrame( nullptr );
-	};
+	}
 
 	template< typename TElementTraits >
 	template< typename TAllocatorType >
@@ -53,6 +53,6 @@ namespace Marshaling
 		);
 
 		(local_env->*ARRAY_ELEMENTS_RELEASE_HANDLER)( source, array_elements, JNI_ABORT );
-	};
-};
-};
+	}
+}
+}

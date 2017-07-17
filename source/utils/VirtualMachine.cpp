@@ -12,7 +12,7 @@ namespace Jni
 	{
 		static VirtualMachine vm;
 		return vm;
-	};
+	}
 
 	const bool VirtualMachine::Initialize( JavaVM* jvm )
 	{
@@ -35,7 +35,7 @@ namespace Jni
 		JNI_RETURN_IF_E( !vm.CaptureClassLoader(), false, "Failed to capture the class loader." );
 		JNI_RETURN_IF_E( !vm.AcquireClassInterface(), false, "Failed to acquire the interface of `java.lang.Class` class." );
 		return true;
-	};
+	}
 
 	void VirtualMachine::Finalize()
 	{
@@ -46,7 +46,7 @@ namespace Jni
 		vm.m_jvm			= nullptr;
 		vm.m_main_env		= nullptr;
 		vm.m_main_thread_id	= 0;
-	};
+	}
 
 	const bool VirtualMachine::CaptureClassLoader()
 	{
@@ -72,7 +72,7 @@ namespace Jni
 		JNI_RETURN_IF_E( !m_class_loader, false, "Failed to get class loader object." );
 
 		return true;
-	};
+	}
 
 	const bool VirtualMachine::AcquireClassInterface()
 	{
@@ -92,7 +92,7 @@ namespace Jni
 		JNI_RETURN_IF_E( !m_get_simple_name, false, "Failed to locate `String Class::getSimpleName()` function." );
 
 		return true;
-	};
+	}
 
 	const bool VirtualMachine::RegisterClassNatives( const NativeBindingTable& bindings )
 	{
@@ -119,7 +119,7 @@ namespace Jni
 		);
 
 		return true;
-	};
+	}
 
 	const bool VirtualMachine::RegisterClassNatives( std::initializer_list<NativeBindingTable> bindings )
 	{
@@ -127,7 +127,7 @@ namespace Jni
 			bindings.begin(), bindings.end(),
 			static_cast<const bool (*)( const NativeBindingTable& )>( VirtualMachine::RegisterClassNatives )
 		);
-	};
+	}
 
 	JNIEnv* VirtualMachine::GetLocalEnvironment()
 	{
@@ -145,7 +145,7 @@ namespace Jni
 
 		JNI_RETURN_IF_E( pthread_setspecific( vm.m_detach_key, local_env ) != 0, local_env, "Failed to set thread-local detach routine for JniEnv." );
 		return local_env;
-	};
+	}
 
 	void VirtualMachine::DeleteSharedClass( jclass value )
 	{
@@ -154,14 +154,14 @@ namespace Jni
 		if( value != nullptr )
 		{
 			GetLocalEnvironment()->DeleteGlobalRef( value );
-		};
-	};
+		}
+	}
 
 	void VirtualMachine::DetachLocalEnv( void* local_env )
 	{
 		JNI_EXPECTS( IsValid() );
 		GetInstance().m_jvm->DetachCurrentThread();
-	};
+	}
 
 	std::shared_ptr<_jclass> VirtualMachine::GetClassReference( jobject local_object_ref )
 	{
@@ -174,7 +174,7 @@ namespace Jni
 
 		// The value returned is `std::shared_ptr` with custom deleter.
 		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class ) ), VirtualMachine::DeleteSharedClass };
-	};
+	}
 
 	std::shared_ptr<_jclass> VirtualMachine::GetClassReference( jclass local_class_ref )
 	{
@@ -185,7 +185,7 @@ namespace Jni
 
 		// The value returned is `std::shared_ptr` with custom deleter.
 		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class_ref ) ), VirtualMachine::DeleteSharedClass };
-	};
+	}
 
 	std::shared_ptr<_jclass> VirtualMachine::GetClassReference( const char* class_name )
 	{
@@ -201,7 +201,7 @@ namespace Jni
 		weak_class			= shared_class;
 
 		return shared_class;
-	};
+	}
 
 	std::shared_ptr<_jclass> VirtualMachine::LoadClass( const char* class_name )
 	{
@@ -228,25 +228,25 @@ namespace Jni
 				if( stored_char == '/' )
 				{
 					stored_char = '.';
-				};
-			};
+				}
+			}
 
 			// For any other thread only captured `ClassLoader` instance may be used.
 			local_class_ref = reinterpret_cast<jclass>(
 				local_env->CallObjectMethod( *m_class_loader, *m_load_class_func, Marshaling::ToJava( modified_class_name ) )
 			);
-		};
+		}
 
 		if( local_env->ExceptionCheck() == JNI_TRUE )
 		{
 			local_env->ExceptionDescribe();
 			local_env->ExceptionClear();
 			local_class_ref = nullptr;
-		};
+		}
 
 		JNI_RETURN_IF_W( local_class_ref == nullptr, {}, "No class was found with name `%s`.", class_name );
 
 		// The value returned is `std::shared_ptr` with custom deleter.
 		return { reinterpret_cast<jclass>( local_env->NewGlobalRef( local_class_ref ) ), VirtualMachine::DeleteSharedClass };
-	};
-};
+	}
+}

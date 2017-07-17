@@ -33,5 +33,5 @@ namespace Utils
 	{
 
 	};
-};
-};
+}
+}

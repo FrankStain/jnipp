@@ -52,4 +52,4 @@ namespace Jni
 		Class		m_class_handle;				// Handle to class owning the static method.
 		jmethodID	m_function_id	= nullptr;	// Id of Java static method.
 	};
-};
+}

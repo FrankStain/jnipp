@@ -18,7 +18,7 @@ namespace Utils
 		return (Jni::Marshaling::JavaType<TNativeReturnType>)Jni::Marshaling::ToJava<TNativeReturnType>(
 			NATIVE_FUNCTION( local_env, sender, Jni::Marshaling::FromJava<TNativeArgumentTypes>( arguments )... )
 		);
-	};
+	}
 
 	template< typename TSenderType, typename... TNativeArgumentTypes >
 	template< void (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... ) >
@@ -29,7 +29,7 @@ namespace Utils
 	)
 	{
 		NATIVE_FUNCTION( local_env, sender, Jni::Marshaling::FromJava<TNativeArgumentTypes>( arguments )... );
-	};
+	}
 
 	template< typename TSenderType, typename TNativeReturnType, typename... TNativeArgumentTypes >
 	template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... ) >
@@ -40,7 +40,7 @@ namespace Utils
 			reinterpret_cast<void*>( func ),
 			Signature::GetString(),
 			function_name
-		};
-	};
-};
-};
+		}
+	}
+}
+}

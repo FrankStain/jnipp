@@ -68,7 +68,7 @@ namespace Utils
 	{
 		using String = StaticString<'[', CHARS...>;
 	};
-};
+}
 
 	/**
 		@brief	Combiner of static strings.
@@ -93,4 +93,4 @@ namespace Utils
 	/// @brief	Class path extractor from `ClassName` and `ArrayName` static strings.
 	template< typename TClassNameString >
 	using ClassPath = typename Utils::ClassPathExtractor<TClassNameString>::String;
-};
+}

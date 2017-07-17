@@ -75,4 +75,4 @@ namespace Jni
 
 		jfieldID	m_field_id	= nullptr;	// Field id for JNI.
 	};
-};
+}

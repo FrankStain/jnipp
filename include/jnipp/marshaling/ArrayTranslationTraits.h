@@ -44,5 +44,5 @@ namespace Marshaling
 		template< typename TAllocatorType >
 		static inline void ToJava( const NativeType<TAllocatorType>& source, JavaType& destination );
 	};
-};
-};
+}
+}

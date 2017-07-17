@@ -10,42 +10,42 @@ namespace Jni
 		: m_field_id( other.m_field_id )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	MemberField<TNativeType>::MemberField( MemberField&& other )
 		: m_field_id( std::move( other.m_field_id ) )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	MemberField<TNativeType>::MemberField( const std::string& class_name, const std::string& field_name )
 		: MemberField( class_name.c_str(), field_name.c_str() )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	MemberField<TNativeType>::MemberField( const Class& class_handle, const std::string& field_name )
 		: MemberField( *class_handle, field_name.c_str() )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	MemberField<TNativeType>::MemberField( const char* class_name, const char* field_name )
 		: MemberField( Class{ class_name }, field_name )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	MemberField<TNativeType>::MemberField( const Class& class_handle, const char* field_name )
 		: MemberField( *class_handle, field_name )
 	{
 
-	};
+	}
 
 	template< typename TNativeType >
 	MemberField<TNativeType>::MemberField( jclass class_ref, const char* field_name )
@@ -57,13 +57,13 @@ namespace Jni
 		m_field_id		= local_env->GetFieldID( class_ref, field_name, Signature::GetString() );
 
 		JNI_ENSURES( m_field_id != 0 );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::GetValue( const Object& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( *object_handle, value_storage );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::GetValue( jobject object_ref, TNativeType& value_storage ) const
@@ -72,13 +72,13 @@ namespace Jni
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return GetValue( local_env, object_ref, value_storage );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::GetValue( JNIEnv* local_env, const Object& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( local_env, *object_handle, value_storage );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::GetValue( JNIEnv* local_env, jobject object_ref, TNativeType& value_storage ) const
@@ -93,13 +93,13 @@ namespace Jni
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, true );
 		local_env->PopLocalFrame( nullptr );
 		return true;
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::SetValue( const Object& object_handle, const TNativeType& value_storage ) const
 	{
 		return SetValue( *object_handle, value_storage );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::SetValue( jobject object_ref, const TNativeType& value_storage ) const
@@ -108,13 +108,13 @@ namespace Jni
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return SetValue( local_env, object_ref, value_storage );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::SetValue( JNIEnv* local_env, const Object& object_handle, const TNativeType& value_storage ) const
 	{
 		return SetValue( local_env, *object_handle, value_storage );
-	};
+	}
 
 	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::SetValue( JNIEnv* local_env, jobject object_ref, const TNativeType& value_storage ) const
@@ -130,5 +130,5 @@ namespace Jni
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, true );
 		local_env->PopLocalFrame( nullptr );
 		return true;
-	};
-};
+	}
+}

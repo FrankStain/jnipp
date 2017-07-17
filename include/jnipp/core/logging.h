@@ -28,7 +28,7 @@ namespace Logging
 		#if( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD )
 		__android_log_print( message_type, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
-	};
+	}
 
 	/**
 		@brief	Write message into android log-cat with `VERBOSE` type.
@@ -43,7 +43,7 @@ namespace Logging
 		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_VERBOSE_ENABLED )
 		__android_log_print( ANDROID_LOG_VERBOSE, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
-	};
+	}
 
 	/**
 		@brief	Write message into android log-cat with `DEBUG` type.
@@ -58,7 +58,7 @@ namespace Logging
 		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_DEBUG_ENABLED )
 		__android_log_print( ANDROID_LOG_DEBUG, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
-	};
+	}
 
 	/**
 		@brief	Write message into android log-cat with `INFO` type.
@@ -73,7 +73,7 @@ namespace Logging
 		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_INFO_ENABLED )
 		__android_log_print( ANDROID_LOG_INFO, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
-	};
+	}
 
 	/**
 		@brief	Write message into android log-cat with `WARNING` type.
@@ -88,7 +88,7 @@ namespace Logging
 		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_WARNING_ENABLED )
 		__android_log_print( ANDROID_LOG_WARN, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
-	};
+	}
 
 	/**
 		@brief	Write message into android log-cat with `ERROR` type.
@@ -103,7 +103,7 @@ namespace Logging
 		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_EROR_ENABLED )
 		__android_log_print( ANDROID_LOG_ERROR, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
-	};
+	}
 
 	/**
 		@brief	Write message into android log-cat with `ASSERT` type.
@@ -118,8 +118,8 @@ namespace Logging
 		#if( ( JNIPP_LOGS_ENABLED || JNIPP_DEBUG_BUILD ) && JNIPP_LOGS_ASSERT_ENABLED )
 		__android_log_print( ANDROID_LOG_FATAL, TAG, format, std::forward<TArgumentTypes>( arguments )... );
 		#endif
-	};
-};
-};
+	}
+}
+}
 
 #pragma GCC diagnostic pop

@@ -59,4 +59,4 @@ namespace Jni
 	private:
 		std::shared_ptr<_jclass>	m_class_ref;	// Shared JNI representation of Java class global reference.
 	};
-};
+}

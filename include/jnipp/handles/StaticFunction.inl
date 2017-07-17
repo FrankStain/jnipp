@@ -11,7 +11,7 @@ namespace Jni
 		, m_function_id( other.m_function_id )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( StaticFunction&& other )
@@ -19,28 +19,28 @@ namespace Jni
 		, m_function_id( std::move( other.m_function_id ) )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const std::string& class_name, const std::string& function_name )
 		: StaticFunction( class_name.c_str(), function_name.c_str() )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const Class& class_handle, const std::string& function_name )
 		: StaticFunction( class_handle, function_name.c_str() )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const char* class_name, const char* function_name )
 		: StaticFunction( Class{ class_name }, function_name )
 	{
 
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	StaticFunction<TNativeReturnType, TNativeArguments...>::StaticFunction( const Class& class_handle, const char* function_name )
@@ -53,7 +53,7 @@ namespace Jni
 		m_function_id	= local_env->GetStaticMethodID( *m_class_handle, function_name, Signature::GetString() );
 
 		JNI_ENSURES( m_function_id != 0 );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType StaticFunction<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
@@ -62,7 +62,7 @@ namespace Jni
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 
 		return Call( local_env, arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType StaticFunction<TNativeReturnType, TNativeArguments...>::Call( JNIEnv* local_env, const TNativeArguments&... arguments ) const
@@ -70,7 +70,7 @@ namespace Jni
 		JNI_RETURN_IF_E( !IsValid(), TNativeReturnType(), "Function handle was not initialized properly." );
 
 		return FunctionInvocation{ local_env, *m_class_handle, m_function_id }.Call( arguments... );
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline const StaticFunction<TNativeReturnType, TNativeArguments...>&
@@ -79,7 +79,7 @@ namespace Jni
 		m_class_handle	= other.m_class_handle;
 		m_function_id	= other.m_function_id;
 		return *this;
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline const StaticFunction<TNativeReturnType, TNativeArguments...>&
@@ -88,5 +88,5 @@ namespace Jni
 		m_class_handle	= std::move( other.m_class_handle );
 		m_function_id	= std::move( other.m_function_id );
 		return *this;
-	};
-};
+	}
+}

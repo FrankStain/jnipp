@@ -76,4 +76,4 @@ namespace Jni
 		MemberFunction<std::string>			m_get_name;				// `java.lang.String java.lang.Class::getName()`
 		MemberFunction<std::string>			m_get_simple_name;		// `java.lang.String java.lang.Class::getSimpleName()`
 	};
-};
+}

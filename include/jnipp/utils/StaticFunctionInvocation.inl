@@ -15,7 +15,7 @@ namespace Utils
 	{
 		JNI_EXPECTS( m_class_ref != nullptr );
 		JNI_EXPECTS( m_function_id != 0 )
-	};
+	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
 	inline TNativeReturnType StaticFunctionInvocation<TNativeReturnType, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
@@ -38,7 +38,7 @@ namespace Utils
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0, native_result );
 		m_local_env->PopLocalFrame( nullptr );
 		return native_result;
-	};
+	}
 
 	template< typename... TNativeArguments >
 	inline StaticFunctionInvocation<void, TNativeArguments...>::StaticFunctionInvocation( JNIEnv* local_env, jclass class_ref, jmethodID function_id )
@@ -48,7 +48,7 @@ namespace Utils
 	{
 		JNI_EXPECTS( m_class_ref != nullptr );
 		JNI_EXPECTS( m_function_id != 0 )
-	};
+	}
 
 	template< typename... TNativeArguments >
 	inline void StaticFunctionInvocation<void, TNativeArguments...>::Call( const TNativeArguments&... arguments ) const
@@ -67,6 +67,6 @@ namespace Utils
 
 		JNI_RETURN_IF( LOCAL_FRAME_SIZE == 0 );
 		m_local_env->PopLocalFrame( nullptr );
-	};
-};
-};
+	}
+}
+}

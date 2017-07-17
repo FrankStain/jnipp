@@ -54,5 +54,5 @@ namespace Utils
 		template< TNativeReturnType (*NATIVE_FUNCTION)( JNIEnv*, TSenderType, const TNativeArgumentTypes&... ) >
 		static inline NativeFunction GetNativeFunction( const char* function_name );
 	};
-};
-};
+}
+}

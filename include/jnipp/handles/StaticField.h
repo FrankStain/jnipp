@@ -59,4 +59,4 @@ namespace Jni
 		Class		m_class_handle;				// Handle to class of field.
 		jfieldID	m_field_id		= nullptr;	// Field id for JNI.
 	};
-};
+}

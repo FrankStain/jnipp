@@ -20,7 +20,7 @@ namespace Android
 		const Thread& operator = ( const Thread& other )	{ Object::operator=( other ); return *this; };
 		const Thread& operator = ( Thread&& other )			{ Object::operator=( other ); return *this; };
 	};
-};
+}
 
 namespace Marshaling
 {
@@ -44,13 +44,13 @@ namespace Marshaling
 		static inline void FromJava( const JavaType& source, NativeType& destination )
 		{
 			destination = source;
-		};
+		}
 
 		/// @brief	Type translation from C++ space to Java space.
 		static inline void ToJava( const NativeType& source, JavaType& destination )
 		{
 			destination = *source;
-		};
+		}
 	};
-};
-};
+}
+}
