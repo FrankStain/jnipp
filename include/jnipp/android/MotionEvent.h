@@ -4,6 +4,7 @@
 
 #include <jnipp/jnipp.h>
 #include <android/input.h>
+#include "InputDevice.const.h"
 #include "MotionEvent.const.h"
 
 
