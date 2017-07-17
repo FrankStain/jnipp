@@ -29,7 +29,7 @@ namespace Jni
 
 		/// @brief	Get the storage for handles table.
 		template< typename TCachedHandles >
-		static inline Utils::HandlesStorageEntry<TCachedHandles>& GetHandlesStorage();
+		static inline Utils::HandlesStorageEntry<TCachedHandles>* GetHandlesStorage();
 
 		/// @brief	Get the global `JavaVM` instance.
 		static inline JavaVM* GetJvm()				{ return GetInstance().m_jvm; };

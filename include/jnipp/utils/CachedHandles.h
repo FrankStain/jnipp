@@ -21,24 +21,39 @@ namespace Jni
 	{
 	// Construction and assignation.
 	public:
-		CachedHandles();
+		CachedHandles() = default;
 		CachedHandles( const CachedHandles& other );
 		CachedHandles( CachedHandles&& other );
+		CachedHandles( const CachedHandles<TCachedHandles, !IS_PERMANENT>& other );
+		CachedHandles( CachedHandles<TCachedHandles, !IS_PERMANENT>&& other );
 		~CachedHandles();
 
 		// There is nothing different between two instances of same type.
-		inline CachedHandles& operator = ( const CachedHandles& other ) = delete;
-		inline CachedHandles& operator = ( CachedHandles&& other ) = delete;
+		inline CachedHandles& operator = ( const CachedHandles& other );
+		inline CachedHandles& operator = ( CachedHandles&& other );
+		inline CachedHandles& operator = ( const CachedHandles<TCachedHandles, !IS_PERMANENT>& other );
+		inline CachedHandles& operator = ( CachedHandles<TCachedHandles, !IS_PERMANENT>&& other );
 
 	// public interface.
 	public:
 		/// @brief	Get the cached handles.
-		inline const TCachedHandles& GetHandles() const		{ return *m_storage.GetHandles(); };
+		inline const TCachedHandles& GetHandles() const		{ return *GetStorage().GetHandles(); };
 
-		inline const TCachedHandles* operator -> () const	{ return m_storage.GetHandles(); };
+		inline const TCachedHandles* operator -> () const	{ return GetStorage().GetHandles(); };
+
+	// Private interface.
+	private:
+		/// @brief	Lazy initialization of storage.
+		inline Utils::HandlesStorageEntry<TCachedHandles>& GetStorage() const;
+
+		///
+		inline void RetainStorage() const;
+
+		///
+		inline void ReleaseStorage() const;
 
 	// Private state.
 	private:
-		Utils::HandlesStorageEntry<TCachedHandles>&	m_storage;
+		mutable Utils::HandlesStorageEntry<TCachedHandles>*	m_storage	= nullptr;
 	};
 }
