@@ -21,7 +21,7 @@ namespace Android {};
 
 
 // Jni++ configuration.
-#include <jnipp/core/configuration.h>
+#include "core/configuration.h"
 
 // Most major system includes.
 #include <cstdint>
@@ -39,60 +39,61 @@ namespace Android {};
 #include <android/log.h>
 
 // Jni++ core stuff.
-#include <jnipp/core/logging.h>
-#include <jnipp/core/macros.h>
+#include "core/logging.h"
+#include "core/macros.h"
 
 // Jni++ utils.
-#include <jnipp/utils/StaticString.h>
-#include <jnipp/utils/StaticString.operations.h>
+#include "utils/StaticString.h"
+#include "utils/StaticString.operations.h"
 
 // Jni++ type marshaling.
-#include <jnipp/marshaling/JavaTypeTraits.h>
-#include <jnipp/marshaling/EnvironmentTraits.h>
-#include <jnipp/marshaling/ArrayTranslationTraits.h>
-#include <jnipp/marshaling/NativeTypeTraits.h>
+#include "marshaling/JavaTypeTraits.h"
+#include "marshaling/EnvironmentTraits.h"
+#include "marshaling/ArrayTranslationTraits.h"
+#include "marshaling/NativeTypeTraits.h"
 
 // Jni++ forward declarations and useful types.
-#include <jnipp/utils/forwards.h>
-#include <jnipp/utils/types.h>
+#include "utils/forwards.h"
+#include "utils/types.h"
 
 // Jni++ wrap for Java classes.
-#include <jnipp/handles/Class.h>
-#include <jnipp/handles/Object.h>
-#include <jnipp/marshaling/NativeTypeTraits.Object.h>
-#include <jnipp/marshaling/NativeTypeTraits.Class.h>
+#include "handles/Class.h"
+#include "handles/Object.h"
+#include "marshaling/NativeTypeTraits.Object.h"
+#include "marshaling/NativeTypeTraits.Class.h"
 
 // Jni++ wrap for Java class fields.
-#include <jnipp/handles/MemberField.h>
-#include <jnipp/handles/StaticField.h>
+#include "handles/MemberField.h"
+#include "handles/StaticField.h"
 
 // Jni++ wrap for Java functions.
-#include <jnipp/utils/MemberFunctionInvocation.h>
-#include <jnipp/utils/StaticFunctionInvocation.h>
-#include <jnipp/handles/MemberFunction.h>
-#include <jnipp/handles/StaticFunction.h>
+#include "utils/MemberFunctionInvocation.h"
+#include "utils/StaticFunctionInvocation.h"
+#include "handles/MemberFunction.h"
+#include "handles/StaticFunction.h"
 
 // Some crucial Jni++ types.
-#include <jnipp/utils/NativeFunction.h>
-#include <jnipp/utils/NativeFunction.utils.h>
-#include <jnipp/utils/NativeFunction.macros.h>
+#include "utils/NativeFunction.h"
+#include "utils/NativeFunction.utils.h"
+#include "utils/NativeFunction.macros.h"
 
 // Jni++ major utility - virtual machine wrap.
-#include <jnipp/utils/SharedObjectHandles.h>
-#include <jnipp/utils/VirtualMachine.h>
-#include <jnipp/utils/Environment.h>
+#include "utils/HandlesCacheEntry.h"
+#include "utils/CachedHandles.h"
+#include "utils/VirtualMachine.h"
+#include "utils/Environment.h"
 
 // Deferred implementation of Jni++ functionality.
-#include <jnipp/utils/Environment.inl>
-#include <jnipp/utils/NativeFunction.utils.inl>
-#include <jnipp/handles/Object.inl>
-#include <jnipp/handles/MemberField.inl>
-#include <jnipp/handles/StaticField.inl>
-#include <jnipp/handles/MemberFunction.inl>
-#include <jnipp/handles/StaticFunction.inl>
-#include <jnipp/utils/MemberFunctionInvocation.inl>
-#include <jnipp/utils/StaticFunctionInvocation.inl>
-#include <jnipp/marshaling/NativeTypeTraits.FromJava.inl>
-#include <jnipp/marshaling/NativeTypeTraits.ToJava.inl>
-#include <jnipp/marshaling/ArrayTranslationTraits.FromJava.inl>
-#include <jnipp/marshaling/ArrayTranslationTraits.ToJava.inl>
+#include "utils/Environment.inl"
+#include "utils/NativeFunction.utils.inl"
+#include "handles/Object.inl"
+#include "handles/MemberField.inl"
+#include "handles/StaticField.inl"
+#include "handles/MemberFunction.inl"
+#include "handles/StaticFunction.inl"
+#include "utils/MemberFunctionInvocation.inl"
+#include "utils/StaticFunctionInvocation.inl"
+#include "marshaling/NativeTypeTraits.FromJava.inl"
+#include "marshaling/NativeTypeTraits.ToJava.inl"
+#include "marshaling/ArrayTranslationTraits.FromJava.inl"
+#include "marshaling/ArrayTranslationTraits.ToJava.inl"
