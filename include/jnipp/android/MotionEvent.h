@@ -65,10 +65,10 @@ namespace Android
 			MemberFunction<int32_t>				get_action_index	= { jni_class, "getActionIndex" };
 			MemberFunction<int64_t>				get_down_time		= { jni_class, "getDownTime" };
 
-			MemberFunction<int32_t, int32_t>	get_pointer_id			= { jni_class, "" };
-			MemberFunction<float, int32_t>		get_pointer_x			= { jni_class, "" };
-			MemberFunction<float, int32_t>		get_pointer_y			= { jni_class, "" };
-			MemberFunction<float, int32_t>		get_pointer_pressure	= { jni_class, "" };
+			MemberFunction<int32_t, int32_t>	get_pointer_id			= { jni_class, "getPointerId" };
+			MemberFunction<float, int32_t>		get_pointer_x			= { jni_class, "getX" };
+			MemberFunction<float, int32_t>		get_pointer_y			= { jni_class, "getY" };
+			MemberFunction<float, int32_t>		get_pointer_pressure	= { jni_class, "getPressure" };
 		};
 
 		CachedHandles<MotionEventHandles, true>	m_handles;	// Permanently cached handles for object.
