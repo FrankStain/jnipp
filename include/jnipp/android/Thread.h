@@ -2,6 +2,8 @@
 // Apache 2.0 License
 #pragma once
 
+#include <jnipp/jnipp.h>
+
 
 namespace Jni
 {
