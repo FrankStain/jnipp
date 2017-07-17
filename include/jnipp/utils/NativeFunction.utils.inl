@@ -40,7 +40,7 @@ namespace Utils
 			reinterpret_cast<void*>( func ),
 			Signature::GetString(),
 			function_name
-		}
+		};
 	}
 }
 }

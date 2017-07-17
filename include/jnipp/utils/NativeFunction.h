@@ -53,7 +53,7 @@ namespace Jni
 		{
 			return { name, signature, address };
 		}
-	}
+	};
 
 	/**
 		@brief	Binding table for native handlers of Java classes.
@@ -63,5 +63,5 @@ namespace Jni
 	{
 		const char*								class_name;	// Name of Java class.
 		std::initializer_list<NativeFunction>	natives;	// List of native handlers.
-	}
+	};
 }
