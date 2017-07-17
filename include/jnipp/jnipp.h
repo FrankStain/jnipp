@@ -26,6 +26,8 @@ namespace Android {};
 // Most major system includes.
 #include <cstdint>
 #include <string>
+#include <typeinfo>
+#include <typeindex>
 #include <vector>
 #include <deque>
 #include <list>
@@ -84,6 +86,8 @@ namespace Android {};
 #include "utils/Environment.h"
 
 // Deferred implementation of Jni++ functionality.
+#include "utils/CachedHandles.inl"
+#include "utils/VirtualMachine.inl"
 #include "utils/Environment.inl"
 #include "utils/NativeFunction.utils.inl"
 #include "handles/Object.inl"

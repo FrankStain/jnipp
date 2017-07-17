@@ -27,11 +27,18 @@ namespace Jni
 		/// @brief	Get the `Environment` instance for current thread.
 		static JNIEnv* GetLocalEnvironment();
 
+		/// @brief	Get the storage for handles table.
+		template< typename TCachedHandles >
+		static inline Utils::HandlesStorageEntry<TCachedHandles>& GetHandlesStorage();
+
 		/// @brief	Get the global `JavaVM` instance.
-		static inline JavaVM* GetJvm()			{ return GetInstance().m_jvm; };
+		static inline JavaVM* GetJvm()				{ return GetInstance().m_jvm; };
 
 		/// @brief	Check the `VirtualMachine` is properly initialized.
-		static inline const bool IsValid()		{ return GetInstance().m_jvm != nullptr; };
+		static inline const bool IsValid()			{ return GetInstance().m_jvm != nullptr; };
+
+		/// @brief	Get the mutex for handles cache.
+		static inline Utils::Mutex& GetCacheMutex()	{ return GetInstance().m_cache_mutex; };
 
 	private:
 		/// @brief	Access to single instance (using Meyers's implementation).
@@ -58,6 +65,7 @@ namespace Jni
 		// ['Java class name'] -> weak `jclass` pointer. Used for shared owning of `jclass` instances.
 		using WeakClassStorage = std::unordered_map< std::string, std::weak_ptr<_jclass> >;
 
+		Utils::Mutex		m_cache_mutex;					// Synchronization mutex for safe multi-thread access to handles cache.
 		Utils::Mutex		m_classes_mutex;				// Synchronization mutex for safe multi-thread access to class references.
 		JavaVM*				m_jvm				= nullptr;	// Instance of Java virtual machine.
 		JNIEnv*				m_main_env			= nullptr;	// Instance of Environment for the main thread.
@@ -75,5 +83,11 @@ namespace Jni
 		MemberFunction<std::string>			m_get_canonical_name;	// `java.lang.String java.lang.Class::getCanonicalName()`
 		MemberFunction<std::string>			m_get_name;				// `java.lang.String java.lang.Class::getName()`
 		MemberFunction<std::string>			m_get_simple_name;		// `java.lang.String java.lang.Class::getSimpleName()`
+
+	private:
+		// ['Table type index'] -> pointer to allocated table.
+		using HandlesCache = std::unordered_map<std::type_index, std::unique_ptr<Utils::HandlesCacheEntry>>;
+
+		HandlesCache		m_handles_cache;				// Cache for handles tables.
 	};
 }
