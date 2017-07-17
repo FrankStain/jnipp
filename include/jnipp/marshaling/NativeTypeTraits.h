@@ -73,6 +73,49 @@ namespace Marshaling
 	}
 
 
+	/// @brief	Type translation traits specification for enumeration classes.
+	template< typename TEnumType, bool IS_ENUM = std::is_enum<TEnumType>::value >
+	struct EnumTypeTraits;
+
+	/// @brief	Type translation traits specification for enumeration classes.
+	template< typename TEnumType >
+	struct EnumTypeTraits<TEnumType, true> : NativeTypeTraits<typename std::underlying_type<TEnumType>::type>
+	{
+		/// @brief	Underlying type for enumeration type.
+		using UnderlyingType	= typename std::underlying_type<TEnumType>::type;
+
+		/// @brief	Native type traits for underlying type of enumeration type.
+		using UnderlyingTraits	= NativeTypeTraits<UnderlyingType>;
+
+
+		/// @brief	Count of local references required to store this type in Java local frame.
+		constexpr static const size_t LOCAL_FRAME_SIZE = UnderlyingTraits::LOCAL_FRAME_SIZE;
+
+
+		/// @brief	C++ native type.
+		using NativeType	= TEnumType;
+
+		/// @brief	JNI representation of Java type.
+		using JavaType		= typename UnderlyingTraits::JavaType;
+
+
+		/// @brief	Type translation from Java space to C++ space.
+		static inline void FromJava( const JavaType& source, NativeType& destination )
+		{
+			UnderlyingType buffer;
+			UnderlyingTraits::FromJava( source, buffer );
+			destination = static_cast<TEnumType>( buffer );
+		}
+
+		/// @brief	Type translation from C++ space to Java space.
+		static inline void ToJava( const NativeType& source, JavaType& destination )
+		{
+			const UnderlyingType buffer = static_cast<UnderlyingType>( source );
+			UnderlyingTraits::FromJava( buffer, destination );
+		}
+	};
+
+
 	/// @brief	Traits specification for native `void` type.
 	template<>
 	struct NativeTypeTraits<void> : EnvironmentTraits<void>, JavaTypeTraits<void>
