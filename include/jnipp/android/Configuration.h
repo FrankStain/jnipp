@@ -3,6 +3,10 @@
 #pragma once
 
 #include <jnipp/jnipp.h>
+#include <android/configuration.h>
+#include "Configuration.const.h"
+#include "Configuration.struct.h"
+#include "Locale.h"
 
 
 namespace Jni
@@ -21,6 +25,25 @@ namespace Android
 		const Configuration& operator = ( jobject object_ref )			{ Object::operator=( object_ref ); return *this; };
 		const Configuration& operator = ( const Configuration& other )	{ Object::operator=( other ); return *this; };
 		const Configuration& operator = ( Configuration&& other )		{ Object::operator=( other ); return *this; };
+
+	private:
+		struct ConfigurationHandles
+		{
+			Class jni_class = { "android/content/res/Configuration" };
+
+			//MemberField<int32_t>			density_dpi				= { jni_class, "densityDpi" }; // android-17.
+			MemberField<float>				font_scale				= { jni_class, "fontScale" };
+			MemberField<KeyboardType>		keyboard				= { jni_class, "keyboard" };
+			MemberField<KeyboardState>		keyboard_hidden			= { jni_class, "keyboardHidden" };
+			MemberField<ScreenOrientation>	screen_orientation		= { jni_class, "orientation" };
+			MemberField<ScreenLayoutState>	scren_layout			= { jni_class, "screenLayout" };
+			MemberField<int32_t>			scren_width_dp			= { jni_class, "screenWidthDp" };
+			MemberField<int32_t>			scren_height_dp			= { jni_class, "screenHeightDp" };
+			MemberField<int32_t>			scren_smallest_width_dp	= { jni_class, "smallestScreenWidthDp" };
+			MemberField<ScreenUiMode>		ui_mode					= { jni_class, "uiMode" };
+		};
+
+		CachedHandles<ConfigurationHandles>	m_handles;	// Temporally cached and shared handles for object.
 	};
 }
 
