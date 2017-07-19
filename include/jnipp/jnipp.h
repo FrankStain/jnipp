@@ -47,12 +47,15 @@ namespace Android {};
 // Jni++ utils.
 #include "utils/StaticString.h"
 #include "utils/StaticString.operations.h"
+#include "utils/HasBitsField.h"
 
 // Jni++ type marshaling.
 #include "marshaling/JavaTypeTraits.h"
 #include "marshaling/EnvironmentTraits.h"
 #include "marshaling/ArrayTranslationTraits.h"
 #include "marshaling/NativeTypeTraits.h"
+#include "marshaling/EnumTypeTraits.h"
+#include "marshaling/BitfieldTypeTraits.h"
 
 // Jni++ forward declarations and useful types.
 #include "utils/forwards.h"
