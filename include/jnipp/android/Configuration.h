@@ -17,6 +17,15 @@ namespace Android
 	class Configuration : public Object
 	{
 	public:
+		/// @brief	Class name.
+		using ClassPath = Jni::StaticString<
+			'a', 'n', 'd', 'r', 'o', 'i', 'd', '/',
+			'c', 'o', 'n', 't', 'e', 'n', 't', '/',
+			'r', 'e', 's', '/',
+			'C', 'o', 'n', 'f', 'i', 'g', 'u', 'r', 'a', 't', 'i', 'o', 'n'
+		>;
+
+
 		Configuration() = default;
 		Configuration( jobject object_ref ) : Object( object_ref ) {};
 		Configuration( const Configuration& other ) : Object( other ) {};
@@ -58,7 +67,7 @@ namespace Android
 	private:
 		struct ConfigurationHandles
 		{
-			Class jni_class = { "android/content/res/Configuration" };
+			Class jni_class = { ClassPath::GetString() };
 
 			//MemberField<int32_t>			density_dpi				= { jni_class, "densityDpi" }; // since android-17.
 			MemberField<float>				font_scale				= { jni_class, "fontScale" };
@@ -80,36 +89,6 @@ namespace Marshaling
 {
 	/// @brief	Traits specification for native `Jni::Android::Configuration` type.
 	template<>
-	struct NativeTypeTraits<Jni::Android::Configuration> : EnvironmentTraits<jobject>
-	{
-		/// @brief	Count of local references required to store this type in Java local frame.
-		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-
-		/// @brief	Java type signature.
-		using Signature	= ClassName<
-			'a', 'n', 'd', 'r', 'o', 'i', 'd', '/',
-			'c', 'o', 'n', 't', 'e', 'n', 't', '/',
-			'r', 'e', 's', '/',
-			'C', 'o', 'n', 'f', 'i', 'g', 'u', 'r', 'a', 't', 'i', 'o', 'n'
-		>;
-
-		/// @brief	C++ native type.
-		using NativeType	= Jni::Android::Configuration;
-
-		/// @brief	JNI representation of Java type.
-		using JavaType		= jobject;
-
-		/// @brief	Type translation from Java space to C++ space.
-		static inline void FromJava( const JavaType& source, NativeType& destination )
-		{
-			destination = source;
-		}
-
-		/// @brief	Type translation from C++ space to Java space.
-		static inline void ToJava( const NativeType& source, JavaType& destination )
-		{
-			destination = *source;
-		}
-	};
+	struct NativeTypeTraits<Jni::Android::Configuration> : ObjectTypeTraits<Jni::Android::Configuration> {};
 }
 }

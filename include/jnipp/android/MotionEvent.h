@@ -16,6 +16,14 @@ namespace Android
 	class MotionEvent : public Object
 	{
 	public:
+		/// @brief	Class name.
+		using ClassPath = Jni::StaticString<
+			'a', 'n', 'd', 'r', 'o', 'i', 'd', '/',
+			'v', 'i', 'e', 'w', '/',
+			'M', 'o', 't', 'i', 'o', 'n', 'E', 'v', 'e', 'n', 't'
+		>;
+
+
 		MotionEvent() = default;
 		MotionEvent( jobject object_ref ) : Object( object_ref ) {};
 		MotionEvent( const MotionEvent& other ) : Object( other ) {};
@@ -61,7 +69,7 @@ namespace Android
 	private:
 		struct MotionEventHandles
 		{
-			Class	jni_class	= { "android/view/MotionEvent" };
+			Class	jni_class	= { ClassPath::GetString() };
 
 			MemberFunction<int32_t>				get_pointer_count	= { jni_class, "getPointerCount" };
 			MemberFunction<InputSourceClass>	get_source_class	= { jni_class, "getSource" };
@@ -84,31 +92,6 @@ namespace Marshaling
 {
 	/// @brief	Traits specification for native `Jni::Android::MotionEvent` type.
 	template<>
-	struct NativeTypeTraits<Jni::Android::MotionEvent> : EnvironmentTraits<jobject>
-	{
-		/// @brief	Count of local references required to store this type in Java local frame.
-		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-
-		/// @brief	Java type signature.
-		using Signature	= ClassName<'a', 'n', 'd', 'r', 'o', 'i', 'd', '/', 'v', 'i', 'e', 'w', '/', 'M', 'o', 't', 'i', 'o', 'n', 'E', 'v', 'e', 'n', 't'>;
-
-		/// @brief	C++ native type.
-		using NativeType	= Jni::Android::MotionEvent;
-
-		/// @brief	JNI representation of Java type.
-		using JavaType		= jobject;
-
-		/// @brief	Type translation from Java space to C++ space.
-		static inline void FromJava( const JavaType& source, NativeType& destination )
-		{
-			destination = source;
-		}
-
-		/// @brief	Type translation from C++ space to Java space.
-		static inline void ToJava( const NativeType& source, JavaType& destination )
-		{
-			destination = *source;
-		}
-	};
+	struct NativeTypeTraits<Jni::Android::MotionEvent> : ObjectTypeTraits<Jni::Android::MotionEvent> {};
 }
 }

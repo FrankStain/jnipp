@@ -13,6 +13,10 @@ namespace Android
 	class ClassLoader : public Object
 	{
 	public:
+		/// @brief	Class name.
+		using ClassPath = Jni::StaticString<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'C', 'l', 'a', 's', 's', 'L', 'o', 'a', 'd', 'e', 'r'>;
+
+
 		ClassLoader() = default;
 		ClassLoader( jobject object_ref ) : Object( object_ref ) {};
 		ClassLoader( const ClassLoader& other ) : Object( other ) {};
@@ -28,31 +32,6 @@ namespace Marshaling
 {
 	/// @brief	Traits specification for native `Jni::Android::ClassLoader` type.
 	template<>
-	struct NativeTypeTraits<Jni::Android::ClassLoader> : EnvironmentTraits<jobject>
-	{
-		/// @brief	Count of local references required to store this type in Java local frame.
-		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-
-		/// @brief	Java type signature.
-		using Signature	= ClassName<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'C', 'l', 'a', 's', 's', 'L', 'o', 'a', 'd', 'e', 'r'>;
-
-		/// @brief	C++ native type.
-		using NativeType	= Jni::Android::ClassLoader;
-
-		/// @brief	JNI representation of Java type.
-		using JavaType		= jobject;
-
-		/// @brief	Type translation from Java space to C++ space.
-		static inline void FromJava( const JavaType& source, NativeType& destination )
-		{
-			destination = source;
-		}
-
-		/// @brief	Type translation from C++ space to Java space.
-		static inline void ToJava( const NativeType& source, JavaType& destination )
-		{
-			destination = *source;
-		}
-	};
+	struct NativeTypeTraits<Jni::Android::ClassLoader> : ObjectTypeTraits<Jni::Android::ClassLoader> {};
 }
 }

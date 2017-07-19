@@ -13,6 +13,10 @@ namespace Android
 	class KeyEvent : public Object
 	{
 	public:
+		/// @brief	Class name.
+		using ClassPath = Jni::StaticString<'a', 'n', 'd', 'r', 'o', 'i', 'd', '/', 'v', 'i', 'e', 'w', '/', 'K', 'e', 'y', 'E', 'v', 'e', 'n', 't'>;
+
+
 		KeyEvent() = default;
 		KeyEvent( jobject object_ref ) : Object( object_ref ) {};
 		KeyEvent( const KeyEvent& other ) : Object( other ) {};
@@ -28,31 +32,6 @@ namespace Marshaling
 {
 	/// @brief	Traits specification for native `Jni::Android::KeyEvent` type.
 	template<>
-	struct NativeTypeTraits<Jni::Android::KeyEvent> : EnvironmentTraits<jobject>
-	{
-		/// @brief	Count of local references required to store this type in Java local frame.
-		constexpr static const size_t LOCAL_FRAME_SIZE = 1;
-
-		/// @brief	Java type signature.
-		using Signature	= ClassName<'a', 'n', 'd', 'r', 'o', 'i', 'd', '/', 'v', 'i', 'e', 'w', '/', 'K', 'e', 'y', 'E', 'v', 'e', 'n', 't'>;
-
-		/// @brief	C++ native type.
-		using NativeType	= Jni::Android::KeyEvent;
-
-		/// @brief	JNI representation of Java type.
-		using JavaType		= jobject;
-
-		/// @brief	Type translation from Java space to C++ space.
-		static inline void FromJava( const JavaType& source, NativeType& destination )
-		{
-			destination = source;
-		}
-
-		/// @brief	Type translation from C++ space to Java space.
-		static inline void ToJava( const NativeType& source, JavaType& destination )
-		{
-			destination = *source;
-		}
-	};
+	struct NativeTypeTraits<Jni::Android::KeyEvent> : ObjectTypeTraits<Jni::Android::KeyEvent> {};
 }
 }
