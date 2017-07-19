@@ -14,4 +14,9 @@ namespace Android
 {
 
 }
+
+namespace Marshaling
+{
+
+}
 }
