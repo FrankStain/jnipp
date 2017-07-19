@@ -22,6 +22,35 @@ namespace Android
 		Configuration( const Configuration& other ) : Object( other ) {};
 		Configuration( Configuration&& other ) : Object( other ) {};
 
+
+		/// @brief	Getter for `android.content.res.Configuration.fontScale` field.
+		inline const float GetFontScale() const							{ return m_handles->font_scale.GetValue( *this, 0.0f ); };
+
+		/// @brief	Getter for `android.content.res.Configuration.keyboard` field.
+		inline const KeyboardType GetKeyboardType() const				{ return m_handles->keyboard.GetValue( *this, KeyboardType::Undefined ); };
+
+		/// @brief	Getter for `android.content.res.Configuration.keyboardHidden` field.
+		inline const KeyboardState GetKeyboardState() const				{ return m_handles->keyboard_hidden.GetValue( *this, KeyboardState::Undefined ); };
+
+		/// @brief	Getter for `android.content.res.Configuration.orientation` field.
+		inline const ScreenOrientation GetOrientation() const			{ return m_handles->screen_orientation.GetValue( *this, ScreenOrientation::Undefined ); };
+
+		/// @brief	Getter for `android.content.res.Configuration.screenLayout` field.
+		inline ScreenLayoutState GetScreenLayout() const				{ return m_handles->scren_layout.GetValue( *this, { 0 } ); };
+
+		/// @brief	Getter for `android.content.res.Configuration.screenWidthDp` field.
+		inline const int32_t GetScreenWidthDp() const					{ return m_handles->scren_width_dp.GetValue( *this, 0 ); };
+
+		/// @brief	Getter for `android.content.res.Configuration.screenHeightDp` field.
+		inline const int32_t GetScreenHeightDp() const					{ return m_handles->scren_height_dp.GetValue( *this, 0 ); };
+
+		/// @brief	Getter for `android.content.res.Configuration.smallestScreenWidthDp` field.
+		inline const int32_t GetScreenSmallestWidthDp() const			{ return m_handles->scren_smallest_width_dp.GetValue( *this, 0 ); };
+
+		/// @brief	Getter for `android.content.res.Configuration.uiMode` field.
+		inline ScreenUiMode GetUiMode() const							{ return m_handles->ui_mode.GetValue( *this, { 0 } ); };
+
+
 		const Configuration& operator = ( jobject object_ref )			{ Object::operator=( object_ref ); return *this; };
 		const Configuration& operator = ( const Configuration& other )	{ Object::operator=( other ); return *this; };
 		const Configuration& operator = ( Configuration&& other )		{ Object::operator=( other ); return *this; };
@@ -31,7 +60,7 @@ namespace Android
 		{
 			Class jni_class = { "android/content/res/Configuration" };
 
-			//MemberField<int32_t>			density_dpi				= { jni_class, "densityDpi" }; // android-17.
+			//MemberField<int32_t>			density_dpi				= { jni_class, "densityDpi" }; // since android-17.
 			MemberField<float>				font_scale				= { jni_class, "fontScale" };
 			MemberField<KeyboardType>		keyboard				= { jni_class, "keyboard" };
 			MemberField<KeyboardState>		keyboard_hidden			= { jni_class, "keyboardHidden" };
