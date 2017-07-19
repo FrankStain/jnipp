@@ -66,6 +66,7 @@ namespace Android {};
 #include "handles/Object.h"
 #include "marshaling/NativeTypeTraits.Object.h"
 #include "marshaling/NativeTypeTraits.Class.h"
+#include "marshaling/ObjectTypeTraits.h"
 
 // Jni++ wrap for Java class fields.
 #include "handles/MemberField.h"
