@@ -23,6 +23,9 @@ namespace Jni
 		/// @brief	Get the value of field.
 		inline const bool GetValue( TNativeType& value_storage ) const;
 
+		/// @brief	Get the value of field.
+		inline TNativeType GetValue( const TNativeType& default_value ) const;
+
 		/// @brief	Set the value of field.
 		inline const bool SetValue( const TNativeType& value_storage ) const;
 

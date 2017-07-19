@@ -26,6 +26,12 @@ namespace Jni
 		/// @brief	Get the value of field from given object ref.
 		inline const bool GetValue( jobject object_ref, TNativeType& value_storage ) const;
 
+		/// @brief	Get the value of field from given handle to object.
+		inline TNativeType GetValue( const Object& object_handle, const TNativeType& default_value ) const;
+
+		/// @brief	Get the value of field from given object ref.
+		inline TNativeType GetValue( jobject object_ref, const TNativeType& default_value ) const;
+
 
 		/// @brief	Set the value of field to given object by its handle.
 		inline const bool SetValue( const Object& object_handle, const TNativeType& value_storage ) const;

@@ -75,6 +75,19 @@ namespace Jni
 	}
 
 	template< typename TNativeType >
+	inline TNativeType MemberField<TNativeType>::GetValue( const Object& object_handle, const TNativeType& default_value ) const
+	{
+		return GetValue( *object_handle, default_value );
+	}
+
+	template< typename TNativeType >
+	inline TNativeType MemberField<TNativeType>::GetValue( jobject object_ref, const TNativeType& default_value ) const
+	{
+		TNativeType value;
+		return ( GetValue( object_ref, value ) )? value : default_value;
+	}
+
+	template< typename TNativeType >
 	inline const bool MemberField<TNativeType>::GetValue( JNIEnv* local_env, const Object& object_handle, TNativeType& value_storage ) const
 	{
 		return GetValue( local_env, *object_handle, value_storage );

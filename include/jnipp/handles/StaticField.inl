@@ -65,6 +65,13 @@ namespace Jni
 	}
 
 	template< typename TNativeType >
+	inline TNativeType StaticField<TNativeType>::GetValue( const TNativeType& default_value ) const
+	{
+		TNativeType value;
+		return ( GetValue( value ) )? value : default_value;
+	}
+
+	template< typename TNativeType >
 	inline const bool StaticField<TNativeType>::GetValue( JNIEnv* local_env, TNativeType& value_storage ) const
 	{
 		JNI_RETURN_IF_E( !IsValid(), false, "Field handle was not initialized properly." );
