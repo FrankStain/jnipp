@@ -13,7 +13,7 @@ namespace Android
 	class KeyEvent : public Object
 	{
 	public:
-		/// @brief	Class name.
+		/// @brief	Class path.
 		using ClassPath = Jni::StaticString<'a', 'n', 'd', 'r', 'o', 'i', 'd', '/', 'v', 'i', 'e', 'w', '/', 'K', 'e', 'y', 'E', 'v', 'e', 'n', 't'>;
 
 

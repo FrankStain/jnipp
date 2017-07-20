@@ -13,7 +13,7 @@ namespace Android
 	class ClassLoader : public Object
 	{
 	public:
-		/// @brief	Class name.
+		/// @brief	Class path.
 		using ClassPath = Jni::StaticString<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'C', 'l', 'a', 's', 's', 'L', 'o', 'a', 'd', 'e', 'r'>;
 
 

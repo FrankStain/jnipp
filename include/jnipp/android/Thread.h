@@ -13,7 +13,7 @@ namespace Android
 	class Thread : public Object
 	{
 	public:
-		/// @brief	Class name.
+		/// @brief	Class path.
 		using ClassPath = Jni::StaticString<'j', 'a', 'v', 'a', '/', 'l', 'a', 'n', 'g', '/', 'T', 'h', 'r', 'e', 'a', 'd'>;
 
 
