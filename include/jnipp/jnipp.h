@@ -43,6 +43,7 @@ namespace Android {};
 // Jni++ core stuff.
 #include "core/logging.h"
 #include "core/macros.h"
+#include "core/types.h"
 
 // Jni++ utils.
 #include "utils/StaticString.h"
