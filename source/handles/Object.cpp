@@ -42,6 +42,12 @@ namespace Jni
 		m_class_handle.Invalidate();
 	}
 
+	const bool Object::IsInstanceOf( const Class& base_class ) const
+	{
+		JNI_RETURN_IF( !IsValid() || !base_class, false );
+		return VirtualMachine::GetLocalEnvironment()->IsInstanceOf( m_object_ref.get(), *base_class );
+	}
+
 	const Object& Object::operator=( jobject object_ref )
 	{
 		AcquireObjectRef( object_ref );
@@ -95,5 +101,15 @@ namespace Jni
 
 		m_object_ref = { VirtualMachine::GetLocalEnvironment()->NewGlobalRef( object_ref ), Object::DeleteObjectRef };
 		m_class_handle.Invalidate();
+	}
+
+	const bool operator==( const Object& left, const Object& right )
+	{
+		return VirtualMachine::GetLocalEnvironment()->IsSameObject( *left, *right );
+	}
+
+	const bool operator!=( const Object& left, const Object& right )
+	{
+		return !VirtualMachine::GetLocalEnvironment()->IsSameObject( *left, *right );
 	}
 }

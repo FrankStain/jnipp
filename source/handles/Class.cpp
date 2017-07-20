@@ -122,4 +122,14 @@ namespace Jni
 		AcquireClassReference( class_name );
 		return *this;
 	}
+
+	const bool operator==( const Class& left, const Class& right )
+	{
+		return VirtualMachine::GetLocalEnvironment()->IsSameObject( *left, *right );
+	}
+
+	const bool operator!=( const Class& left, const Class& right )
+	{
+		return !VirtualMachine::GetLocalEnvironment()->IsSameObject( *left, *right );
+	}
 }

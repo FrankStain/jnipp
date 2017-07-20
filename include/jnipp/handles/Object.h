@@ -24,6 +24,9 @@ namespace Jni
 		/// @brief	Invalidate the handle.
 		void Invalidate();
 
+		/// @brief	Check that the object is instance of given class.
+		const bool IsInstanceOf( const Class& base_class ) const;
+
 		/// @brief	Check the object handle carries valid value.
 		inline const bool IsValid() const					{ return m_object_ref != nullptr; };
 
@@ -59,4 +62,8 @@ namespace Jni
 		std::shared_ptr<_jobject>	m_object_ref;	// Shared JNI representation of Java object global reference.
 		mutable Class				m_class_handle;	// Handle to class of stored object.
 	};
+
+
+	const bool operator == ( const Object& left, const Object& right );
+	const bool operator != ( const Object& left, const Object& right );
 }

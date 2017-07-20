@@ -59,4 +59,8 @@ namespace Jni
 	private:
 		std::shared_ptr<_jclass>	m_class_ref;	// Shared JNI representation of Java class global reference.
 	};
+
+
+	const bool operator == ( const Class& left, const Class& right );
+	const bool operator != ( const Class& left, const Class& right );
 }
