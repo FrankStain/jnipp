@@ -19,6 +19,11 @@ namespace Jni
 		StaticFunction( const char* class_name, const char* function_name );
 		StaticFunction( const Class& class_handle, const char* function_name );
 
+		StaticFunction( const std::string& class_name, const std::string& function_name, IgnoreFailure );
+		StaticFunction( const Class& class_handle, const std::string& function_name, IgnoreFailure );
+		StaticFunction( const char* class_name, const char* function_name, IgnoreFailure );
+		StaticFunction( const Class& class_handle, const char* function_name, IgnoreFailure );
+
 
 		/// @brief	Call the function with given arguments.
 		inline TNativeReturnType Call( const TNativeArguments&... arguments ) const;

@@ -18,6 +18,10 @@ namespace Jni
 		MemberFunction( const Class& class_handle, const std::string& function_name );
 		MemberFunction( const char* class_name, const char* function_name );
 		MemberFunction( const Class& class_handle, const char* function_name );
+		MemberFunction( const std::string& class_name, const std::string& function_name, IgnoreFailure );
+		MemberFunction( const Class& class_handle, const std::string& function_name, IgnoreFailure );
+		MemberFunction( const char* class_name, const char* function_name, IgnoreFailure );
+		MemberFunction( const Class& class_handle, const char* function_name, IgnoreFailure );
 
 
 		/// @brief	Call the function with given arguments for given Java object and return result.

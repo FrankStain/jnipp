@@ -18,6 +18,10 @@ namespace Jni
 		MemberField( const Class& class_handle, const std::string& field_name );
 		MemberField( const char* class_name, const char* field_name );
 		MemberField( const Class& class_handle, const char* field_name );
+		MemberField( const std::string& class_name, const std::string& field_name, IgnoreFailure );
+		MemberField( const Class& class_handle, const std::string& field_name, IgnoreFailure );
+		MemberField( const char* class_name, const char* field_name, IgnoreFailure );
+		MemberField( const Class& class_handle, const char* field_name, IgnoreFailure );
 
 
 		/// @brief	Get the value of field from given handle to object.
@@ -59,6 +63,7 @@ namespace Jni
 		using Signature	= typename Marshaling::TypeSignature<TNativeType>;
 
 		MemberField( jclass class_ref, const char* field_name );
+		MemberField( jclass class_ref, const char* field_name, IgnoreFailure );
 
 
 		/// @brief	Get the value of field from given handle to object.

@@ -18,6 +18,10 @@ namespace Jni
 		StaticField( const Class& class_handle, const std::string& field_name );
 		StaticField( const char* class_name, const char* field_name );
 		StaticField( const Class& class_handle, const char* field_name );
+		StaticField( const std::string& class_name, const std::string& field_name, IgnoreFailure );
+		StaticField( const Class& class_handle, const std::string& field_name, IgnoreFailure );
+		StaticField( const char* class_name, const char* field_name, IgnoreFailure );
+		StaticField( const Class& class_handle, const char* field_name, IgnoreFailure );
 
 
 		/// @brief	Get the value of field.

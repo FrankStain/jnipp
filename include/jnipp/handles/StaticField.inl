@@ -7,52 +7,78 @@ namespace Jni
 {
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const StaticField& other )
-		: m_class_handle( other.m_class_handle )
-		, m_field_id( other.m_field_id )
+		: m_class_handle{ other.m_class_handle }
+		, m_field_id{ other.m_field_id }
 	{
 
 	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField<TNativeType>::StaticField( StaticField&& other )
-		: m_class_handle( std::move( other.m_class_handle ) )
-		, m_field_id( std::move( other.m_field_id ) )
+		: m_class_handle{ std::move( other.m_class_handle ) }
+		, m_field_id{ std::move( other.m_field_id ) }
 	{
 
 	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const std::string& class_name, const std::string& field_name )
-		: StaticField( class_name.c_str(), field_name.c_str() )
+		: StaticField{ class_name.c_str(), field_name.c_str() }
 	{
 
 	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const Class& class_handle, const std::string& field_name )
-		: StaticField( class_handle, field_name.c_str() )
+		: StaticField{ class_handle, field_name.c_str() }
 	{
 
 	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const char* class_name, const char* field_name )
-		: StaticField( Class{ class_name }, field_name )
+		: StaticField{ Class{ class_name }, field_name }
 	{
 
 	}
 
 	template< typename TNativeType >
 	StaticField<TNativeType>::StaticField( const Class& class_handle, const char* field_name )
-		: m_class_handle( class_handle )
+		: StaticField{ class_handle, field_name, IGNORE_FAILURE }
+	{
+		JNI_ENSURES( m_field_id != 0 );
+	}
+
+	template< typename TNativeType >
+	StaticField<TNativeType>::StaticField( const std::string& class_name, const std::string& field_name, IgnoreFailure )
+		: StaticField{ class_name.c_str(), field_name.c_str(), IGNORE_FAILURE }
+	{
+
+	}
+
+	template< typename TNativeType >
+	StaticField<TNativeType>::StaticField( const Class& class_handle, const std::string& field_name, IgnoreFailure )
+		: StaticField{ class_handle, field_name.c_str(), IGNORE_FAILURE }
+	{
+
+	}
+
+	template< typename TNativeType >
+	StaticField<TNativeType>::StaticField( const char* class_name, const char* field_name, IgnoreFailure )
+		: StaticField{ Class{ class_name }, field_name, IGNORE_FAILURE }
+	{
+
+	}
+
+	template< typename TNativeType >
+	StaticField<TNativeType>::StaticField( const Class& class_handle, const char* field_name, IgnoreFailure )
+		: m_class_handle{ class_handle }
 	{
 		JNI_EXPECTS( m_class_handle.IsValid() );
 		JNI_RETURN_IF_E( !VirtualMachine::IsValid(), , "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
 
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 		m_field_id		= local_env->GetStaticFieldID( *m_class_handle, field_name, Signature::GetString() );
-
-		JNI_ENSURES( m_field_id != 0 );
 	}
 
 	template< typename TNativeType >
