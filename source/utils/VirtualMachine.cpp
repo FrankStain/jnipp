@@ -190,7 +190,7 @@ namespace Jni
 	std::shared_ptr<_jclass> VirtualMachine::GetClassReference( const char* class_name )
 	{
 		JNI_RETURN_IF_E( !IsValid(), {}, "%s:%d - Attempt to use Uninitialized virtual machine.", __func__, __LINE__ );
-		JNI_RETURN_IF_W( ( class_name == nullptr ) || !strlen( class_name ), {}, "Attempt to get Java class via empty class name." );
+		JNI_RETURN_IF_W( ( class_name == nullptr ) || !::strlen( class_name ), {}, "Attempt to get Java class via empty class name." );
 
 		Utils::MutexLock lock{ m_classes_mutex };
 		auto& weak_class = m_shared_classes[ class_name ];
