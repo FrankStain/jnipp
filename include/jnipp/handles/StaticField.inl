@@ -79,6 +79,13 @@ namespace Jni
 
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 		m_field_id		= local_env->GetStaticFieldID( *m_class_handle, field_name, Signature::GetString() );
+
+		if( local_env->ExceptionCheck() == JNI_TRUE )
+		{
+			local_env->ExceptionDescribe();
+			local_env->ExceptionClear();
+			m_field_id = nullptr;
+		}
 	}
 
 	template< typename TNativeType >

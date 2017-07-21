@@ -77,6 +77,13 @@ namespace Jni
 
 		auto local_env	= VirtualMachine::GetLocalEnvironment();
 		m_function_id	= local_env->GetMethodID( *m_class_handle, function_name, Signature::GetString() );
+
+		if( local_env->ExceptionCheck() == JNI_TRUE )
+		{
+			local_env->ExceptionDescribe();
+			local_env->ExceptionClear();
+			m_function_id = nullptr;
+		}
 	}
 
 	template< typename TNativeReturnType, typename... TNativeArguments >
