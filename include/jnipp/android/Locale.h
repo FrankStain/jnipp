@@ -24,46 +24,46 @@ namespace Android
 
 
 		/// @brief	Cal the `java.util.Locale.getCountry` function.
-		inline std::string GetCountry() const								{ return m_handles->get_country.Call( *this ); };
+		inline std::string GetCountry() const;
 
 		/// @brief	Cal the `java.util.Locale.getLanguage` function.
-		inline std::string GetLanguage() const								{ return m_handles->get_language.Call( *this ); };
+		inline std::string GetLanguage() const;
 
 		/// @brief	Cal the `java.util.Locale.getScript` function.
-		inline std::string GetScript() const								{ return m_handles->get_script.Call( *this ); };
+		inline std::string GetScript() const;
 
 		/// @brief	Cal the `java.util.Locale.getVariant` function.
-		inline std::string GetVariant() const								{ return m_handles->get_variant.Call( *this ); };
+		inline std::string GetVariant() const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayCountry` function.
-		inline std::string GetDisplayCountry() const						{ return m_handles->get_display_country.Call( *this ); };
+		inline std::string GetDisplayCountry() const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayLanguage` function.
-		inline std::string GetDisplayLanguage() const						{ return m_handles->get_display_lang.Call( *this ); };
+		inline std::string GetDisplayLanguage() const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayName` function.
-		inline std::string GetDisplayName() const							{ return m_handles->get_display_name.Call( *this ); };
+		inline std::string GetDisplayName() const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayScript` function.
-		inline std::string GetDisplayScript() const							{ return m_handles->get_display_script.Call( *this ); };
+		inline std::string GetDisplayScript() const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayVariant` function.
-		inline std::string GetDisplayVariant() const						{ return m_handles->get_display_variant.Call( *this ); };
+		inline std::string GetDisplayVariant() const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayCountry` function.
-		inline std::string GetDisplayCountry( const Locale& other ) const	{ return m_handles->get_display_country_for.Call( *this, other ); };
+		inline std::string GetDisplayCountry( const Locale& other ) const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayLanguage` function.
-		inline std::string GetDisplayLanguage( const Locale& other ) const	{ return m_handles->get_display_lang_for.Call( *this, other ); };
+		inline std::string GetDisplayLanguage( const Locale& other ) const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayName` function.
-		inline std::string GetDisplayName( const Locale& other ) const		{ return m_handles->get_display_name_for.Call( *this, other ); };
+		inline std::string GetDisplayName( const Locale& other ) const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayScript` function.
-		inline std::string GetDisplayScript( const Locale& other ) const	{ return m_handles->get_display_script_for.Call( *this, other ); };
+		inline std::string GetDisplayScript( const Locale& other ) const;
 
 		/// @brief	Cal the `java.util.Locale.getDisplayVariant` function.
-		inline std::string GetDisplayVariant( const Locale& other ) const	{ return m_handles->get_display_variant_for.Call( *this, other ); };
+		inline std::string GetDisplayVariant( const Locale& other ) const;
 
 
 		const Locale& operator = ( jobject object_ref )						{ Object::operator=( object_ref ); return *this; };
@@ -71,25 +71,7 @@ namespace Android
 		const Locale& operator = ( Locale&& other )							{ Object::operator=( other ); return *this; };
 
 	private:
-		struct LocaleHandles
-		{
-			Class	jni_class	= { ClassPath::GetString() };
-
-			MemberFunction<std::string>			get_country				= { jni_class, "getCountry" };
-			MemberFunction<std::string>			get_display_country		= { jni_class, "getDisplayCountry" };
-			MemberFunction<std::string>			get_display_lang		= { jni_class, "getDisplayLanguage" };
-			MemberFunction<std::string>			get_display_name		= { jni_class, "getDisplayName" };
-			MemberFunction<std::string>			get_display_script		= { jni_class, "getDisplayScript" };
-			MemberFunction<std::string>			get_display_variant		= { jni_class, "getDisplayVariant" };
-			MemberFunction<std::string, Locale>	get_display_country_for	= { jni_class, "getDisplayCountry" };
-			MemberFunction<std::string, Locale>	get_display_lang_for	= { jni_class, "getDisplayLanguage" };
-			MemberFunction<std::string, Locale>	get_display_name_for	= { jni_class, "getDisplayName" };
-			MemberFunction<std::string, Locale>	get_display_script_for	= { jni_class, "getDisplayScript" };
-			MemberFunction<std::string, Locale>	get_display_variant_for	= { jni_class, "getDisplayVariant" };
-			MemberFunction<std::string>			get_language			= { jni_class, "getLanguage" };
-			MemberFunction<std::string>			get_script				= { jni_class, "getScript" };
-			MemberFunction<std::string>			get_variant				= { jni_class, "getVariant" };
-		};
+		struct LocaleHandles;
 
 		CachedHandles<LocaleHandles>	m_handles;	// Temporally cached and shared handles for object.
 	};
@@ -102,3 +84,5 @@ namespace Marshaling
 	struct NativeTypeTraits<Jni::Android::Locale> : ObjectTypeTraits<Jni::Android::Locale> {};
 }
 }
+
+#include "Locale.inl"
