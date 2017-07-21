@@ -91,7 +91,7 @@ namespace Android
 			MemberFunction<LocaleList>		get_locales				= { jni_class, "getLocales", IGNORE_FAILURE }; // since android-24
 		};
 
-		CachedHandles<ConfigurationHandles>	m_handles;	// Temporally cached and shared handles for object.
+		CachedHandles<ConfigurationHandles, true>	m_handles;	// Permanently cached and shared handles for object.
 	};
 }
 
