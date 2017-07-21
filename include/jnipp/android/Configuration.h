@@ -7,6 +7,7 @@
 #include "Configuration.const.h"
 #include "Configuration.struct.h"
 #include "Locale.h"
+#include "LocaleList.h"
 
 
 namespace Jni
@@ -45,7 +46,7 @@ namespace Android
 		inline const KeyboardState GetKeyboardState() const				{ return m_handles->keyboard_hidden.GetValue( *this, KeyboardState::Undefined ); };
 
 		/// @brief	Platform-independent accessor to current locale.
-		//Locale GetLocale() const;
+		Locale GetLocale() const;
 
 		/// @brief	Getter for `android.content.res.Configuration.orientation` field.
 		inline const ScreenOrientation GetOrientation() const			{ return m_handles->screen_orientation.GetValue( *this, ScreenOrientation::Undefined ); };
@@ -87,7 +88,7 @@ namespace Android
 			MemberField<int32_t>			scren_smallest_width_dp	= { jni_class, "smallestScreenWidthDp" };
 			MemberField<ScreenUiMode>		ui_mode					= { jni_class, "uiMode" };
 
-			//MemberFunction<LocaleList>		get_locales				= { jni_class, "getLocales", IGNORE_FAILURE }; // since android-24
+			MemberFunction<LocaleList>		get_locales				= { jni_class, "getLocales", IGNORE_FAILURE }; // since android-24
 		};
 
 		CachedHandles<ConfigurationHandles>	m_handles;	// Temporally cached and shared handles for object.
