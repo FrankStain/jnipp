@@ -30,6 +30,19 @@ namespace Android
 		AssetManager( AssetManager&& other ) : Object( other ) { AcquireAssets(); };
 
 
+		/// @breif	Check that the given path leads to valid assets folder.
+		const bool IsValidFolder( const std::string& path ) const;
+
+		/// @brief	Check that the given path leads to valid asset file.
+		const bool IsValidFile( const std::string& path ) const;
+
+		/// @brief	Open the asset.
+		std::shared_ptr<AAsset> OpenAsset( const std::string& path, const AssetOpenMode open_mode ) const;
+
+		/// @brief	Query the asset manager to get all files in given folder.
+		void ListFolder( std::deque<std::string>* files, std::deque<std::string>* folders, const std::string& path ) const;
+
+
 		const AssetManager& operator = ( jobject object_ref )			{ Object::operator=( object_ref ); AcquireAssets(); return *this; };
 		const AssetManager& operator = ( const AssetManager& other )	{ Object::operator=( other ); AcquireAssets(); return *this; };
 		const AssetManager& operator = ( AssetManager&& other )			{ Object::operator=( other ); AcquireAssets(); return *this; };
@@ -41,6 +54,8 @@ namespace Android
 		struct AssetManagerHandles
 		{
 			Class	jni_class	= { ClassPath::GetString() };
+
+			MemberFunction<std::vector<std::string>, std::string>	list_path	= { jni_class,	"list" };
 		};
 
 		AAssetManager*						m_assets	= nullptr;	// Low-level representation of assets manager.
