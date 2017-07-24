@@ -74,9 +74,7 @@ namespace Android
 		for( auto& entity : found_entities )
 		{
 			const std::string entity_path{ path + '/' + entity };
-			const ScopedAssetFolder folder{ AAssetManager_openDir( m_assets, entity_path.c_str() ) };
-
-			if( folder.Get() != nullptr )
+			if( IsValidFolder( entity_path ) )
 			{
 				JNI_CONTINUE_IF( folders == nullptr );
 				folders->push_back( std::move( entity ) );
