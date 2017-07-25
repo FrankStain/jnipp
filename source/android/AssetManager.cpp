@@ -49,7 +49,7 @@ namespace Android
 	const bool AssetManager::IsValidFolder( const std::string& path ) const
 	{
 		ScopedAssetFolder folder{ AAssetManager_openDir( m_assets, path.c_str() ) };
-		return folder.Get() != nullptr;
+		return AAssetDir_getNextFileName( folder.Get() ) != nullptr;
 	}
 
 	const bool AssetManager::IsValidFile( const std::string& path ) const
@@ -74,15 +74,15 @@ namespace Android
 		for( auto& entity : found_entities )
 		{
 			const std::string entity_path{ path + '/' + entity };
-			if( IsValidFolder( entity_path ) )
-			{
-				JNI_CONTINUE_IF( folders == nullptr );
-				folders->push_back( std::move( entity ) );
-			}
-			else
+			if( IsValidFile( entity_path ) )
 			{
 				JNI_CONTINUE_IF( files == nullptr );
 				files->push_back( std::move( entity ) );
+			}
+			else
+			{
+				JNI_CONTINUE_IF( folders == nullptr );
+				folders->push_back( std::move( entity ) );
 			}
 		}
 	}
